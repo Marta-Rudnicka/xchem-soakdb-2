@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!-- all variables: title, extra_css, extra_js, page_heading, page_info, table_caption, extra_ths, table_body, aside_content -->
+<html lang="en">
+<head>
+	<title>{{ title }}</title>
+	<link rel="stylesheet" href="style.css">
+	{{ extra_css }}
+	<script src="functions.js"></script>
+	<script src="all-app.js"></script>
+	{{ extra_js }}
+</head>
+<body lang="en">
+	<h1>{{ page_heading }} </h1>
+	<div id="page-info">
+		<p>{{ page_info }}</p>
+	</div>		
+	<main>
+		<div class="col1">
+			<div class="hidden-columns">
+				Hidden columns: 
+				<button class="in-table" id="show-lib">Show Library</button>
+				<button class="in-table" id="show-plate">Show Plate</button>
+				<button class="in-table" id="show-code">Show Code</button>
+				<button class="in-table" id="show-smiles">Show SMILES</button>
+				<button class="in-table" id="show-2d">Show 2D</button>
+				<button class="in-table" id="show-p1">Show [Property1]</button>
+				<button class="in-table" id="show-p2">Show [Property2]</button>
+				<button class="in-table" id="show-p3">Show [Property3]</button>
+				<button class="in-table" id="show-p4">Show [Property4]</button>
+			</div>
+		</div>
+		<table class="datatable">
+			<caption>
+				<h2>{{ table_caption }}</h2>
+				<button id="show-sidebar">Show sidebar</button>
+			</caption>
+			<thead>	
+				<tr>
+					<th class="row-no">Row no.</th>
+					<th class="lib">Library<br><button class="in-table" id="hide-lib">Hide</button></th>
+					<th class="plate">Plate<br><button class="in-table" id="hide-plate">Hide</button></th>
+					<th class="code">Code<br><button class="in-table" id="hide-code">Hide</button></th>
+					<th class="smiles">SMILES<br><button class="in-table" id="hide-smiles">Hide</button></th>
+					<th class="c2d">2D structure<br><button class="in-table" id="hide-2d">Hide</button></th>
+					<th class="p1">[Property1]<br><button class="in-table" id="hide-p1">Hide</button></th>
+					<th class="p2">[Property2]<br><button class="in-table" id="hide-p2">Hide</button></th>
+					<th class="p3">[Property3]<br><button class="in-table" id="hide-p3">Hide</button></th>
+					<th class="p4">[Property4]<br><button class="in-table" id="hide-p4">Hide</button></th>
+					{{ extra_ths }}
+				</tr>
+			</thead> 
+			
+			<tbody id="datatable-body">
+				{{ table_body }}
+			</tbody> 
+		</table>		
+		<div id="wrapper">
+		<aside>
+			<button id="hide-sidebar">Hide sidebar</button>	
+			{{ aside_content }}
+		</aside>
+		</div>
+	</main>
+</body>

@@ -1,0 +1,34 @@
+#batchform{
+display: grid;
+grid-template-columns: 10% 40% 50%;
+
+}
+
+#batchform label{
+text-align: left;
+}
+
+#divide {
+	grid-column: 1/-1;
+	text-align: left;
+}
+
+#cpb-parent {
+	grid-column: 2/-1;
+}
+
+
+
+.dark{
+	background: rgb(210, 210, 0, 0.1) !important;
+}
+
+.datatable tr:nth-child(even) {
+	background: white;
+}
+
+/*
+tr.dark:nth-child(even) {
+	/*background: red !important;
+	background: rgb(210, 210, 0, 0.5) !important;
+}*/

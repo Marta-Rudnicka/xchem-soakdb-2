@@ -1,0 +1,71 @@
+main {
+width: 100%;
+display: grid;
+grid-template-columns: 15% 65% 20%;
+grid-gap: 2px;
+}
+
+.datatable {
+grid-column: 2/3;
+}
+
+
+.datatable tbody{
+display:none;
+}
+
+aside {
+display: block;
+grid-column: 3;
+}
+
+#sort {
+padding: 15px;
+width: 100%;
+border: solid black 1px;
+}
+
+.smiles {
+display: none;
+}
+
+#show-2d, #show-p1, #show-p2, #show-p3, #show-p4, #show-lib, #show-code, #show-plate, #show-filter-options, #hide-unavailable, #availability-list{
+	display: none;
+}
+
+#remove {
+width: 3em;
+}
+
+.removed {
+	background: red !important;
+	text-decoration: line-through;
+	color: grey;
+}
+
+button.remove-button, button.include-button {
+width: 100%;
+padding: 1px;
+margin: 2px;
+font-size: 0.8em;
+}
+
+ button.include-button {
+ display: none;
+ }
+ 
+ .hidden-columns {
+grid-column: 1;
+z-index: 3;
+display: grid;
+position: webkit-sticky;
+position: sticky;
+top: 0;
+border: black solid 1px;
+background: white;
+}
+
+#missing {
+display: none;
+width: 100%;
+}

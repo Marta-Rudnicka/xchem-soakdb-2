@@ -1,0 +1,220 @@
+{% extends "library_template.html" %}
+
+{% block head_links %}
+
+<link rel="stylesheet" href="../static/experiment_preparation/c-selection.css"> 
+<script src="../static/experiment_preparation/c-selection.js"></script>
+
+{% endblock %}
+
+{% block extra_ths %}
+					
+					<th id="select-th">Select<br><button class="in-table" id="select-all">Select all</button><br><button class="in-table"  id="unselect-all">Unelect all</button></th>
+{% endblock %}
+					
+{% block table_body %}
+				<tr><td>1</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>			
+				<tr><td>2</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>3</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>4</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>5</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>6</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>7</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>8</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>9</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></tr>
+				<tr><td>10</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>11</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>12</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>13</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>14</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>15</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>16</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>17</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>18</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>19</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>20</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>21</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>22</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>23</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>24</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>25</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>26</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>27</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>28</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>29</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>30</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>31</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>32</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>33</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>34</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>35</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>36</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>37</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>38</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>39</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>40</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>41</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>42</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>43</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>44</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>45</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>46</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>47</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>48</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>49</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>50</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>51</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>52</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>53</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>54</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>55</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>56</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>57</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>58</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>59</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+				<tr><td>60</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">(none)</td><td><input class="select" type="checkbox"></td></tr>
+{% endblock %}
+
+{% block aside_content%}
+			<form>
+				<button id="hide-filter-options">Hide options</button><button id="show-filter-options">Show options</button>
+				<br>
+				<label class="col1">SORTING AND FILTERING</label>
+				<div id="cherrypicking1">
+					<label class="col1">Sort current view by:</label>
+					<select id="sorting">
+						<option value="lib">Library</option>
+						<option value="plate">Plate</option>
+						<option value="p1">Property 1</option>
+						<option value="p2">Property 2</option>
+						<option value="p3">Property 3</option>
+						<option value="p4">Property 4</option>
+						<option value="p5">Property 5</option>
+					</select>
+					
+					<select id="sort-dir" class="col4">
+						<option value="asc">Ascending</option>
+						<option value="desc">Descending</option>
+					</select>
+					
+					<label class="col1">Remove from view compounds where</label>
+					
+					<select id="remove">
+						<option value="null" class="null">not selected</option>
+						<option value="text-smiles">SMILES</option>
+						<option value="num-p1">Property 1 (num)</option>
+						<option value="text-p2">Property 2 (text)</option>
+						<option value="num-p3">Property 3 (num)</option>
+						<option value="num-p4">Property 4 (num)</option>
+						<option value="text-p5">Property 5 (text)</option>
+					</select>
+					
+					<select id="remove-num" class="num-options">
+						<option value="null">select</option>
+						<option value="eq">=</option>
+						<option value="neq">≠</option>
+						<option value="gt">></option>
+						<option value="ge">≥</option>
+						<option value="st"> &lt;</option>
+						<option value="se">≤</option>
+					</select>
+					
+					<select id="remove-text" class="text-options">
+						<option value="null">select</option>
+						<option value="is">is </option>
+						<option value="is-not">is not</option>
+						<option value="contains" class="string-finder">contains</option>
+						<option value="contains-no" class="string-finder">contains no</option>
+					</select> 
+					
+					<input id="remove-num-option" class="num-options" type="number">				
+					<select id="remove-text-option" class="text-options">
+						<option value="null">select</option>
+						<option value="ct1">cell text 1</option>
+						<option value="ct2">cell text 2</option>
+						<option value="ct3">cell text 3</option>
+						<option value="ct4">cell text 4</option>
+						<option value="ct5">cell text 5</option>
+						<option value="ct6">cell text 6</option>					
+					</select>
+					<input id="remove-string" class="string-to-find" placeholder="Type here">
+					
+					<label class="col1">Add to view compounds where</label>
+					<select id="add">
+						<option value="null">not selected</option>
+						<option value="text-smiles">SMILES</option>
+						<option value="num-p1">Property 1 (num)</option>
+						<option value="text-p2">Property 2 (text)</option>
+						<option value="num-p3">Property 3 (num)</option>
+						<option value="num-p4">Property 4 (num)</option>
+						<option value="text-p5">Property 5 (text)</option>
+					</select>
+						
+					<select id="add-num" class="num-options">
+						<option value="null">select</option>
+						<option value="eq">=</option>
+						<option value="neq">≠</option>
+						<option value="gt">></option>
+						<option value="ge">≥</option>
+						<option value="st"> &lt;</option>
+						<option value="se">≤</option>
+					</select>
+						
+					<select id="add-text" class="text-options">
+						<option value="null">select</option>
+						<option value="is">is </option>
+						<option value="is-not">is not</option>
+						<option value="contains" class="string-finder">contains</option>
+						<option value="contains-no" class="string-finder">contains no</option>
+					</select> 
+						
+					<input id="add-num-option" class="num-options" type="number">				
+					<select id="add-text-option" class="text-options">
+						<option value="null">select</option>
+						<option value="ct1">cell text 1</option>
+						<option value="ct2">cell text 2</option>
+						<option value="ct3">cell text 3</option>
+						<option value="ct4">cell text 4</option>
+						<option value="ct5">cell text 5</option>
+						<option value="ct6">cell text 6</option>				
+					</select>
+					<input id="add-string" class="string-to-find" placeholder="Type here">				
+				</div>
+				<br>
+				<hr>
+				<label class="col1">COMPOUND SELECTION AND PRIORITY</label>
+				<div id="cherrypicking2">
+					<select class="col1" id="action">
+						<option value="null">Select action</option>
+						<option value="select"> Select</option>
+						<option value="unselect">Unselect</option>
+						<option value="increase">Increase priority of</option>
+						<option value="decrease">Decrease priority of</option>
+					</select>
+					<label>all rows from</label>
+					<input id="start" type="number" min="1" max="60">
+					<label>to</label>
+					<input id ="end" type="number" min="1" max="60">
+				</div>
+				<hr>
+				<button type="submit" id="filter-button">Apply</button>
+			</form>
+			<div id="filter-info">
+				<h3>Current selection:</h3>
+				<div>
+				<strong>Selected: X coumpounds from Y libraries</strong><br>
+				<strong>DSIpoised:</strong> x selected, y not selected<br>
+				<strong>FragLites:</strong> x selected, y not selected<br>
+				<strong>PepLites:</strong> x selected, y not selected<br>
+				<strong>MiniFrags:</strong> x selected, y not selected<br>
+				<strong>Cysteine Covalent:</strong> x selected, y not selected<br>
+				<strong>York 3D:</strong> x selected, y not selected<br>
+				<strong>Leeds 3D:</strong> x selected, y not selected<br>
+				</div>
+				<h4>Filters and sorting applied:</h4>
+				<div>Sort by: <span id="current-sort">Library</span>, <span id="current-sort-direction">ascending</span></div>
+				<ul id="filter-list">
+				</ul>
+			</div>
+			<button>Save current selection for experiment</button>
+{% endblock %}

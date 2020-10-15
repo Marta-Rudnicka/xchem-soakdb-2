@@ -1,0 +1,44 @@
+.crystal-field {
+	padding:0;
+	/*background: red;*/
+}
+
+img {
+padding: 0;
+display: none;
+}
+
+.show-image:checked ~ .crystal-pic {
+	display:block;
+}
+
+#show-x, #show-y, #show-plate, #show-drop, #show-score {
+display: none;
+}
+
+tbody {
+display: none;
+}
+
+button.remove-button, button.include-button {
+width: 100%;
+padding: 1px;
+margin: 2px;
+font-size: 0.8em;
+}
+
+
+button.include-button {
+display: none;
+}
+
+.removed {
+	background: red !important;
+	text-decoration: line-through;
+	color: grey;
+}
+
+#crystal-form {
+display: grid;
+grid-template-columns: 70% 30%;
+}

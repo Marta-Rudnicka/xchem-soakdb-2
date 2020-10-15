@@ -1,0 +1,153 @@
+{% extends "library_template.html" %}
+
+{% block head_links %}
+ <link rel="stylesheet" href="../static/experiment_preparation/c-check.css">
+  <script src="../static/experiment_preparation/c-check.js"></script>
+{% endblock %}
+
+{% block extra_left %}
+			<div class="col1" id="availability-list">
+				<h2>Availability of selected compounds</h2>
+				<div>[X] available<br>[Y] currently unavailable</div>
+				<button class="in-table" id="show-unavailable">Show unavailable</button>
+				<button class="in-table" id="hide-unavailable">Hide unavailable</button>
+				<table id="missing">
+					<tr>
+						<th>Code</th>
+						<th>Priority</th>
+					</tr>
+					<tr>
+						<td>Compound 1</td>
+						<td>Low</td>
+					</tr>
+					<tr>
+						<td>Compound 2</td>
+						<td>Low</td>
+					</tr>
+					<tr>
+						<td>Compound 3</td>
+						<td>Low</td>
+					</tr>
+					<tr>
+						<td>Compound 4</td>
+						<td>Medium</td>
+					</tr>
+					<tr>
+						<td>Compound 5</td>
+						<td>Low</td>
+					</tr>
+					<tr>
+						<td>Compound 6</td>
+						<td>Low</td>
+					</tr>
+				</table>
+			</div> 
+		</div>
+	{% endblock %}
+		
+	{% block extra_ths %}
+
+					<th id="remove">Remove<br><button class="in-table">Remove all</button></th>
+	{% endblock %}
+	
+			
+{% block table_body %}
+				<tr><td>1</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>2</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>3</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>4</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>5</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>6</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>7</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>8</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>9</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>10</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>11</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>12</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>13</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>14</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>15</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>16</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>17</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>18</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>19</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>20</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>21</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>22</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>23</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>24</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>25</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>26</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>27</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>28</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>29</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>30</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>31</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>32</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>33</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>34</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>35</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>36</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>37</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>38</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>39</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>40</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>41</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>42</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>43</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>44</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>45</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>46</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>47</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>48</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>49</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>50</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>51</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>52</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>53</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>54</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>55</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>56</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>57</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>58</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>59</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+				<tr><td>60</td><td class="lib">[data]</td><td class="plate">[data]</td><td class="code">[data]</td><td class="smiles">[data]</td><td class="c2d"><img alt="alttext" src="../static/experiment_preparation/pic.png"></td><td class="p1">[data]</td><td class="p2">[data]</td><td class="p3">[data]</td><td class="p4">[data]</td><td class="priority">High</td><td><button class="remove-button">Remove</button><button class="include-button">Include</button></td></tr>
+{% endblock %}
+
+{% block aside_content%}
+				<button id="load">Load saved compound selection</button>
+				<form id="sort">
+					<br>
+					<label class="col1">Sort by:</label>
+					<br>
+					<select>
+						<option>Library</option>
+						<option>Property 2</option>
+						<option>Property 3</option>
+						<option>Property 4</option>
+						<option>Property 5</option>
+					</select>
+					<select class="col4">
+						<option>Ascending</option>
+						<option>Descending</option>
+					</select>
+					<br>
+					<label>Select rows to add to experiment</label>
+					<br>
+					<label>from</label>
+					<input type="number">
+					<label>to</label>
+					<input type="number">
+					<br>
+					<label>Remove rows:</label>
+					<br>
+					<label>from</label>
+					<input type="number">
+					<label>to</label>
+					<input type="number">
+					<br>
+					<button class="in-table" type="submit">Apply</button>
+				</form>
+				<div>X compounds from Y libraries have been selected for the next screen</div>
+				<button>Export to experiment</button>
+{% endblock %}
