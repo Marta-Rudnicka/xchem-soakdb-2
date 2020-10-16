@@ -1,23 +1,23 @@
 /*use [#hideButton] to hide all elements in elementList and show [#showButton] */
 function hideElementList(hideButton, elementList, showButton){
-		document.getElementById(hideButton).onclick = () => {
+		document.getElementById(hideButton).addEventListener("click", function(){
 		elementList.forEach(cell => {
 			cell.style.display = 'none';
 		})
 		document.getElementById(showButton).style.display = 'inline-block';
 		return false;
-	}
+	})
 }
 
 /*use [#showButton] to show all elements in elementList*/
 function showElementList(showButton, elementList) {
-	document.getElementById(showButton).onclick = () => {
+	document.getElementById(showButton).addEventListener("click", function() {
 		elementList.forEach(cell => {
 			cell.style.display = 'table-cell';
-		})		
+		})	
 		document.getElementById(showButton).style.display = 'none';
 		return false;
-	}
+	})
 }
 
 /*when [#button] is clicked, check all checkboxes in listOfCheckboxes */
@@ -81,4 +81,38 @@ function setAllElementValuesTo(array, cvalue) {
 	for (i = 0; i < array.length; i++) {
 		document.querySelector(array[i]).value = cvalue;
 	} 
+}
+
+function showWhenChecked(checkboxID, elementID, displayType){
+	const element = document.getElementById(elementID);
+	const checkbox = document.getElementById(checkboxID);
+	if (checkbox.checked === true) {
+		element.style.display = displayType;
+	}
+	else {
+		element.style.display = 'none';
+	}
+}
+
+function countChecked(checkboxIdList, displayElementId) {
+	var counter = 0;
+	checkboxIdList.forEach(id => {	
+	const checkbox = document.getElementById(id);
+	if (checkbox.checked === true) {
+			counter++;
+		}
+	})
+	document.getElementById(displayElementId).innerHTML = counter;
+}
+
+function showHiddenClass(className){
+	document.querySelectorAll(className).forEach(element => {
+		element.style.visibility = 'visible';
+	})
+}
+
+function hideClass(className){
+	document.querySelectorAll(className).forEach(element => {
+		element.style.visibility = 'hidden';
+	})
 }

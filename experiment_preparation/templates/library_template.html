@@ -22,18 +22,17 @@
 	<main>
 		<div class="col1">
 			<div class="hidden-columns">
-				Hidden columns: 
-				<button class="in-table" id="show-lib">Show Library</button>
-				<button class="in-table" id="show-plate">Show Plate</button>
-				<button class="in-table" id="show-code">Show Code</button>
-				<button class="in-table" id="show-smiles">Show SMILES</button>
-				<button class="in-table" id="show-2d">Show 2D</button>
-				<button class="in-table" id="show-p1">Show [Property1]</button>
-				<button class="in-table" id="show-p2">Show [Property2]</button>
-				<button class="in-table" id="show-p3">Show [Property3]</button>
-				<button class="in-table" id="show-p4">Show [Property4]</button>
-			</div>
-		
+				Show more table columns: 
+				<button class="small-button" id="show-lib">Show Library</button>
+				<button class="small-button" id="show-plate">Show Plate</button>
+				<button class="small-button" id="show-code">Show Compound code</button>
+				<button class="small-button" id="show-smiles">Show SMILES</button>
+				<button class="small-button" id="show-2d">Show 2D</button>
+				<button class="small-button" id="show-p1">Show [Property1]</button>
+				<button class="small-button" id="show-p2">Show [Property2]</button>
+				<button class="small-button" id="show-p3">Show [Property3]</button>
+				<button class="small-button" id="show-p4">Show [Property4]</button>
+			</div>		
 		{% block extra_left %}
 		{% endblock %}
 		</div>
@@ -45,16 +44,16 @@
 			<thead>	
 				<tr>
 					<th class="row-no">Row no.</th>
-					<th class="lib">Library<br><button class="in-table" id="hide-lib">Hide</button></th>
-					<th class="plate">Plate<br><button class="in-table" id="hide-plate">Hide</button></th>
+					<th class="lib">Library {% include "sort.html" %}<br><button class="in-table" id="hide-lib">Hide</button>{% include "select_filter.html" %}</th>
+					<th class="plate">Plate {% include "sort.html" %}<br><button class="in-table" id="hide-plate">Hide</button>{% include "select_filter.html" %}</th>
 					<th class="code">Code<br><button class="in-table" id="hide-code">Hide</button></th>
-					<th class="smiles">SMILES<br><button class="in-table" id="hide-smiles">Hide</button></th>
+					<th class="smiles">SMILES<br><button class="in-table" id="hide-smiles">Hide</button>{% include "typestring_filter.html" %}</th>
 					<th class="c2d">2D structure<br><button class="in-table" id="hide-2d">Hide</button></th>
-					<th class="p1">[Property1]<br><button class="in-table" id="hide-p1">Hide</button></th>
-					<th class="p2">[Property2]<br><button class="in-table" id="hide-p2">Hide</button></th>
-					<th class="p3">[Property3]<br><button class="in-table" id="hide-p3">Hide</button></th>
-					<th class="p4">[Property4]<br><button class="in-table" id="hide-p4">Hide</button></th>
-					<th>Priority</th>
+					<th class="p1">[Property1]{% include "sort.html" %}<br><button class="in-table" id="hide-p1">Hide</button>{% include "select_filter.html" %}</th>
+					<th class="p2">[Property2]{% include "sort.html" %}<br><button class="in-table" id="hide-p2">Hide</button>{% include "typestring_filter.html" %}</th>
+					<th class="p3">[Property3]{% include "sort.html" %}<br><button class="in-table" id="hide-p3">Hide</button>{% include "select_filter.html" %}</th>
+					<th class="p4">[Property4]{% include "sort.html" %}<br><button class="in-table" id="hide-p4">Hide</button>{% include "typestring_filter.html" %}</th>
+					<th>Priority{% include "sort.html" %}</th>
 					{% block extra_ths %}
 					{% endblock %}
 				</tr>
@@ -67,7 +66,9 @@
 		</table>		
 		<div id="wrapper">
 		<aside>
+			<div id="hide-sidebar-div">
 			<button id="hide-sidebar">Hide sidebar</button>	
+			</div>
 			{% block aside_content %}
 			{% endblock %}
 		</aside>

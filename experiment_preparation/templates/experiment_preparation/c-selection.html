@@ -7,9 +7,22 @@
 
 {% endblock %}
 
+{%block select_filter%}
+						<form class="advanced">
+							<label>Show filters options</label><input class="value-list" type="checkbox"><br>
+							<div class="show-list">
+								<label>Uncheck values to filter them out:</label><br>
+								<input type="checkbox" checked><label>Option 1</label><br>
+								<input type="checkbox" checked><label>Option 2</label><br>
+								<input type="checkbox" checked><label>Option 3</label><br>
+								<input type="checkbox" checked><label>Option 4</label><br>
+							</div>
+						</form>
+{%endblock%}	
+
 {% block extra_ths %}
 					
-					<th id="select-th">Select<br><button class="in-table" id="select-all">Select all</button><br><button class="in-table"  id="unselect-all">Unelect all</button></th>
+					<th id="select-th">Select<br><button class="small-button" id="select-all">Select all</button><br><button class="small-button"  id="unselect-all">Unelect all</button></th>
 {% endblock %}
 					
 {% block table_body %}
@@ -76,145 +89,164 @@
 {% endblock %}
 
 {% block aside_content%}
-			<form>
-				<button id="hide-filter-options">Hide options</button><button id="show-filter-options">Show options</button>
+		<div id="libform-wrapper">
+			<form id="libform">
+				<label>SELECT LIBRARIES TO INSPECT:</label>
 				<br>
-				<label class="col1">SORTING AND FILTERING</label>
-				<div id="cherrypicking1">
-					<label class="col1">Sort current view by:</label>
-					<select id="sorting">
-						<option value="lib">Library</option>
-						<option value="plate">Plate</option>
-						<option value="p1">Property 1</option>
-						<option value="p2">Property 2</option>
-						<option value="p3">Property 3</option>
-						<option value="p4">Property 4</option>
-						<option value="p5">Property 5</option>
-					</select>
-					
-					<select id="sort-dir" class="col4">
-						<option value="asc">Ascending</option>
-						<option value="desc">Descending</option>
-					</select>
-					
-					<label class="col1">Remove from view compounds where</label>
-					
-					<select id="remove">
-						<option value="null" class="null">not selected</option>
-						<option value="text-smiles">SMILES</option>
-						<option value="num-p1">Property 1 (num)</option>
-						<option value="text-p2">Property 2 (text)</option>
-						<option value="num-p3">Property 3 (num)</option>
-						<option value="num-p4">Property 4 (num)</option>
-						<option value="text-p5">Property 5 (text)</option>
-					</select>
-					
-					<select id="remove-num" class="num-options">
-						<option value="null">select</option>
-						<option value="eq">=</option>
-						<option value="neq">≠</option>
-						<option value="gt">></option>
-						<option value="ge">≥</option>
-						<option value="st"> &lt;</option>
-						<option value="se">≤</option>
-					</select>
-					
-					<select id="remove-text" class="text-options">
-						<option value="null">select</option>
-						<option value="is">is </option>
-						<option value="is-not">is not</option>
-						<option value="contains" class="string-finder">contains</option>
-						<option value="contains-no" class="string-finder">contains no</option>
-					</select> 
-					
-					<input id="remove-num-option" class="num-options" type="number">				
-					<select id="remove-text-option" class="text-options">
-						<option value="null">select</option>
-						<option value="ct1">cell text 1</option>
-						<option value="ct2">cell text 2</option>
-						<option value="ct3">cell text 3</option>
-						<option value="ct4">cell text 4</option>
-						<option value="ct5">cell text 5</option>
-						<option value="ct6">cell text 6</option>					
-					</select>
-					<input id="remove-string" class="string-to-find" placeholder="Type here">
-					
-					<label class="col1">Add to view compounds where</label>
-					<select id="add">
-						<option value="null">not selected</option>
-						<option value="text-smiles">SMILES</option>
-						<option value="num-p1">Property 1 (num)</option>
-						<option value="text-p2">Property 2 (text)</option>
-						<option value="num-p3">Property 3 (num)</option>
-						<option value="num-p4">Property 4 (num)</option>
-						<option value="text-p5">Property 5 (text)</option>
-					</select>
-						
-					<select id="add-num" class="num-options">
-						<option value="null">select</option>
-						<option value="eq">=</option>
-						<option value="neq">≠</option>
-						<option value="gt">></option>
-						<option value="ge">≥</option>
-						<option value="st"> &lt;</option>
-						<option value="se">≤</option>
-					</select>
-						
-					<select id="add-text" class="text-options">
-						<option value="null">select</option>
-						<option value="is">is </option>
-						<option value="is-not">is not</option>
-						<option value="contains" class="string-finder">contains</option>
-						<option value="contains-no" class="string-finder">contains no</option>
-					</select> 
-						
-					<input id="add-num-option" class="num-options" type="number">				
-					<select id="add-text-option" class="text-options">
-						<option value="null">select</option>
-						<option value="ct1">cell text 1</option>
-						<option value="ct2">cell text 2</option>
-						<option value="ct3">cell text 3</option>
-						<option value="ct4">cell text 4</option>
-						<option value="ct5">cell text 5</option>
-						<option value="ct6">cell text 6</option>				
-					</select>
-					<input id="add-string" class="string-to-find" placeholder="Type here">				
+				<div id="libs">
+					<label>DSIpoised</label><input type="checkbox" id="dsi-poised">
+					<label>FragLites</label><input type="checkbox" id="frag-lites">
+					<label>PepLites</label><input type="checkbox" id="pep-lites">
+					<label>MiniFrags</label><input type="checkbox" id="mini-frags">
+					<label>Cysteine Covalent</label><input type="checkbox" id="cysteine-covalent">
+					<label>York 3D</label><input type="checkbox" id="york-3d">
+					<label>Leeds 3D</label><input type="checkbox" id="leeds-3d">
 				</div>
-				<br>
-				<hr>
-				<label class="col1">COMPOUND SELECTION AND PRIORITY</label>
-				<div id="cherrypicking2">
-					<select class="col1" id="action">
-						<option value="null">Select action</option>
-						<option value="select"> Select</option>
-						<option value="unselect">Unselect</option>
-						<option value="increase">Increase priority of</option>
-						<option value="decrease">Decrease priority of</option>
-					</select>
-					<label>all rows from</label>
-					<input id="start" type="number" min="1" max="60">
-					<label>to</label>
-					<input id ="end" type="number" min="1" max="60">
-				</div>
-				<hr>
-				<button type="submit" id="filter-button">Apply</button>
+				<button id="add-libs">Show selected libraries in the table</button>
 			</form>
-			<div id="filter-info">
-				<h3>Current selection:</h3>
-				<div>
-				<strong>Selected: X coumpounds from Y libraries</strong><br>
-				<strong>DSIpoised:</strong> x selected, y not selected<br>
-				<strong>FragLites:</strong> x selected, y not selected<br>
-				<strong>PepLites:</strong> x selected, y not selected<br>
-				<strong>MiniFrags:</strong> x selected, y not selected<br>
-				<strong>Cysteine Covalent:</strong> x selected, y not selected<br>
-				<strong>York 3D:</strong> x selected, y not selected<br>
-				<strong>Leeds 3D:</strong> x selected, y not selected<br>
+		</div>
+			<div id="hidden-on-load">
+				<button id="hide-filter-options">Hide advanced sorting and filtering</button><button id="show-filter-options">Show advanced sorting and filtering</button>
+				<form id="advanced" class="advanced">		
+					<div id="cherrypicking1">
+					<label id="sort-filter">SORTING AND FILTERING</label>
+						<label class="col1">Sort current view by:</label>
+						<select id="sorting">
+							<option value="lib">Library</option>
+							<option value="plate">Plate</option>
+							<option value="p1">Property 1</option>
+							<option value="p2">Property 2</option>
+							<option value="p3">Property 3</option>
+							<option value="p4">Property 4</option>
+							<option value="p5">Property 5</option>
+						</select>
+						
+						<select id="sort-dir" class="col4">
+							<option value="asc">Ascending</option>
+							<option value="desc">Descending</option>
+						</select>
+						
+						<label class="col1">Remove from view compounds where</label>
+						
+						<select id="remove">
+							<option value="null" class="null">not selected</option>
+							<option value="text-smiles">SMILES</option>
+							<option value="num-p1">Property 1 (num)</option>
+							<option value="text-p2">Property 2 (text)</option>
+							<option value="num-p3">Property 3 (num)</option>
+							<option value="num-p4">Property 4 (num)</option>
+							<option value="text-p5">Property 5 (text)</option>
+						</select>
+						
+						<select id="remove-num" class="num-options">
+							<option value="null">select</option>
+							<option value="eq">=</option>
+							<option value="neq">≠</option>
+							<option value="gt">></option>
+							<option value="ge">≥</option>
+							<option value="st"> &lt;</option>
+							<option value="se">≤</option>
+						</select>
+						
+						<select id="remove-text" class="text-options">
+							<option value="null">select</option>
+							<option value="is">is </option>
+							<option value="is-not">is not</option>
+							<option value="contains" class="string-finder">contains</option>
+							<option value="contains-no" class="string-finder">contains no</option>
+						</select> 
+						
+						<input id="remove-num-option" class="num-options" type="number">				
+						<select id="remove-text-option" class="text-options">
+							<option value="null">select</option>
+							<option value="ct1">cell text 1</option>
+							<option value="ct2">cell text 2</option>
+							<option value="ct3">cell text 3</option>
+							<option value="ct4">cell text 4</option>
+							<option value="ct5">cell text 5</option>
+							<option value="ct6">cell text 6</option>					
+						</select>
+						<input id="remove-string" class="string-to-find" placeholder="Type here">
+						
+						<label class="col1">Add to view compounds where</label>
+						<select id="add">
+							<option value="null">not selected</option>
+							<option value="text-smiles">SMILES</option>
+							<option value="num-p1">Property 1 (num)</option>
+							<option value="text-p2">Property 2 (text)</option>
+							<option value="num-p3">Property 3 (num)</option>
+							<option value="num-p4">Property 4 (num)</option>
+							<option value="text-p5">Property 5 (text)</option>
+						</select>
+							
+						<select id="add-num" class="num-options">
+							<option value="null">select</option>
+							<option value="eq">=</option>
+							<option value="neq">≠</option>
+							<option value="gt">></option>
+							<option value="ge">≥</option>
+							<option value="st"> &lt;</option>
+							<option value="se">≤</option>
+						</select>
+							
+						<select id="add-text" class="text-options">
+							<option value="null">select</option>
+							<option value="is">is </option>
+							<option value="is-not">is not</option>
+							<option value="contains" class="string-finder">contains</option>
+							<option value="contains-no" class="string-finder">contains no</option>
+						</select> 
+							
+						<input id="add-num-option" class="num-options" type="number">				
+						<select id="add-text-option" class="text-options">
+							<option value="null">select</option>
+							<option value="ct1">cell text 1</option>
+							<option value="ct2">cell text 2</option>
+							<option value="ct3">cell text 3</option>
+							<option value="ct4">cell text 4</option>
+							<option value="ct5">cell text 5</option>
+							<option value="ct6">cell text 6</option>				
+						</select>
+						<input id="add-string" class="string-to-find" placeholder="Type here">				
+					</div>
+					<hr>		
+					<div id="cherrypicking2">
+						<label id="selection-priority">COMPOUND SELECTION AND PRIORITY</label>
+						<select class="col1" id="action">
+							<option value="null">Select action</option>
+							<option value="select"> Select</option>
+							<option value="unselect">Unselect</option>
+							<option value="increase">Increase priority of</option>
+							<option value="decrease">Decrease priority of</option>
+						</select>
+						<label>all rows from</label>
+						<input id="start" type="number" min="1" max="60">
+						<label>to</label>
+						<input id ="end" type="number" min="1" max="60">
+					</div>
+					<hr>
+					<button type="submit" id="filter-button">Apply</button>
+				</form>
+				<div id="filter-info">
+					<h3>Current selection:</h3>
+					<strong>Selected: X coumpounds from <span id="libs-count">0</span> libraries</strong><br>
+					<ul id="lib-list">
+					<li id="dsi-poised-l"><strong>DSIpoised:</strong> 0 selected, 666 not selected</li>
+					<li id="frag-lites-l"><strong>FragLites:</strong> 0 selected, 666 not selected</li>
+					<li id="pep-lites-l"><strong>PepLites:</strong> 69 selected, 420 not selected</li>
+					<li id="mini-frags-l"><strong>MiniFrags:</strong> 69 selected, 420 not selected</li>
+					<li id="cysteine-covalent-l"><strong>Cysteine Covalent:</strong> 42 selected, 404 not selected</li>
+					<li id="york-3d-l"><strong>York 3D:</strong> 42 selected, 404 not selected</li>
+					<li id="leeds-3d-l"><strong>Leeds 3D:</strong> &pi; selected, <em>i</em> not selected</li>
+					</ul>
 				</div>
 				<h4>Filters and sorting applied:</h4>
-				<div>Sort by: <span id="current-sort">Library</span>, <span id="current-sort-direction">ascending</span></div>
-				<ul id="filter-list">
-				</ul>
+				<div style="display:none">Sort by: 
+				<span id="current-sort">Library</span>, <span id="current-sort-direction">ascending</span>
+				<p>Not implemented</p>
+				</div>
+					<ul id="filter-list">
+					</ul>
+				<button>Save current selection for experiment</button>
 			</div>
-			<button>Save current selection for experiment</button>
 {% endblock %}

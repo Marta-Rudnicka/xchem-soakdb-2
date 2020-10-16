@@ -1,5 +1,4 @@
 body {
-	/*width: 1200px;*/
 	margin: auto;
 	font-family: sans-serif;
 }
@@ -17,24 +16,24 @@ table, th, td, tbody, thead {
 /*nNEW LAYOUT */
 
 main {
+width: 100%;
 margin-top: 20px;
 display: grid;
 grid-gap: 1px;
-grid-template-columns: 5% 68% 25%;
+grid-template-columns: 10% 65% 25%;
 }
 
-/*
-
-main {
-margin-top: 20px;
-display: grid;
-grid-template-columns: 870px 400px;
-grid-gap: 5px;
-} */
-
 .datatable {
-	grid-column: 2/3;
+	grid-column: 2;
 	grid-row: 1;
+}
+
+#page-info {
+width: 30em;
+margin: auto;
+margin-top: 2px;
+margin-bottom: 2px;
+padding: 0;
 }
 
 /*
@@ -64,9 +63,10 @@ table.datatable th {
 width: 3em;
 }
 
+/*
 .datatable tr:nth-child(even) {
 background: rgba(211, 211, 211, 0.4);
-}
+}*/
 
 .cs, #cshead {
 	display: none;
@@ -84,14 +84,14 @@ right: 1px;
 }
 
 
-
+/*
 aside{
 background: white;
 grid-column: 2/3;
 height: 100%;
 position: fixed;
 top: 2px;
-}
+}*/
 
 div {
 padding: 5px
@@ -104,9 +104,24 @@ font-size: 1.2em;
 }
 
 button.in-table {
-width: 100%;
+width: 98%;
 padding: 1px;
 margin: 2px;
+font-size: 0.8em;
+position: absolute;
+bottom:0;
+left:0;
+}
+
+form.advanced {
+margin-bottom: 1em;
+margin-left: 0;
+}
+
+button.small-button {
+width: 100%;
+padding: 1px;
+margin: 1px;
 font-size: 0.8em;
 }
 
@@ -195,16 +210,16 @@ button[type="submit"] {
 	/*background: red;*/
 }
 
-#hide-sidebar {
-/*
-position: webkit-sticky;
-position: sticky;*/
+#hide-sidebar-div {
+background: white;
+padding-left: 4em;
+padding-bottom: 1em;
 display: inline-block;
-/*height: 2em;*/
+position: fixed;
 top: 0px;
 right: 10px;
 float: right;
-/*vertical-align: top;*/
+
 }
 
 #show-sidebar {

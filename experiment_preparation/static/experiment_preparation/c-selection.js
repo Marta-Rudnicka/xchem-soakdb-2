@@ -60,8 +60,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	const allPlate = document.querySelectorAll('.plate');
 	const allSmiles = document.querySelectorAll('.smiles');
 	const allCode = document.querySelectorAll('.code');
+	
 	//array of checkboxes in table
 	const selectCheckboxes = document.querySelectorAll('.select');
+	
+	//array of advanced filters
+	const allAdvanced = document.querySelectorAll('.advanced');
+	const allSortByColumn=document.querySelectorAll('.sort-by-column');
 	
 	selectCheckboxes.forEach(checkbox => {
 		checkbox.onchange = () => {
@@ -108,21 +113,24 @@ document.addEventListener('DOMContentLoaded', () => {
 	})	
 	
 	/*'Hide options' button*/
-	document.getElementById('hide-filter-options').onclick = () => {
-		hide(['#hide-filter-options', '#cherrypicking1', 
-		'#cherrypicking2'])
+	document.getElementById('hide-filter-options').addEventListener("click", function() {
+		hide(['#hide-filter-options', '#advanced'])
 		document.getElementById('show-filter-options').style.display = 'inline-block';
+		hideClass('.sort-by-column');
 		return false;	
-		}
+		})
 	
 	/*'Show options' button */
-	document.getElementById('show-filter-options').onclick = () => {
+	document.getElementById('show-filter-options').addEventListener("click", function() {
+		document.querySelectorAll('form.advanced').forEach(form => {
+			form.style.display = 'block';
+			})
 		document.getElementById('show-filter-options').style.display = 'none';
-		document.getElementById('cherrypicking1').style.display = 'grid';
-		document.getElementById('cherrypicking2').style.display = 'grid';
+		document.getElementById('advanced').style.display = 'block';
 		document.getElementById('hide-filter-options').style.display = 'inline-block';
+		showHiddenClass('.sort-by-column');
 		return false;	
-		}
+		})
 	
 	/*When 'Apply sorting/filters' button is clicked, use Filter 
 	 * Strings to generate info about all the filters and sorting 
@@ -185,6 +193,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	showElementList('show-code', allCode);
 	showElementList('show-plate', allPlate);
 	showElementList('show-smiles', allSmiles);
+	
+	hideElementList('hide-filter-options', allAdvanced)
+	/*showElementList('show-filter-options', allAdvanced, )*/
+
 	
 	//actions after selecting the property to filter by (Remove)
 	document.getElementById('remove').onchange = () => {
@@ -256,5 +268,19 @@ document.addEventListener('DOMContentLoaded', () => {
 			document.getElementById('add-text-option').style.display="grid";
 			document.getElementById('add-string').style.display="none";
 		}		
-	}	
+	}
+	
+	document.getElementById('add-libs').onclick = () => {
+		document.getElementById('hidden-on-load').style.display = 'block';
+		document.querySelector('tbody').style.visibility = 'visible';
+		showWhenChecked('dsi-poised', 'dsi-poised-l', 'list-item');
+		showWhenChecked('frag-lites', 'frag-lites-l', 'list-item');	
+		showWhenChecked('pep-lites', 'pep-lites-l', 'list-item');	
+		showWhenChecked('mini-frags', 'mini-frags-l', 'list-item');	
+		showWhenChecked('cysteine-covalent', 'cysteine-covalent-l', 'list-item');	
+		showWhenChecked('york-3d', 'york-3d-l', 'list-item');	
+		showWhenChecked('leeds-3d', 'leeds-3d-l', 'list-item');	
+		countChecked(['dsi-poised', 'frag-lites', 'pep-lites', 'mini-frags', 'cysteine-covalent', 'york-3d', 'leeds-3d' ],'libs-count');
+		return false;
+	}
 })
