@@ -1,5 +1,5 @@
 {% load static %}
-<!-- 	vars: title, table_caption
+<!-- 	vars: title, table_caption, tbody
 		blocks: head_links, show_buttons, ths, tbody, menu
 -->
 <!DOCTYPE html>
@@ -30,8 +30,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{% block tbody %}
-			{% endblock %}		
+			{{ tbody| safe }}
 		</tbody>
 	</table>
 	

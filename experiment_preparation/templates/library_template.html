@@ -60,8 +60,7 @@
 			</thead> 
 			
 			<tbody id="datatable-body">
-				{% block table_body %}
-				{% endblock %}
+				{{ tbody | safe }}
 			</tbody> 
 		</table>		
 		<div id="wrapper">
