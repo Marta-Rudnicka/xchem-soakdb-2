@@ -18,12 +18,99 @@
 								<input type="checkbox" checked><label>Option 4</label><br>
 							</div>
 						</form>
-{%endblock%}	
+{% endblock %}	
 
-{% block extra_ths %}
-					
-					<th id="select-th">Select<br><button class="small-button" id="select-all">Select all</button><br><button class="small-button"  id="unselect-all">Unelect all</button></th>
+{% block ths %}
+					<th class="row-no">Row no.</th>
+					<th class="lib">Library 
+						{% include "sort.html" %}
+						<br>
+						<button class="in-table" id="hide-lib">Hide</button>
+						{% include "select_filter.html" %}
+					</th>
+					<th class="plate">Plate 
+						{% include "sort.html" %}
+						<br>
+						<button class="in-table" id="hide-plate">Hide</button>
+						{% include "select_filter.html" %}
+					</th>
+					<th class="code">Code
+						<br>
+						<button class="in-table" id="hide-code">Hide</button>
+					</th>
+					<th class="smiles">SMILES
+						<br>
+						<button class="in-table" id="hide-smiles">Hide</button>
+						{% include "typestring_filter.html" %}
+					</th>
+					<th class="c2d">2D structure
+						<br>
+						<button class="in-table" id="hide-2d">Hide</button>
+					</th>
+					<th class="p1">[Property1]
+						{% include "sort.html" %}
+						<br>
+						<button class="in-table" id="hide-p1">Hide</button>
+						{% include "select_filter.html" %}
+					</th>
+					<th class="p2">[Property2]
+						{% include "sort.html" %}
+						<br>
+						<button class="in-table" id="hide-p2">Hide</button>
+						{% include "typestring_filter.html" %}
+					</th>
+					<th class="p3">[Property3]
+						{% include "sort.html" %}
+						<br>
+						<button class="in-table" id="hide-p3">Hide</button>
+						{% include "select_filter.html" %}
+					</th>
+					<th class="p4">[Property4]
+						{% include "sort.html" %}
+						<br>
+						<button class="in-table" id="hide-p4">Hide</button>
+						{% include "typestring_filter.html" %}
+					</th>
+					<th>Priority
+						{% include "sort.html" %}</th>			
+					<th id="select-th">Select
+						<br>
+						<button class="small-button" id="select-all">Select all</button>
+						<br>
+						<button class="small-button"  id="unselect-all">Unelect all</button>
+					</th>
 {% endblock %}
+
+{% block tbody %}
+	{% for i in counter %}
+	<tr>
+		<td>{{i}}</td>
+		<td class="lib">[data]</td>
+		<td class="plate">[data]</td>
+		<td class="code">[data]</td>
+		<td class="smiles">[data]</td>
+		<td class="c2d">
+			<img alt="alttext" src="../static/experiment_preparation/pic.png">
+		</td>
+		<td class="p1">[data]</td>
+		<td class="p2">[data]</td>
+		<td class="p3">[data]</td>
+		<td class="p4">[data]</td>
+		<td class="priority">
+			<span class="no-pr">(none)</span>
+			<span class="pr">5</span> 
+				<img src="../static/compound_screen/up.png" alt="increase" class="increase">
+				<img src="../static/compound_screen/down.png" alt="decrease" class="decrease">
+		</td>
+		<td>
+			<input class="select" type="checkbox">
+		</td>
+	</tr>
+	{% endfor %}
+{% endblock %}
+
+
+
 
 {% block aside_content%}
 		<div id="libform-wrapper">
@@ -185,5 +272,8 @@
 					<ul id="filter-list">
 					</ul>
 				<button>Save current selection for experiment</button>
+				<div>
+				
+				</div>
 			</div>
 {% endblock %}

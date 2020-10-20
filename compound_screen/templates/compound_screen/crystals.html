@@ -7,22 +7,44 @@
 
 
 {% block show_buttons %}
-<button class="in-table" id="show-plate">Show plate</button>
-<button class="in-table" id="show-drop">Show drop</button>
-<button class="in-table" id="show-x">Show X coordinates</button>
-<button class="in-table" id="show-y">Show Y coordinates</button>
-<button class="in-table" id="show-score">Show score</button>
+<button class="small-button" id="show-plate">Show plate</button>
+<button class="small-button" id="show-drop">Show drop</button>
+<button class="small-button" id="show-x">Show X coordinates</button>
+<button class="small-button" id="show-y">Show Y coordinates</button>
+<button class="small-button" id="show-score">Show score</button>
 {% endblock %}					
 
 
 {% block ths %}
-<th class="plate">Crystallisation<br>plate<br><button class="in-table" id="hide-plate">Hide</button></th>
+<th class="plate">Crystallisation<br>plate<br><br><button class="in-table" id="hide-plate">Hide</button></th>
 <th class="drop">Drop<br><button class="in-table" id="hide-drop">Hide</button></th>
 <th class="x">X coordinate<br><button class="in-table" id="hide-x">Hide</button></th>
 <th class="y">Y coordinate<br><button class="in-table" id="hide-y">Hide</button></th>
 <th class="score">Score<button class="in-table" id="hide-score">Hide</button></th>
-<th class="crystal-field">Images<br><button class="in-table" id="hide-images">Hide all</button><button class="in-table" id="show-images">Show all</button></th>
+<th class="crystal-field">Images<br><button class="small-button" id="hide-images">Hide all</button><br><br><button class="in-table" id="show-images">Show all</button></th>
 <th>Remove or<br>Include</th>
+{% endblock %}
+
+{% block tbody %}
+	{% for i in counter %}
+		<tr>
+			<td>{{i}}</td>
+			<td class="plate">[data]</td>
+			<td class="drop">[data]</td>
+			<td class="x">[data]</td>
+			<td class="y">[data]</td>
+			<td class="score">[data]</td>
+			<td class="crystal-field">
+				<input type="checkbox" class="show-image">
+				<label>show image</label>
+				<br>
+				<img class="crystal-pic" src="../static/compound_screen/crystal.png" alt="alttext">
+				<br>
+			</td>
+			<td><button class="remove-button">Remove</button>
+			<button class="include-button">Include</button>
+		</tr>
+	{% endfor %}
 {% endblock %}
 
 		{% block menu %}

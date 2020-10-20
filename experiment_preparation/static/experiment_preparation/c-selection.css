@@ -11,6 +11,13 @@ visibility: hidden;
 display: none;
 }
 
+#show-preset {
+display:none;
+}
+.pr, .increase, .decrease {
+visibility: hidden;
+}
+
 #cherrypicking1 {
 	display: none;
 	padding-right: 5px;
@@ -48,19 +55,6 @@ form.advanced {
 width: 100%;
 }
 
-.sort-by-column{
-display: block;
-float: right;
-font-size: 0.8em;
-visibility: hidden;
-vertical-align: top;
-}
-
-.sort-by-column select{ 
-font-size: 1.5em;
-margin-bottom: 2px;
-}
-
 #libs {
 display: grid;
 width: 100%;
@@ -77,8 +71,13 @@ grid-template-columns: 40% 10% 40% 10%;
 	grid-template-rows: 50% 50%;
 }
 
-#show-2d, #show-lib, #show-plate, #hide-filter-options, .code, .p1, .p2, .p3, .p4 {
+#hide-filter-options,{
 	display: none;
+}
+
+form.advanced {
+margin-bottom: 1em;
+margin-left: 0;
 }
 
 .smiles {
@@ -110,3 +109,6 @@ color: grey;
 display: none
 }
 
+.sort-by-column{
+visibility: hidden;
+}

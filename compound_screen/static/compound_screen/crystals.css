@@ -16,8 +16,12 @@ display: none;
 display: none;
 }
 
-tbody {
+.datatable tbody {
 display: none;
+}
+
+.plate-type {
+visibility: hidden;
 }
 
 button.remove-button, button.include-button {

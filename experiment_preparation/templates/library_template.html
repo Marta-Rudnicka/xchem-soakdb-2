@@ -2,7 +2,7 @@
 
 <!DOCTYPE html>
 <!-- variables: title, page_heading, page_info, table_caption,  -->
-<!-- blocks: head_links, extra_left, extra_ths, table_body, aside_content-->
+<!-- blocks: head_links, extra_left, ths, table_body, aside_content-->
 <html lang="en">
 <head>
 	<title>{{ title }}</title>
@@ -25,6 +25,7 @@
 				Show more table columns: 
 				<button class="small-button" id="show-lib">Show Library</button>
 				<button class="small-button" id="show-plate">Show Plate</button>
+				<button class="small-button" id="show-preset">Show Preset</button>
 				<button class="small-button" id="show-code">Show Compound code</button>
 				<button class="small-button" id="show-smiles">Show SMILES</button>
 				<button class="small-button" id="show-2d">Show 2D</button>
@@ -41,26 +42,17 @@
 				<h2>{{ table_caption }}</h2>
 				<button id="show-sidebar">Show sidebar</button>
 			</caption>
-			<thead>	
+			<thead>
 				<tr>
-					<th class="row-no">Row no.</th>
-					<th class="lib">Library {% include "sort.html" %}<br><button class="in-table" id="hide-lib">Hide</button>{% include "select_filter.html" %}</th>
-					<th class="plate">Plate {% include "sort.html" %}<br><button class="in-table" id="hide-plate">Hide</button>{% include "select_filter.html" %}</th>
-					<th class="code">Code<br><button class="in-table" id="hide-code">Hide</button></th>
-					<th class="smiles">SMILES<br><button class="in-table" id="hide-smiles">Hide</button>{% include "typestring_filter.html" %}</th>
-					<th class="c2d">2D structure<br><button class="in-table" id="hide-2d">Hide</button></th>
-					<th class="p1">[Property1]{% include "sort.html" %}<br><button class="in-table" id="hide-p1">Hide</button>{% include "select_filter.html" %}</th>
-					<th class="p2">[Property2]{% include "sort.html" %}<br><button class="in-table" id="hide-p2">Hide</button>{% include "typestring_filter.html" %}</th>
-					<th class="p3">[Property3]{% include "sort.html" %}<br><button class="in-table" id="hide-p3">Hide</button>{% include "select_filter.html" %}</th>
-					<th class="p4">[Property4]{% include "sort.html" %}<br><button class="in-table" id="hide-p4">Hide</button>{% include "typestring_filter.html" %}</th>
-					<th>Priority{% include "sort.html" %}</th>
-					{% block extra_ths %}
+					{% block ths %}
 					{% endblock %}
 				</tr>
 			</thead> 
 			
 			<tbody id="datatable-body">
-				{{ tbody | safe }}
+				{{ extra | safe }}
+				{% block tbody %}
+				{% endblock %}
 			</tbody> 
 		</table>		
 		<div id="wrapper">

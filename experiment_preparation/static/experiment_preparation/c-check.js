@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	const allPlate = document.querySelectorAll('.plate');
 	const allSmiles = document.querySelectorAll('.smiles');
 	const allCode = document.querySelectorAll('.code');
+	const allPreset = document.querySelectorAll('.preset');
 //create arrays of remove and include buttons
 	const allRemoveButtons = document.querySelectorAll('.remove-button');
 	const allIncludeButtons = document.querySelectorAll('.include-button');
@@ -26,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	hideElementList('hide-code', allCode, 'show-code');
 	hideElementList('hide-plate', allPlate, 'show-plate');
 	hideElementList('hide-smiles', allSmiles, 'show-smiles');
+	hideElementList('hide-preset', allPreset, 'show-preset');
 	
 	//buttons for showing hidden table columns
 	showElementList('show-2d', cells2d);
@@ -37,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	showElementList('show-code', allCode);
 	showElementList('show-plate', allPlate);
 	showElementList('show-smiles', allSmiles);
+	showElementList('show-preset', allPreset);
 	
 	allRemoveButtons.forEach(button => {
 		button.onclick = () => {
@@ -56,21 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	})
 	
-	document.getElementById('show-unavailable').onclick = () => {
-		document.getElementById('missing').style.display = "table";
-		document.getElementById('hide-unavailable').style.display = "inline-block";
-		document.getElementById('show-unavailable').style.display = 'none';
-	}
-	
-	document.getElementById('hide-unavailable').onclick = () => {
-		document.getElementById('missing').style.display = 'none';
-		document.getElementById('show-unavailable').style.display = 'inline-block';
-		document.getElementById('hide-unavailable').style.display = 'none';
-	}
-	
 	document.getElementById('load').onclick = () => {
 		console.log('click!');
 		document.getElementById('datatable-body').style.display = 'table-row-group';
-		document.getElementById('availability-list').style.display = 'block';
+		return false;
 	}
 })

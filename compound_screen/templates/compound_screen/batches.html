@@ -19,6 +19,23 @@
 				<th>PlateBatch Name</th>
 {% endblock %}
 
+{% block tbody %}
+	{% for i in counter %}
+	<tr>
+		<td>{{i}}</td>
+		<td>[data]</td>
+		<td>[data]</td>
+		<td>[data]</td>
+		<td>[data]</td>
+		<td>
+			<input class="bno" type="number" min="1">
+		<td>[data]</td>
+	</tr>
+	
+	{% endfor %}
+
+{% endblock %}
+
 {% block menu %}
 <form id="batchform">
 					<label id="divide">Divide crystals into batches:</label>

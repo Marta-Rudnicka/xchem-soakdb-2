@@ -18,6 +18,22 @@
 			<th>Soak Transfer Date/Time</th>
 {% endblock %}
 
+{% block tbody %}
+	{% for i in counter %}
+		<tr>
+			<td>{{i}}</td>
+			<td>[data]</td>
+			<td class="cs"></td>
+			<td>[data]</td>
+			<td class="tv"></td>
+			<td>[data]</td>
+			<td>[data]</td>
+		</tr>
+	
+	{% endfor %}
+
+{% endblock %}
+
 {% block menu %}
 <form>
 

@@ -14,7 +14,23 @@ table, th, td, tbody, thead {
 	padding: 5px;
 }
 
-/*nNEW LAYOUT */
+
+button.in-table {
+width: 98%;
+padding: 1px;
+margin: 2px;
+font-size: 0.8em;
+position: absolute;
+bottom:0;
+left:0;
+}
+
+button.small-button {
+width: 100%;
+padding: 1px;
+margin: 1px;
+font-size: 0.8em;
+}
 
 main {
 margin-top: 20px;
@@ -23,27 +39,10 @@ grid-gap: 1px;
 grid-template-columns: 5% 68% 25%;
 }
 
-/*
-
-main {
-margin-top: 20px;
-display: grid;
-grid-template-columns: 870px 400px;
-grid-gap: 5px;
-} */
-
 .datatable {
 	grid-column: 2/3;
 	grid-row: 1;
 }
-
-/*
-.datatable {
-grid-column: 1/2;
-overflow: scroll;
-margin: 10px;
-}*/
-/*END*/
 
 th {
 vertical-align: top;
@@ -64,9 +63,10 @@ table.datatable th {
 width: 3em;
 }
 
+/*
 .datatable tr:nth-child(even) {
 background: rgba(211, 211, 211, 0.4);
-}
+}*/
 
 .cs, #cshead {
 	display: none;
@@ -75,15 +75,6 @@ background: rgba(211, 211, 211, 0.4);
 .startform {
 width: 500px
 }
-
-#wrapper {
-/*position: fixed;
-top: 1px;
-right: 1px;
-/*width: 600px;*/
-}
-
-
 
 aside{
 background: white;

@@ -68,15 +68,41 @@ document.addEventListener('DOMContentLoaded', () => {
 	const allAdvanced = document.querySelectorAll('.advanced');
 	const allSortByColumn=document.querySelectorAll('.sort-by-column');
 	
+	document.querySelectorAll('.increase').forEach(pic => {
+		pic.onclick = () => {
+			console.log('click!');
+			var val = parseInt(pic.parentElement.querySelector('.pr').innerHTML) - 1;
+			if (val > 0) {
+				pic.parentElement.querySelector('.pr').innerHTML = val;
+			}
+		}
+	})
+	
+	document.querySelectorAll('.decrease').forEach(pic => {
+		pic.onclick = () => {
+			console.log('click!');
+			var val = parseInt(pic.parentElement.querySelector('.pr').innerHTML) + 1;
+			if (val < 6) {
+				pic.parentElement.querySelector('.pr').innerHTML = val;
+			}
+		}
+	})
+	
 	selectCheckboxes.forEach(checkbox => {
 		checkbox.onchange = () => {
 			if (checkbox.checked === true) {
-				console.log('checked!');
-				checkbox.parentElement.parentElement.querySelector('.priority').innerHTML = 'Low';
+				
+				checkbox.parentElement.parentElement.querySelector('.pr').style.visibility = "visible";
+				checkbox.parentElement.parentElement.querySelector('.increase').style.visibility = "visible";
+				checkbox.parentElement.parentElement.querySelector('.decrease').style.visibility = "visible";
+				checkbox.parentElement.parentElement.querySelector('.no-pr').style.display = "none";
 				checkbox.parentElement.parentElement.querySelector('.priority').style.color = 'black';
 			}
 			else {
-				checkbox.parentElement.parentElement.querySelector('.priority').innerHTML = '(none)';
+				checkbox.parentElement.parentElement.querySelector('.pr').style.visibility = "hidden";
+				checkbox.parentElement.parentElement.querySelector('.increase').style.visibility = "hidden";
+				checkbox.parentElement.parentElement.querySelector('.decrease').style.visibility = "hidden";
+				checkbox.parentElement.parentElement.querySelector('.no-pr').style.display = "inline-block";
 				checkbox.parentElement.parentElement.querySelector('.priority').style.color = 'grey';
 			}
 		}
@@ -283,4 +309,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		countChecked(['dsi-poised', 'frag-lites', 'pep-lites', 'mini-frags', 'cysteine-covalent', 'york-3d', 'leeds-3d' ],'libs-count');
 		return false;
 	}
+	
+	
+	
 })

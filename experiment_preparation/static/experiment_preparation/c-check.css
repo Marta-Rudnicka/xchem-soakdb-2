@@ -14,6 +14,10 @@ grid-column: 2/3;
 display:none;
 }
 
+.preset {
+display: none;
+}
+
 aside {
 display: block;
 grid-column: 3;
@@ -25,22 +29,29 @@ width: 100%;
 border: solid black 1px;
 }
 
-.smiles {
-display: none;
-}
-
-#show-2d, #show-p1, #show-p2, #show-p3, #show-p4, #show-lib, #show-code, #show-plate, #show-filter-options, #hide-unavailable, #availability-list{
-	display: none;
-}
-
 #remove {
 width: 3em;
+}
+
+.unavailable > td {
+color: grey;
+text-decoration: line-through;
+}
+
+.unavailable .add-remove {
+color: black;
+/*background: red;*/
+text-decoration: none;
 }
 
 .removed {
 	background: red !important;
 	text-decoration: line-through;
 	color: grey;
+}
+
+form p{
+font-size: 0.8em;
 }
 
 button.remove-button, button.include-button {

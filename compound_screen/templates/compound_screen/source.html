@@ -7,29 +7,47 @@
 
 
 {% block show_buttons %}
-<button class="in-table" id="show-lib">Show Library</button>
-<button class="in-table" id="show-plate">Show Plate</button>
-<button class="in-table" id="show-cc">Show Concentration</button>
-<button class="in-table" id="show-code">Show Code</button>
-<button class="in-table" id="show-smiles">Show SMILES</button>
-<button class="in-table" id="show-2d">Show 2D</button>
-<button class="in-table" id="show-p1">Show [Property1]</button>
-<button class="in-table" id="show-p2">Show [Property2]</button>
-<button class="in-table" id="show-p3">Show [Property3]</button>
-<button class="in-table" id="show-p4">Show [Property4]</button>
-{% endblock %}					
+<button class="small-button" id="show-lib">Show Library</button>
+<button class="small-button" id="show-plate">Show Plate</button>
+<button class="small-button" id="show-cc">Show Concentration</button>
+<button class="small-button" id="show-code">Show Code</button>
+<button class="small-button" id="show-smiles">Show SMILES</button>
+<button class="small-button" id="show-2d">Show 2D</button>	
+{% endblock %}
+
+
 
 {% block ths %}
-<th class="lib">Library name<br><button class="in-table" id="hide-lib">Hide</button></th>
+					<th class="lib">Library name<br><button class="in-table" id="hide-lib">Hide</button></th>
 					<th class="plate">Library plate<br><button class="in-table" id="hide-plate">Hide </button></th>
 					<th class="cc">Compound<br>concentration (mM)<br><button class="in-table" id="hide-cc">Hide </button></th>
 					<th class="code">Code<br><button class="in-table" id="hide-code">Hide </button></th>
 					<th class="smiles">SMILES<br><button class="in-table" id="hide-smiles">Hide </button></th>
 					<th class="c2d">2D structure<br><button class="in-table" id="hide-2d">Hide </button></th>
-					<th class="p1">[Property1]<br><button class="in-table" id="hide-p1">Hide</button></th>
-					<th class="p2">[Property2]<br><button class="in-table" id="hide-p2">Hide</button></th>
-					<th class="p3">[Property3]<br><button class="in-table" id="hide-p3">Hide</button></th>
-					<th class="p4">[Property4]<br><button class="in-table" id="hide-p4">Hide</button></th>
+					<th class="priority">Priority<br>(1=highest)</th>
+					
+{% endblock %}
+
+{% block tbody %}
+	{% for i in counter %}
+		<tr>
+			<td>{{i}}</td>
+			<td class="lib">[data]</td>
+			<td class="plate">[data]</td>
+			<td class="cc">[data]</td>
+			<td class="code">[data]</td>
+			<td class="smiles">[data]</td>
+			<td class="c2d">
+				<img src="../static/compound_screen/pic.png" alt="alttext"></td>
+			<td>
+				<span class="pr">3</span>
+				<img src="../static/compound_screen/up.png" alt="increase" class="increase">
+				<img src="../static/compound_screen/down.png" alt="decrease" class="decrease">
+				</td>
+			</tr>' 
+	
+	{% endfor %}
+
 {% endblock %}
 
 {% block menu %}
