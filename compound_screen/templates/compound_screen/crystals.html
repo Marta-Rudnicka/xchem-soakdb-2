@@ -5,72 +5,46 @@
 <script src="../../static/compound_screen/crystals.js"></script>
 {% endblock %}
 
-
-{% block show_buttons %}
-<button class="small-button" id="show-plate">Show plate</button>
-<button class="small-button" id="show-drop">Show drop</button>
-<button class="small-button" id="show-x">Show X coordinates</button>
-<button class="small-button" id="show-y">Show Y coordinates</button>
-<button class="small-button" id="show-score">Show score</button>
-{% endblock %}					
+{% block main %}
 
 
-{% block ths %}
-<th class="plate">Crystallisation<br>plate<br><br><button class="in-table" id="hide-plate">Hide</button></th>
-<th class="drop">Drop<br><button class="in-table" id="hide-drop">Hide</button></th>
-<th class="x">X coordinate<br><button class="in-table" id="hide-x">Hide</button></th>
-<th class="y">Y coordinate<br><button class="in-table" id="hide-y">Hide</button></th>
-<th class="score">Score<button class="in-table" id="hide-score">Hide</button></th>
-<th class="crystal-field">Images<br><button class="small-button" id="hide-images">Hide all</button><br><br><button class="in-table" id="show-images">Show all</button></th>
-<th>Remove or<br>Include</th>
+
+	{% include "section.html" with plate_number="1" crystal_number=counter1|last counter=counter1 %}
+	{% include "section.html" with plate_number="2" crystal_number=counter2|last counter=counter2 %}
+	{% include "section.html" with plate_number="3" crystal_number=counter3|last counter=counter3 %}
+	{% include "section.html" with plate_number="4" crystal_number=counter4|last counter=counter4 %}
 {% endblock %}
 
-{% block tbody %}
-	{% for i in counter %}
-		<tr>
-			<td>{{i}}</td>
-			<td class="plate">[data]</td>
-			<td class="drop">[data]</td>
-			<td class="x">[data]</td>
-			<td class="y">[data]</td>
-			<td class="score">[data]</td>
-			<td class="crystal-field">
-				<input type="checkbox" class="show-image">
-				<label>show image</label>
-				<br>
-				<img class="crystal-pic" src="../static/compound_screen/crystal.png" alt="alttext">
-				<br>
-			</td>
-			<td><button class="remove-button">Remove</button>
-			<button class="include-button">Include</button>
-		</tr>
-	{% endfor %}
-{% endblock %}
-
-		{% block menu %}
+{% block menu %}
+		<div id="summary" hidden>
+		<h3>Summary</h3>	
+		Total accepted crystals: <span id="total-accepted"></span><br> Total rejected crystals: <span id="total-rejected"></span></div>
+		<div id="crystal-info" hidden>
+			<h3>Crystal information:</h3>
 			
-				<button id="texrank">Upload crystal positions from TeXRank</button>
-				<form id="crystal-form">
-					<label>Enter drop volume (nL):</label>
-					<input type="number" min="1">
-					<button type="submit">Submit</button>
-					<label>Remove crystals with score lower than:</label>
-					<input type="number" min="1">
-					<label>Add crystals with score higher than:</label>
-					<input type="number" min="1">
-					
-					<button type="submit">Apply</button>
-					
-				</form>
-				<div>X crystals accepted for experiment</div>
-				<div>Y crystals removed</div>
-				<button>Accept and save</button>
+			<div id="infobox">
+				<span class="right"><strong>Drop:</strong></span> <span>[data]</span>
+				<span class="right"><strong>X coordinate:</strong></span> <span>[data]</span>
+				<span class="right"><strong>Y coordinate:</strong></span><span>[data]</span>
+				<span class="right"><strong>Score:</strong></span> <span>[data]</span>
 			</div>
-				<div class="nextlink">
-					<button>Next step <br> (Divide crystals into batches)</button>
-					<br>
-					<span class="comment"> Only works if there is some saved data <br>
-					and the drop volume is entered. If data saved is different <br>
-					than data in the spreadshet, asks if you want to save changes.</span>
-				</div>
-				{% endblock %}
+		<p id="empty-crystal-info">
+			Click on the <img src="../static/compound_screen/info.png" alt="alttext"> icon to display information about the crystal.
+			</p>
+		</div>	
+		<button id="texrank">Upload crystal images and information from TeXRank</button>
+		<form id="crystal-form" hidden>
+			<label>Enter drop volume (nL):</label>
+			<input type="number" min="1">
+			<button type="submit">Submit</button>
+			<label>Remove crystals with score lower than:</label>
+			<input type="number" min="1">
+			<label>Add crystals with score higher than:</label>
+			<input type="number" min="1">
+				
+		<button type="submit">Apply</button>
+			
+			<div class="nextlink">
+				<button>Next step <br> (Create batches)</button>
+			</div>
+{% endblock %}

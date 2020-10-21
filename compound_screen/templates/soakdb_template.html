@@ -12,44 +12,7 @@
   <script src="../../static/compound_screen/functions.js"></script>
 </head>
 <body>
-	<main>			
-		<div class="col1">
-			<div class="hidden-columns">
-				Show more table columns: 
-				{% block show_buttons %}
-				{% endblock %}				
-			</div>
-			
-		</div>
-	<table class="datatable">
-		<caption><h2>{{ table_caption }}</h2></caption>		
-		<thead>
-			<tr>
-				<th>Row<br>no.</th>
-				{% block ths %}
-				{% endblock %}		
-			</tr>
-		</thead>
-		<tbody>
-			{% block tbody %}
-			{% endblock %}		
-					
-		</tbody>
-	</table>
-	
-	<div id="wrapper">
-		<aside>
-			<nav>
-				<a href="solvents/source.html">Go to solvent characterization | </a><a href="all.html"> See all in one table (read only)</a>
-				<br><hr>
-				<a href="source"> Source compounds | </a><a href="crystals">Crystals | </a><a 
-			href="batches">Batches | </a><a href="soak">Soak | </a><a 
-			href="cryo">Cryo | </a><a 
-			href="harvesting">Harvesting | </a><a href="collection">Data 
-			collection</a>
-			</nav>
-			<div class="local-menu">
-				<table>
+	<table>
 					<tr>
 						<th>Project</th>
 						<th>Lab visit</th>
@@ -67,7 +30,23 @@
 						<td class="plate-type">autodetected</td>
 					</tr>
 				</table>
-			</div>
+	<h1>{{ header }}</h1>
+	<div>{{ page_info }}</div>
+	<main>
+		{% block main %}
+		
+		{% endblock %}
+	<div id="wrapper">
+		<aside>
+			<nav>
+				<a href="solvents/source.html">Go to solvent characterization | </a><a href="all.html"> See all in one table (read only)</a>
+				<br><hr>
+				<a href="source"> Source compounds | </a><a href="crystals">Crystals | </a><a 
+			href="batches">Batches | </a><a href="soak">Soak | </a><a 
+			href="cryo">Cryo | </a><a 
+			href="harvesting">Harvesting | </a><a href="collection">Data 
+			collection</a>
+			</nav>
 			<div class="local-menu">
 			{% block menu %}
 			{% endblock %}		

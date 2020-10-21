@@ -17,9 +17,14 @@ def source(request):
 
 def crystals(request):
 	return render(request, "compound_screen/crystals.html", {
-	"title": "Crystals table",
+	"title": "Crystal gallery",
+	"header": "CRYSTAL GALLERY",
 	"table_caption": "Crystals", 
-		"counter": range(61),
+	"counter1": range(1,15),
+	"counter2": range(1,20),
+	"counter3": range(1,8),
+	"counter4": range(1,30),
+	
 	})
 
 def batches(request):

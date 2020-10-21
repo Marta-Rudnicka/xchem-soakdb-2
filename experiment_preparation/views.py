@@ -15,6 +15,7 @@ def index(request):
 def cherrypicking(request):
 	return render(request, "experiment_preparation/c-selection.html", {
 		"title": "Compound Selection",
+		"page_info": "Select most suitable compounds for your experiment from XChem in-house libraries",
 		"page_heading": "XChem in-house library explorer", 
 		"table_caption": "Compounds in XChem in-house libraries", 
 		"counter": range(1, 61),

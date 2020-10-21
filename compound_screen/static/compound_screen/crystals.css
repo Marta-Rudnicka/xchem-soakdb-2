@@ -1,48 +1,139 @@
+main {
+display: grid;
+grid-template-columns: 73% 23%;
+}
+
+body {
+padding: 2em;
+}
+#wrapper {
+grid-column: 2;
+}
+/*
 .crystal-field {
 	padding:0;
-	/*background: red;*/
-}
+}*/
 
 img {
 padding: 0;
-display: none;
 }
 
-.show-image:checked ~ .crystal-pic {
-	display:block;
+img.bin-pic, img.info-pic {
+position: absolute;
+opacity: 0.5;
+top:0;
 }
 
-#show-x, #show-y, #show-plate, #show-drop, #show-score {
-display: none;
+img.bin-pic:hover, img.info-pic:hover {
+opacity:1;
 }
 
-.datatable tbody {
+img.bin-pic {
+left:0;
+}
+ 
+img.info-pic{
+right:0;
+}
+
+#infobox {
+visibility: hidden;
+display: grid;
+grid-template-columns: 30% 65%;
+grid-gap: 5px;
+}
+
+#crystal-info {
+border: solid black;
+}
+
+.right {
+text-align: right;
+}
+
+.hidden {
 display: none;
+animation: disappear-big;
+}
+
+rejected .hidden .{
+display: none;
+animation: disappear-small;
+}
+
+
+.gallery, .gallery-highlighted {
+margin: 5px;
+position: relative;
+display: block;
+padding: 0;
+border: solid black 2px;
+animation-name: disappear-big;
+animation-play-state: paused;
+animation-iteration-count: infinite;
+}
+
+.main-pic {
+animation-name: disappear-big;
+animation-play-state: paused;
+animation-iteration-count: infinite;
+}
+
+.gallery-highlighted {
+border: solid #66ff00 6px;
+}
+
+.rejected {/*
+background: red;*/
+border: solid red 2px;
+}
+
+.rejected .main-pic {
+width: 120px;
+animation-name: disappear-small;
+animation-play-state: paused;
+animation-iteration-count: infinite;
+}
+
+.rejected .gallery {
+animation-name: disappear-small;
+animation-play-state: paused;
+animation-iteration-count: infinite;
+}
+
+.accepted, .rejected {
+grid-column: 1;
+display: flex;
+flex-wrap: wrap;
+justify-content: flex-start;
+}
+
+#crystal-form {
+display: hidden;
+grid-template-columns: 70% 30%;
+}
+
+section {
+grid-column: 1/2;
+display: none;
+background: #f6f6f6;
+margin: 1em;
+}
+
+#total-accepted, #total-rejected {
+font-size: 1.5em;
 }
 
 .plate-type {
 visibility: hidden;
 }
 
-button.remove-button, button.include-button {
-width: 100%;
-padding: 1px;
-margin: 2px;
-font-size: 0.8em;
+@keyframes disappear-big {
+	from {width: 200px; height: 200px;}
+	to {width: 0; height: 0;}
 }
 
-
-button.include-button {
-display: none;
-}
-
-.removed {
-	background: red !important;
-	text-decoration: line-through;
-	color: grey;
-}
-
-#crystal-form {
-display: grid;
-grid-template-columns: 70% 30%;
+@keyframes disappear-small {
+	from {width: 100px; height: 100px;}
+	to {width: 0; height: 0;}
 }

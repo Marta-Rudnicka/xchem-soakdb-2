@@ -1,0 +1,23 @@
+<div class="col1">
+			<div class="hidden-columns">
+				Show more table columns: 
+				{% block show_buttons %}
+				{% endblock %}				
+			</div>
+			
+		</div>
+	<table class="datatable">
+		<caption><h2>{{ table_caption }}</h2></caption>		
+		<thead>
+			<tr>
+				<th>Row<br>no.</th>
+				{% block ths %}
+				{% endblock %}		
+			</tr>
+		</thead>
+		<tbody>
+			{% block tbody %}
+			{% endblock %}		
+					
+		</tbody>
+	</table>

@@ -1,0 +1,16 @@
+<section>
+	<h2>Crystallisation Plate {{plate_number}}</h2>
+	<div>Accepted: <span class="counter-accepted">{{crystal_number}}</span><br>Rejected: <span class="counter-rejected">0</span></div>
+	<h3>Accepted crystals </h3>
+	<div class="accepted">
+		{% for i in counter %}
+		{% include "tile.html" with class="gallery" icon="bin.png" hidden="" %}		
+		{% endfor %}
+	</div>
+	<h3>Rejected crystals</h3>
+	<div class="rejected">			
+		{% for i in counter %}
+		{% include "tile.html" with class="hidden" icon="recycle.jpg" hidden="hidden" %}
+		{% endfor %}
+	</div>
+</section>

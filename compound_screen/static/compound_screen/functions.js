@@ -68,7 +68,7 @@ function hide(array) {
 	} 
 }
 
-/*shows an array of lements setting their display attributes to displayType*/
+/*shows an array of elements setting their display attributes to displayType*/
 function show(array, displayType) { 
 	for (i = 0; i < array.length; i++) {
 		document.querySelector(array[i]).style.display = displayType;
