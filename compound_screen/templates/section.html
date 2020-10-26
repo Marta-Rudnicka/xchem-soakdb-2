@@ -1,16 +1,24 @@
 <section>
 	<h2>Crystallisation Plate {{plate_number}}</h2>
-	<div>Accepted: <span class="counter-accepted">{{crystal_number}}</span><br>Rejected: <span class="counter-rejected">0</span></div>
+	<div class="plate-buttons">
+		<button>Remove plate from experiment</button>
+		<button class="show-all">Display all crystal details</button>
+		<button class="hide-all" hidden>Hide crystal details</button>
+	</div>
+	<div>Drop volume: [data]<br>
+		Accepted: <span class="counter-accepted">{{crystal_number}}</span>
+		<br>Rejected: <span class="counter-rejected">0</span>
+	</div>
 	<h3>Accepted crystals </h3>
 	<div class="accepted">
-		{% for i in counter %}
-		{% include "tile.html" with class="gallery" icon="bin.png" hidden="" %}		
+		{% for well in wells %}
+		{% include "tile.html" with class="gallery" icon="bin.png" hidden="" well=well container="" plate=plate_number %}		
 		{% endfor %}
 	</div>
 	<h3>Rejected crystals</h3>
 	<div class="rejected">			
-		{% for i in counter %}
-		{% include "tile.html" with class="hidden" icon="recycle.jpg" hidden="hidden" %}
+		{% for well in wells %}
+		{% include "tile.html" with class="hidden" icon="recycle.jpg" hidden="hidden" well=well container="rejected" plate=plate_number%}
 		{% endfor %}
 	</div>
 </section>

@@ -1,5 +1,14 @@
-<div class="{{class}}">
+<div class="{{class}}" id="{{plate}}-{{well}}-{{container}}">
+	<div><p class="well-name">{{well}}</p>
+		
+		<img class="bin-pic" src="../static/compound_screen/{{icon}}" alt="alttext" {{hidden}}>
+		<img class="show-pic" src="../static/compound_screen/show-info.png" alt="alttext" {{hidden}}>
+		<img class="hide-pic" src="../static/compound_screen/hide.png" alt="alttext" hidden>
+	</div>
+	<div class="infobox">
+		<span class="right"><strong>X:</strong></span><span>[data]</span>
+		<span class="right"><strong>Y:</strong></span><span>[data]</span>
+		<span class="right"><strong>Score:</strong></span> <span>[data]</span>
+	</div>
 	<img class="main-pic" src="../static/compound_screen/crystal.png" alt="alttext"> 
-	<img class="bin-pic" src="../static/compound_screen/{{icon}}" alt="alttext" {{hidden}}>
-	<img class="info-pic" src="../static/compound_screen/info.png" alt="alttext" {{hidden}}>
 </div>

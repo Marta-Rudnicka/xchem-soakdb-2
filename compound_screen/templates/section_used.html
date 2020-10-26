@@ -1,0 +1,27 @@
+<section class="all-used">
+	<h2>Crystallisation Plate {{plate_number}}</h2>
+	<div class="plate-buttons">
+		<button class="show-plate">Show plate</button>
+		<button class="hide-plate" hidden>Hide plate</button>
+		<button class="show-all">Display all crystal details</button>
+		<button class="hide-all" hidden>Hide crystal details</button>
+	</div>
+	<div>Drop volume: [data]<br>
+		Used: <span class="counter-accepted">{{crystal_number}}</span>
+		<br>Rejected: <span class="counter-rejected">0</span>
+	</div>
+	<div class="plate-body" hidden>
+		<h3>Used crystals </h3>
+		<div class="used">
+			{% for well in wells %}
+			{% include "tile.html" with class="used-tile" icon="bin.png" hidden="" well=well container="used" plate=plate_number %}		
+			{% endfor %}
+		</div>
+		<h3>Rejected crystals</h3>
+		<div class="rejected">			
+			{% for well in wells %}
+			{% include "tile.html" with class="hidden" icon="recycle.jpg" hidden="hidden" well=well container="rejected" plate=plate_number%}
+			{% endfor %}
+		</div>
+	</div>
+</section>
