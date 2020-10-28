@@ -2,7 +2,7 @@
  * path. Uses functions defined in crystals_functions.js	*/
 
 document.addEventListener('DOMContentLoaded', () => {
-	updateTotals();	
+	updateTotals();
 	
 	//rejecting or recycling a crystal	
 	document.querySelectorAll('.bin-pic').forEach(image => {
@@ -26,16 +26,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		
 	//display info about a crystal
 	document.querySelectorAll('.show-pic').forEach(image => {
-		image.onclick = () => {
-			showInfoBox(image);
-		}
-	})
-
-	//hide info about crystal
-	document.querySelectorAll('.hide-pic').forEach(image => {
-		image.onclick = () => {
-			hideInfoBox(image);
-		}
+		const parentTile = image.parentElement.parentElement
+		let group = new Hideable(parentTile, '.infobox', 'grid', '.hide-pic', '.show-pic', 'inline-block' );
+		group.addListeners();
 	})
 			
 	//show new plate
@@ -50,63 +43,23 @@ document.addEventListener('DOMContentLoaded', () => {
 	//show all crystal info in a plate
 	document.querySelectorAll('.show-all').forEach(button => {
 		const parentPlate = button.parentElement.parentElement;
-		button.onclick = () => {
-			parentPlate.querySelectorAll('.show-pic').forEach(image => {
-				showInfoBox(image)
-			})
-			parentPlate.querySelector('.hide-all').hidden = false;
-			button.hidden = true;
-		}
-	})
-	//hide all crystal info in a plate
-	document.querySelectorAll('.hide-all').forEach(button => {
-		const parentPlate = button.parentElement.parentElement;
-		button.onclick = () => {
-			parentPlate.querySelectorAll('.hide-pic').forEach(image => {
-				hideInfoBox(image);
-			})
-			parentPlate.querySelector('.show-all').hidden = false;
-			button.hidden = true;
-		}
+		const infoboxes = parentPlate.querySelectorAll('.infobox');
+		let group = new HideableArray(parentPlate, infoboxes, 'grid', '.hide-all', '.show-all', 'inline-block');
+		group.individualControls = ['.show-pic', '.hide-pic', 'grid'];
+		group.addListeners();
 	})
 	
-	document.querySelectorAll('.show-plate').forEach(button => {
-		const parentPlate = button.parentElement.parentElement
-		button.onclick = () => {
-			parentPlate.querySelector('.plate-body').hidden = false;
-			parentPlate.querySelector('.show-plate').hidden = true;
-			parentPlate.querySelector('.hide-plate').hidden = false;
-		}
-		
+	
+	//hide and show crystals in a used plate
+	document.querySelectorAll('.all-used').forEach(plate => {
+		let group = new Hideable(plate, '.plate-body', 'block', '.hide-plate', '.show-plate', 'inline-block' );
+		group.addListeners();		
 	})	
 	
-	document.querySelectorAll('.hide-plate').forEach(button => {
-		const parentPlate = button.parentElement.parentElement
-		button.onclick = () => {
-			parentPlate.querySelector('.plate-body').hidden = true;
-			parentPlate.querySelector('.show-plate').hidden = false;
-			parentPlate.querySelector('.hide-plate').hidden = true;
-		}
-		
+	//show and hide used crystals in a partially used plate 
+	document.querySelectorAll('.used-div').forEach(div => {
+		let group = new Hideable(div, '.used', 'flex', '.hide-used-crystals', '.show-used-crystals', 'inline-block');
+		group.addListeners();
 	})	
 	
-	document.querySelectorAll('.show-used-crystals').forEach(image => {
-		const parentPlate = image.parentElement.parentElement
-		image.onclick = () => {
-			parentPlate.querySelector('.used').style.display = "flex";
-			parentPlate.querySelector('.show-used-crystals').hidden = true;
-			parentPlate.querySelector('.hide-used-crystals').hidden = false;
-		}
-		
-	})	
-	
-	document.querySelectorAll('.hide-used-crystals').forEach(image => {
-		const parentPlate = image.parentElement.parentElement
-		image.onclick = () => {
-			parentPlate.querySelector('.used').style.display = "none";
-			parentPlate.querySelector('.show-used-crystals').hidden = false;
-			parentPlate.querySelector('.hide-used-crystals').hidden = true;
-		}
-		
-	})	
 })

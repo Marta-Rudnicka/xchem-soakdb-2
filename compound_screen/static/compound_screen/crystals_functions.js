@@ -94,24 +94,3 @@ function showTile(tile, containerClass) {
 	setTimeout(showHidden, 420, newTile.querySelector('.show-pic'));
 	newTile.className = "gallery";
 }
-
-function showInfoBox(image) {
-	const parentTile = image.parentElement.parentElement
-	//switch icons
-	parentTile.querySelector('.hide-pic').hidden = false;
-	image.hidden = true;
-		
-	//show infobox
-	parentTile.querySelector('.infobox').style.display = 'grid';
-}
-
-function hideInfoBox(image) {
-	const parentTile = image.parentElement.parentElement
-	//switch icons
-	parentTile.querySelector('.show-pic').hidden = false;
-	image.hidden = true;
-		
-	//show infobox
-	parentTile.querySelector('.infobox').style.display = 'none';
-}
-
