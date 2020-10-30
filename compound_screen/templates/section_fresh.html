@@ -1,0 +1,19 @@
+{% extends "section_template.html" %}
+		{% block extra_buttons %}
+		<button>Remove plate from experiment</button>
+		{% endblock %}
+
+	{% block extra_stats %}	
+		Accepted: <span class="counter-accepted">{{crystal_number}}</span>
+	{% endblock %}
+		<br>Rejected: <span class="counter-rejected">0</span>
+	</div>
+	{% block accepted%}
+	
+	<h3>Accepted crystals </h3>
+	<div class="accepted">
+		{% for well in wells %}
+		{% include "tile.html" with class="gallery" icon="bin.png" hidden="" well=well container="" plate=plate_number %}		
+		{% endfor %}
+	</div>
+	{% endblock %}

@@ -19,6 +19,7 @@ img.bin-pic, img.info-pic, img.show-pic{
 position: absolute;
 opacity: 0.5;
 top:0;
+visibility: visible;
 }
 
 img.bin-pic:hover, img.info-pic:hover, img.show-pic:hover, img.hide-pic:hover, img.show-used-crystals:hover {
@@ -29,18 +30,20 @@ img.bin-pic {
 left:0;
 }
  
-img.hide-pic{
+/*img.hide-pic{*/
+.hide-icon {
+visibility: hidden;
 position: absolute;
 opacity: 0.5;
-top: 20px;
-right:0;
+top: 14px;
+right:40px;
 }
 
-img.hide-pic, img.show-pic {
+img.show-pic {
 right:0
 }
 
-.infobox {
+.infobox{
 display: none;
 grid-template-columns: 60% 35%;
 grid-gap: 5px;
@@ -177,6 +180,11 @@ top: 0;
 right: 0;
 }
 
+.plate-buttons button {
+margin: 0;
+padding: 5px;
+}
+
 .partial .used {
 display: none;
 }
@@ -187,6 +195,24 @@ background: grey;
 
 .used-div {
 position: relative;
+}
+
+input[type="checkbox"] {
+display: none;
+}
+
+input[type="radio"]:checked ~ .infobox {
+display: grid;
+}
+
+label.show-icon, label.hide-icon {
+width: 0;
+margin: 0;
+padding: 0;
+}
+
+input[type="radio"]:checked ~ .hide-icon {
+visibility: visible;
 }
 
 @keyframes disappear-big {

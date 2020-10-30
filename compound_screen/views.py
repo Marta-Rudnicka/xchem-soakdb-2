@@ -1,13 +1,6 @@
 from django.shortcuts import render
 import string
 
-def generate_table_body(html_string):
-	rows = ""
-	for i in range(61):
-		rows = rows + "<tr><td>" + str(i+1) + "</td>" + html_string + "</tr>\n"
-	
-	return rows	
-
 def generate_well_names(highest_letter, highest_number): 
 	
 	#generate lists of strings to concatenate into well names
@@ -30,9 +23,12 @@ def generate_well_names(highest_letter, highest_number):
 				for letter in charlist:
 					well_name_list.append(cap + number + letter)
 	return well_name_list
-	
+
+# a real crystallisation plate	
 wells = generate_well_names(8, 13)
+# a model of a crystallisation plate for testing (with fewer pictures to load)
 wells_small = generate_well_names(3, 4)
+#parts of a plate model to simulate partially used plate
 wells_small_1 = wells_small[0:8]
 wells_small_2 = wells_small[8:-1]
 

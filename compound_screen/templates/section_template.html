@@ -1,0 +1,41 @@
+{% comment %}
+to be used by crystals.html
+
+Each <section> represents one crystallisation plate.
+There are three possible subdivisions of a plate: used crystals, accepted
+crystals, and rejected crystals.
+
+There are three templates extending this one:
+*section_used.html which has no accepted crystals.
+*section_partially_used.html, which has all subdivisions
+*section_fresh.html, which has no used crystals
+
+{% endcomment %}
+
+<section class="{{plate_class}}">
+	<h2>Crystallisation Plate {{plate_number}}</h2>
+	<div class="plate-buttons">
+		{% block extra_buttons %}
+		{% endblock %}
+		<button class="show-all">Display all crystal details</button>
+		<button class="hide-all">Hide all crystal details</button>
+	</div>
+	<div>Drop volume: [data]<br>
+	{% block extra_stats %}
+	{% endblock %}
+		<br>Rejected: <span class="counter-rejected">0</span>
+	</div>
+	{% block used_div %}
+	{% endblock %}
+	{% block accepted%}
+	{% endblock %}
+	<h3>Rejected crystals</h3>
+	<div class="rejected">			
+		{% for well in wells %}
+		{% include "tile.html" with class="hidden" icon="recycle.jpg" hidden="hidden" well=well container="rejected" plate=plate_number%}
+		{% endfor %}
+	</div>
+	{% block optional_closure %}
+	{% endblock %}
+</section>
+

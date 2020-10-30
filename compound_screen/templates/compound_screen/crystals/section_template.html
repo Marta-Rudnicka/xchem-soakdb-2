@@ -1,26 +1,26 @@
-{% extends "section_template.html" %}
-
-<section>
+<section class="{{plate_class}}">
 	<h2>Crystallisation Plate {{plate_number}}</h2>
 	<div class="plate-buttons">
-		<button>Remove plate from experiment</button>
+		{% block extra_buttons %}
+		{% end %}
 		<button class="show-all">Display all crystal details</button>
 		<button class="hide-all">Hide all crystal details</button>
 	</div>
 	<div>Drop volume: [data]<br>
-		Accepted: <span class="counter-accepted">{{crystal_number}}</span>
+	{% block extra_stats %}
+	{% endblock %}
 		<br>Rejected: <span class="counter-rejected">0</span>
 	</div>
-	<h3>Accepted crystals </h3>
-	<div class="accepted">
-		{% for well in wells %}
-		{% include "tile.html" with class="gallery" icon="bin.png" hidden="" well=well container="" plate=plate_number %}		
-		{% endfor %}
-	</div>
+	{% block used_div %}
+	{% endblock %}
+	{% block accepted%}
+	{% endblock %}
 	<h3>Rejected crystals</h3>
 	<div class="rejected">			
 		{% for well in wells %}
 		{% include "tile.html" with class="hidden" icon="recycle.jpg" hidden="hidden" well=well container="rejected" plate=plate_number%}
 		{% endfor %}
 	</div>
+	
 </section>
+

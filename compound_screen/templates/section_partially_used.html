@@ -1,35 +1,28 @@
-<section class="partial">
-	<h2>Crystallisation Plate {{plate_number}}</h2>
-	<div class="plate-buttons">
-		<button class="show-all">Display all crystal details</button>
-		<button class="hide-all" hidden>Hide crystal details</button>
-	</div>
-	<div>Drop volume: [data]<br>
+{% extends "section_template.html"%}
+
+	{% block extra_stats %}
 		Used: 8<br>
 		Accepted: <span class="counter-accepted">{{crystal_number}}</span>
-		<br>Rejected: <span class="counter-rejected">0</span>
-	</div>
+	{% endblock %}
+	{% block used_div %}
 	<div class="used-div">
 		<h3>Used crystals </h3>
-		<img class="show-used-crystals" src="../static/compound_screen/show.png" alt="alttext">
-		<img class="hide-used-crystals" src="../static/compound_screen/hide.png" alt="alttext" hidden>
+		<img class="show-used-crystals" src="../static/show.png" alt="alttext">
+		<img class="hide-used-crystals" src="../static/hide.png" alt="alttext" hidden>
 		<div class="used" hidden>
 			{% for well in wells_part_1 %}
 			{% include "tile.html" with class="used-tile" icon="bin.png" hidden="" well=well container="used" plate=plate_number %}		
 			{% endfor %}
 		</div>
 	</div>
+	{% endblock %}
+	{% block accepted%}
 		<h3>Accepted crystals</h3>
 		<div class="accepted">
 			{% for well in wells_part_2 %}
 			{% include "tile.html" with class="gallery" icon="bin.png" hidden="" well=well container="" plate=plate_number %}		
 			{% endfor %}
 		</div>
-		<h3>Rejected crystals</h3>
-		<div class="rejected">			
-			{% for well in wells %}
-			{% include "tile.html" with class="hidden" icon="recycle.jpg" hidden="hidden" well=well container="rejected" plate=plate_number%}
-			{% endfor %}
-		</div>
+	{% endblock %}	
 	
 </section>

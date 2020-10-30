@@ -4,6 +4,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 	updateTotals();
 	
+	console.log('loaded crystals.js');
 	//rejecting or recycling a crystal	
 	document.querySelectorAll('.bin-pic').forEach(image => {
 		image.onclick = () => {
@@ -23,13 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
 			
 		}
 	})
-		
-	//display info about a crystal
-	document.querySelectorAll('.show-pic').forEach(image => {
-		const parentTile = image.parentElement.parentElement
-		let group = new Hideable(parentTile, '.infobox', 'grid', '.hide-pic', '.show-pic', 'inline-block' );
-		group.addListeners();
-	})
 			
 	//show new plate
 	document.getElementById('texrank').onclick = () => {
@@ -39,16 +33,18 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.getElementById('summary').hidden = false;
 		document.getElementById('crystal-form').style.display = 'grid';
 	}
-	
-	//show all crystal info in a plate
-	document.querySelectorAll('.show-all').forEach(button => {
-		const parentPlate = button.parentElement.parentElement;
-		const infoboxes = parentPlate.querySelectorAll('.infobox');
-		let group = new HideableArray(parentPlate, infoboxes, 'grid', '.hide-all', '.show-all', 'inline-block');
-		group.individualControls = ['.show-pic', '.hide-pic', 'grid'];
-		group.addListeners();
+		
+	//show all crystal details in the plate
+	document.querySelectorAll('section').forEach(section => {
+		let checker = new MassInputChecker(section, '.show-icon', '.show-all');
+		checker.addListeners();
 	})
 	
+	//hide all crystal details in the plate
+	document.querySelectorAll('section').forEach(section => {
+		let checker = new MassInputChecker(section, '.hide-icon', '.hide-all');
+		checker.addListeners();
+	})
 	
 	//hide and show crystals in a used plate
 	document.querySelectorAll('.all-used').forEach(plate => {

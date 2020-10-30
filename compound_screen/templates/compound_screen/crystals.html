@@ -1,17 +1,28 @@
 {% extends "soakdb_template.html" %}
-  
+
+{% comment %}
+Template for the crystal gallery.
+
+The main block contains <section> elements, each representing one library 
+plate.
+
+{% endcomment %}
+
+
+{% load static %}
+
 {% block head_links %}
 <link rel="stylesheet" href="../../static/compound_screen/crystals.css">
 <script src="../../static/compound_screen/crystals_functions.js"></script>
 <script src="../../static/compound_screen/crystals.js"></script>
-<script src="../../static/compound_screen/classes.js"></script>
+<script src="../static/classes.js"></script>
 {% endblock %}
 
 {% block main %}
 	
-	{% include "section_used.html" with plate_number="all_used" wells=wells crystal_number=wells|length %}
-	{% include "section_partially_used.html" with plate_number="partially_used" wells=wells crystal_number=wells_part_2|length %}
-	{% include "section.html" with plate_number="fresh" wells=wells crystal_number=wells|length %}
+	{% include "section_used.html" with plate_number="all_used" plate_class="all-used" wells=wells crystal_number=wells|length %}
+	{% include "section_partially_used.html" with plate_number="partially_used" plate_class="partial"  wells=wells crystal_number=wells_part_2|length %}
+	{% include "section_fresh.html" with plate_number="fresh" wells=wells crystal_number=wells|length %}
 	
 {% endblock %}
 
