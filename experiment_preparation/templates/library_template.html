@@ -1,68 +1,93 @@
+{% comment %}
+Template to display the currently available list of compounds in a selected
+library plate.
+{% endcomment %}
+
+
 {% load static %}
 
 <!DOCTYPE html>
-<!-- variables: title, page_heading, page_info, table_caption,  -->
-<!-- blocks: head_links, extra_left, ths, table_body, aside_content-->
 <html lang="en">
 <head>
 	<title>{{ title }}</title>
-	<link rel="stylesheet" href="../../static/experiment_preparation/style.css">
+	<link rel="stylesheet" href="../../static/experiment_preparation/plate_details.css">
 	
 	{% block head_links %}
 	{% endblock %}
 	
-	<script src="../../static/experiment_preparation/functions.js"></script>
-	<script src="../../static/experiment_preparation/all-app.js"></script>
+	<script src="../static/classes.js"></script>
+	<script src="../../static/experiment_preparation/library.js"></script>
 </head>
 <body lang="en">
-	<h1>{{ page_heading }} </h1>
-	<div id="page-info">
-		<p>{{ page_info }}</p>
-	</div>		
+	<h1>{{ library }} </h1>
+	<h2>{{ plate }}</h2>	
 	<main>
-		<div class="col1">
+		<div>
 			<div class="hidden-columns">
 				Show more table columns: 
-				<button class="small-button" id="show-lib">Show Library</button>
-				<button class="small-button" id="show-plate">Show Plate</button>
 				<button class="small-button" id="show-preset">Show Preset</button>
 				<button class="small-button" id="show-code">Show Compound code</button>
 				<button class="small-button" id="show-smiles">Show SMILES</button>
-				<button class="small-button" id="show-2d">Show 2D</button>
+				<button class="small-button" id="show-c2d">Show 2D</button>
 				<button class="small-button" id="show-p1">Show [Property1]</button>
 				<button class="small-button" id="show-p2">Show [Property2]</button>
 				<button class="small-button" id="show-p3">Show [Property3]</button>
 				<button class="small-button" id="show-p4">Show [Property4]</button>
-			</div>		
-		{% block extra_left %}
-		{% endblock %}
+			</div>
+			<div><br><br>
+				Export data as:
+				<button class="small-button" id="csv-export">csv file</button>
+				<button class="small-button" id="other-export">some other format</button>
+			</div>
 		</div>
 		<table class="datatable">
 			<caption>
-				<h2>{{ table_caption }}</h2>
-				<button id="show-sidebar">Show sidebar</button>
+				<h2>Compounds in {{ library }}, {{ plate }}</h2>
 			</caption>
 			<thead>
 				<tr>
-					{% block ths %}
-					{% endblock %}
+					<th class="row-no">Row no.</th>
+					<th class="preset">Preset 
+						<br>
+						<button class="in-table" id="hide-preset">Hide</button>
+					</th>
+					<th class="code">Code
+						<br>
+						<button class="in-table" id="hide-code">Hide</button>
+					</th>
+					<th class="smiles">SMILES
+						<br>
+						<button class="in-table" id="hide-smiles">Hide</button>
+					</th>
+					<th class="c2d">2D structure
+						<br>
+						<button class="in-table" id="hide-c2d">Hide</button>
+					</th>
+					<th class="p1">[Property1]
+						
+						<br>
+						<button class="in-table" id="hide-p1">Hide</button>		
+					</th>
+					<th class="p2">[Property2]
+						
+						<br>
+						<button class="in-table" id="hide-p2">Hide</button>
+					</th>
+					<th class="p3">[Property3]
+					
+						<br>
+						<button class="in-table" id="hide-p3">Hide</button>
+					</th>
+					<th class="p4">[Property4]
+						<br>
+						<button class="in-table" id="hide-p4">Hide</button>
+					</th>
 				</tr>
 			</thead> 
-			
 			<tbody id="datatable-body">
-				{{ extra | safe }}
 				{% block tbody %}
 				{% endblock %}
 			</tbody> 
 		</table>		
-		<div id="wrapper">
-		<aside>
-			<div id="hide-sidebar-div">
-			<button id="hide-sidebar">Hide sidebar</button>	
-			</div>
-			{% block aside_content %}
-			{% endblock %}
-		</aside>
-		</div>
 	</main>
 </body>

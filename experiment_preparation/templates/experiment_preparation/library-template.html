@@ -10,10 +10,8 @@
 	{{ extra_js }}
 </head>
 <body lang="en">
-	<h1>{{ page_heading }} </h1>
-	<div id="page-info">
-		<p>{{ page_info }}</p>
-	</div>		
+	<h1>{{ library }} </h1>
+	<h2>{{ plate}}</h2>	
 	<main>
 		<div class="col1">
 			<div class="hidden-columns">
@@ -31,8 +29,7 @@
 		</div>
 		<table class="datatable">
 			<caption>
-				<h2>{{ table_caption }}</h2>
-				<button id="show-sidebar">Show sidebar</button>
+				<h2>Compounds in {{ library }}, {{ plate }}</h2>
 			</caption>
 			<thead>	
 				<tr>
@@ -46,19 +43,13 @@
 					<th class="p2">[Property2]<br><button class="in-table" id="hide-p2">Hide</button></th>
 					<th class="p3">[Property3]<br><button class="in-table" id="hide-p3">Hide</button></th>
 					<th class="p4">[Property4]<br><button class="in-table" id="hide-p4">Hide</button></th>
-					{{ extra_ths }}
 				</tr>
 			</thead> 
 			
 			<tbody id="datatable-body">
-				{{ table_body }}
+				{{ block table_body }}
+				{{% endblock}}
 			</tbody> 
 		</table>		
-		<div id="wrapper">
-		<aside>
-			<button id="hide-sidebar">Hide sidebar</button>	
-			{{ aside_content }}
-		</aside>
-		</div>
 	</main>
 </body>

@@ -1,0 +1,23 @@
+{% extends "library_template.html" %}
+
+{% block head_links %}
+<link rel="stylesheet" href="../../static/experiment_preparation/test_library.css">
+{% endblock %}
+
+{% block tbody %}
+	{% for i in counter %}
+	<tr>
+		<td>{{i}}</td>
+		<td class="preset">[data]</td>
+		<td class="code">[data]</td>
+		<td class="smiles">[data]</td>
+		<td class="c2d">
+			<img alt="alttext" src="../static/experiment_preparation/pic.png">
+		</td>
+		<td class="p1">[data]</td>
+		<td class="p2">[data]</td>
+		<td class="p3">[data]</td>
+		<td class="p4">[data]</td>
+	</tr>
+	{% endfor %}
+{% endblock %}

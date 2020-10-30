@@ -1,0 +1,157 @@
+{% comment %}
+Site for selecting libraries, plates and compounds for a future experiment.
+Mostly hardcoded with made-up data.
+{% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>{{ title }}</title>
+	<link rel="stylesheet" href="../../static/experiment_preparation/x.css">
+	<script src="../../static/experiment_preparation/functions.js"></script>
+	<script src="../static/classes.js"></script>
+	<script src="../../static/experiment_preparation/x.js"></script>
+</head>
+<body lang="en">
+	<h1>Select fragment libraries</h1>
+	<main>
+		<section id="libraries">
+			<h2>Select by library</h2>
+			<div id="libform">
+				<label>SELECT PLATES WITHIN EACH LIBRARY:</label>	
+				<br>
+				<div id="libs">
+					{% include "library_with_plates.html" with library="DSIPoised" library_counter=dsi_counter %}
+					{% include "library_with_plates.html" with library="FragLites" library_counter=fraglites_counter %}
+					{% include "library_with_plates.html" with library="PepLites" library_counter=peplites_counter %}
+					{% include "library_with_plates.html" with library="MiniFrags" library_counter=minifrags_counter %}
+					{% include "library_with_plates.html" with library="Cysteine_Covalent" library_counter=cysteine_counter %}
+					{% include "library_with_plates.html" with library="York3D" library_counter=york_counter %}
+					{% include "library_with_plates.html" with library="Leeds3D" library_counter=leeds_counter %}
+				</div>
+				<button id="show-all">Show all plates</button>
+				<button id="hide-all">Hide all plates</button>
+				<button>Add selected to your collection</button>
+			</div>
+		
+		</section>
+		<section id="properties">
+			<h2>Select by property</h2>
+			<p>Select most desirable properties for your experiment and allow automatic selection</p>
+			<form id="properties-form">
+				{% for i in property_counter %}
+				<div>
+					<input type="checkbox"><label>Property{{i}}</label>
+				</div>
+				{% endfor %}
+			</form>
+			<button>Submit</button>
+		</section>
+		<section id="wishlist">
+			<h2>Upload your wishlist</h2>
+			<div>Info box</div>
+			<form>
+				<label>Upload file with your wishlist:</label>
+				<input type="file">
+				<button type="submit">Submit</button>
+			</form>
+			<div>Learn more about the required file formats: <img id="info" src="../static/info.png" alt="file format specification"></div>
+			<h2>Upload your own compounds</h2>
+			<div>Info box</div>
+			<form>
+				<label>Upload file with your compound:</label>
+				<input type="file">
+				<button type="submit">Submit</button>
+			</form>
+			<div>Learn more about the required file formats: <img id="info" src="../static/info.png" alt="file format specification"></div>
+			
+		</section>
+		
+		<section id="stats">
+			<h2>Library stats</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Library</th>
+						<th>Plate</th>
+						<th>Compounds</th>
+						<th>Selected <br>compounds</th>
+						<th>Stat 1</th>
+						<th>Stat 2</th>
+						<th>Stat 3</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td rowspan="3">Library name 1</td>
+						<td>Plate name 1</td>
+						<td>666</td>
+						<td>420</td>
+						<td>69</td>
+						<td>42</td>
+						<td>21</td>
+					</tr>
+					<tr>
+					
+						<td>Plate name 2</td>
+						<td>1337</td>
+						<td>77</td>
+						<td>13</td>
+						<td>4</td>
+						<td>0</td>
+					</tr>
+					<tr>
+					
+						<td>Plate name 3</td>
+						<td>256</td>
+						<td>128</td>
+						<td>64</td>
+						<td>32</td>
+						<td>16</td>
+					</tr>
+					<tr>
+						<td rowspan="2">Library name 2</td>
+						<td>Plate name 1</td>
+						<td>666</td>
+						<td>420</td>
+						<td>69</td>
+						<td>42</td>
+						<td>21</td>
+					</tr>
+					<tr>
+					
+						<td>Plate name 2</td>
+						<td>1337</td>
+						<td>77</td>
+						<td>13</td>
+						<td>4</td>
+						<td>0</td>
+					</tr>
+					<tfoot>
+						<tr>
+							<td>3 libraries</td>
+							<td>5 plates</td>
+							<td>4246</td>
+							<td>1122</td>
+							<td>228</td>
+							<td>124</td>
+							<td>58</td>
+						</tr>
+					
+					</tfoot>
+				</tbody>
+			</table>
+		</section>
+		<section id="summary">
+			<h2>Summary</h2>
+			<div>
+				<img src="../static/experiment_preparation/dsi-ClogP.png">
+				<img src="../static/experiment_preparation/dsi-Fsp3.png">
+				<img src="../static/experiment_preparation/dsi-mol-weight.png">
+				<img src="../static/experiment_preparation/dsi-TPSA.png">
+			</div>
+		</section>
+	</main>
+
+</body>
+</html>
