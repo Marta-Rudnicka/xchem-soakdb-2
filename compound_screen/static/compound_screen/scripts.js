@@ -1,3 +1,4 @@
+/* for SOAK and CRYO stateg: not yet in use*/
 const minUnit = 2.5
 		
 function calculateTransferVolume(dv, mu, ds) {
