@@ -1,0 +1,75 @@
+{% extends "soakdb_template.html" %}
+
+{% block head_links %}
+<link rel="stylesheet" href="../../static/compound_screen/batch_details.css">
+<!-- <script src="../../static/compound_screen/soak.js"></script> -->
+{% endblock %}
+
+{% block main %}
+<div class="batch-data" id="summary">
+	<h2>Summary</h2>
+	<div class="flex-container">
+		<div class="data-pair"><label>Batch number:</label><span>[data]</span></div>
+		<div class="data-pair"><label>Plate batch name:</label><span>[data]</span></div>
+		<div class="data-pair"><label>Number of crystals:</label><span>[data]</span></div>
+		<div class="data-pair"><label>Library:</label><span>[data]</span></div>
+		<div class="data-pair"><label>Library plate:</label><span>[data]</span></div>
+		<div class="data-pair"><label>Crystallisation plate:</label><span>[data]</span></div>
+		<div class="data-pair"><label>Experiment stage</label><span>[data]</span></div>
+	</div>
+</div>
+<div class="batch-data" id="experimental-data">
+	<div class="columns">
+		<div id="exp-data">
+			<h2>Experimental data</h2><br>
+			<div class="flex-container">
+				<div class="data-pair"><label>Drop volume:</label><span>[data]</span></div>
+				<div class="data-pair"><label>Stock concentration:</label><span>[data]</span></div>
+			</div>
+		</div>
+
+		<div id="soaking-data">
+			<h3>Soaking</h3><br>
+			<div class="flex-container">
+				<div class="data-pair"><label>Compound concentration:</label><span>[data]</span></div>
+				<div class="data-pair"><label>Tansfer volume:</label><span>[data]</span></div>
+				<div class="data-pair"><label>Soak tranfer time:</label><span>[data]</span></div>
+			</div>
+		</div>
+		<div id="cryo-data">
+			<h3>Cryo</h3><br>
+			<div class="flex-container">
+				<div class="data-pair"><label>Cryo stock concentration:</label><span>[data]</span></div>
+				<div class="data-pair"><label>Cryo concentration:</label><span>[data]</span></div>
+				<div class="data-pair"><label>Cryo transfer volume:</label><span>[data]</span></div>
+				<div class="data-pair"><label>Cryo location:</label><span>[data]</span></div>
+				<div class="data-pair"><label>Cryo status:</label><span>[data]</span></div>
+				<div class="data-pair"><label>Cryo transfer time:</label><span>[data]</span></div>
+			</div>
+		</div>
+	</div>
+</div>
+<table>
+	<thead>
+		<caption><h2>Compound list</h2></caption>
+		<tr>
+			<th class="row-no">Row<br>number</th>
+			<th>Drop</th>
+			<th>Compound code</th>
+			<th>2D structure</th>
+			<th>SMILES</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for i in counter %}
+		<tr>
+			<td>{{i}}</td>
+			<td>[data]</td>
+			<td>[data]</td>
+			<td><img src="../../static/ethanol.png" alt="molecule"></td>
+			<td>[data]</td>
+		</tr>
+		{% endfor %}
+	</tbody>
+</table>
+{% endblock %}

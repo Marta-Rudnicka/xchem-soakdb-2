@@ -1,0 +1,68 @@
+aside {
+display: none;
+}
+
+main {
+padding: 1em;
+display: grid;
+grid-template: auto auto / 1fr 2fr;
+}
+
+#summary {
+grid-column: 1/2;
+}
+
+#experimental-data {
+grid-column: 2/3;
+}
+
+h2, h3 {
+margin: 0;
+text-align: center;
+}
+
+.batch-data {
+background: #f6f6f6;
+margin: 1em;
+}
+
+.columns {
+display: grid;
+grid-template: auto auto / auto auto;
+}
+
+
+.flex-container {
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: center;
+}
+
+.flex-container-vert {
+display: flex;
+flex-direction: row;
+flex-wrap: wrap;
+justify-content: center;
+}
+
+.data-pair {
+margin: 5px;
+background: lightgrey;
+flex-grow: 1;
+text-align: center;
+}
+
+main table {
+grid-column: 1/3;
+}
+
+#soaking-data {
+grid-column: 1/2;
+}
+
+#cryo-data {
+grid-column: 2/3;
+grid-row: 1/3;
+
+}

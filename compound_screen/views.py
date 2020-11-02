@@ -53,22 +53,36 @@ def crystals(request):
 
 def batches(request):
 	return render(request, "compound_screen/batches.html", {
-	"title": "Batches table",
+	"title": "Batches",
+	"header": "Batches table",
+	"page_info": "Divide crystals into batches",
 	"table_caption": "Batches", 
-	"counter": range(61),
+	"counter": range(1, 61),
 	})
 
 def soak(request):
 	return render(request, "compound_screen/soak.html", {
-	"title": "Soak table",
+	"title": "Soaking",
+	"header": "Soaking crystals",
+	"page_info": "Monitor and manage the soaking process",
 	"table_caption": "Soaking", 
-	"counter": range(61),
+	"counter": range(1, 15),
+	})
+
+def batch_details(request):
+	return render(request, "compound_screen/batch_details.html", {
+	"title": "Batch details",
+	"header": "Batch details",
+	"counter": range(1, 24),
 	})
 
 def cryo(request):
 	return render(request, "compound_screen/cryo.html", {
 	"title": "Cryo table",
+	"header": "Cryo",
+	"page_info": "Monitor and manage cryo",
 	"table_caption": "Cryo", 
+	"counter": range(1, 15),
 	})
 
 def harvesting(request):

@@ -9,7 +9,7 @@ the experiment and links to other subpages.
   <link rel="stylesheet" href="../../static/compound_screen/style.css">
 {% block head_links %}
 {% endblock %}
-  <script src="../../static/compound_screen/functions.js"></script>
+ <!-- <script src="../../static/compound_screen/functions.js"></script> -->
 </head>
 <body>
 	<table>
@@ -29,8 +29,11 @@ the experiment and links to other subpages.
 					</tr>
 				</table>
 	<h1>{{ header }}</h1>
-	<div>{{ page_info }}</div>
+	<h2>{{ page_info }}</h2>
 	<main>
+		{% block left_sidebar %}
+	{% endblock %}
+		
 		{% block main %}
 		
 		{% endblock %}

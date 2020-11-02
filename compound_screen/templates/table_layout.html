@@ -1,11 +1,14 @@
-<div class="col1">
-			<div class="hidden-columns">
-				Show more table columns: 
-				{% block show_buttons %}
-				{% endblock %}				
-			</div>
-			
+{% extends "soakdb_template.html" %}
+	{% block left_sidebar %}
+	<div class="left-sidebar">
+		<div class="hidden-columns">
+			Show more table columns: 
+			{% block show_buttons %}
+			{% endblock %}				
 		</div>
+	</div>
+	{% endblock %}
+	{% block main %}
 	<table class="datatable">
 		<caption><h2>{{ table_caption }}</h2></caption>		
 		<thead>
@@ -18,6 +21,6 @@
 		<tbody>
 			{% block tbody %}
 			{% endblock %}		
-					
 		</tbody>
 	</table>
+	{% endblock %}

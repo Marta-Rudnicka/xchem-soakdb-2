@@ -6,29 +6,17 @@ function calculateTransferVolume(dv, mu, ds) {
 	
 document.addEventListener('DOMContentLoaded', () => {
 	
+document.querySelectorAll('.batch-details').forEach( button => {
+	button.addEventListener('click', () => {
+		window.open('batch_details');
+		})
+	})
+	
+/*	
+	
 	//get drop volume
 	const dv = document.querySelector("#dv").innerHTML;
-	const multiCheckbox = document.getElementById("multi");
-	const cshead = document.getElementById('cshead');
-	const csFields = document.querySelectorAll('.cs');
-	
-	document.querySelector('#multi').onclick = () =>  {
-		//hide the 'Compound [stock] mM' column
-		if (multiCheckbox.checked == false){
-			cshead.style.display = 'none';
-			csFields.forEach( cell => {
-				cell.style.display = 'none';
-			})
-		}
-		else {
-		//show the column
-			cshead.style.display = 'table-cell';
-			csFields.forEach( cell => {
-				cell.style.display='table-cell';
-			})
-		}
-	}	
-		
+	const csFields = document.querySelectorAll('.cs');	
 			
 	document.querySelector('form').addEventListener('submit', (event) => {
 		//get values from the form
@@ -47,4 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		})
 		event.preventDefault();
 	});
+	* 
+*/
 })

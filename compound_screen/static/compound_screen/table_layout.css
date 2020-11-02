@@ -1,0 +1,24 @@
+main {
+display: grid;
+grid-template-columns: 15em auto 28em;
+}
+
+#wrapper {
+grid-column: 3/4;
+}
+
+.left-sidebar{
+grid-column: 1/2;
+}
+
+#datatable {
+grid-column: 2/3;
+}
+
+body {
+padding: 1em;;
+}
+
+th, td {
+position: relative;
+}

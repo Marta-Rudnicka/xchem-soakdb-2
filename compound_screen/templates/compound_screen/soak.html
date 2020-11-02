@@ -1,6 +1,8 @@
-{% extends "soakdb_template.html" %}
+{% extends "table_layout.html" %}
   
 {% block head_links %}
+<link rel="stylesheet" href="../../static/compound_screen/table_layout.css">
+<link rel="stylesheet" href="../../static/compound_screen/soak.css">
  <script src="../../static/compound_screen/soak.js"></script>
 {% endblock %}
 
@@ -10,12 +12,13 @@
 {% endblock %}					
 
 {% block ths %}
-<th>Batch</th>
-			<th id="cshead">Compound [stock] mM</th>
-			<th>[compound] mM</th>
-			<th>Transfer Vol</th>
+			<th>Batch</th>
+			<th>Stock concentration [mM]</th>
+			<th>Compound concentration [mM]</th>
+			<th>Transfer volume</th>
 			<th>Soak Status</th>
 			<th>Soak Transfer Date/Time</th>
+			<th>Batch details</th>
 {% endblock %}
 
 {% block tbody %}
@@ -23,11 +26,13 @@
 		<tr>
 			<td>{{i}}</td>
 			<td>[data]</td>
-			<td class="cs"></td>
+			<td class="cs">[data]</td>
 			<td>[data]</td>
-			<td class="tv"></td>
+			<td class="tv">[data]</td>
 			<td>[data]</td>
 			<td>[data]</td>
+			<td>[data]</td>
+			<td><button class="batch-details" id="details-b-{{i}}">See batch details</button></td>
 		</tr>
 	
 	{% endfor %}
@@ -40,42 +45,8 @@
 				<label>Desired Solvent %:</label>
 					<input id="ds" type="number" min="1" max="100">
 				<br>
-				<label for="multi">Multiple compound stock concentrations</label>
-					<input id="multi" value="button" type="checkbox">
-					
-				<div class="hide">
-					<label>Compound [stock] mM:</label>
-						<input id="cs" type="number" step="0.1">
-				</div>
-				<div class="manystocks">			
-					<label>Assign stock by library (press and hold Ctrl to select multiple libraries)</label>
-					<span>Enter stock concentration for selected libraries</span>
-						<select multiple>
-							<option>___Generates list of libraries used in the project____</option>
-							<option>Library 1</option>
-							<option>Library 2</option>
-							<option>Library 3</option>
-						</select>
-						<input>
-					<br>
-					<button>Add</button>
-				</div>
 				<button type="submit">(re)calulate and <br>add to pending</button>
 			</form>
-			<table class="manystocks">
-				<tr>
-					<th>Libraries</th>
-					<th>Stock concentration mM</th>
-				</tr>
-				<tr>
-					<td>Library 1</td>
-					<td>Data</td>
-				</tr>
-				<tr>
-					<td>Library 2,Library 3</td>
-					<td>Data</td>
-				</tr>
-			</table>
 		<br>
 		
 		<button type="submit">Export pending batches<br>to Echo</button>
