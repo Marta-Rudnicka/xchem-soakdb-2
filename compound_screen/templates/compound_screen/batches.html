@@ -10,6 +10,7 @@
 
 {% block main %}
 <div id="source">
+	<!--
 	<div id="source-lib-plates">
 		<h2>Library plates</h2>
 			<table>.
@@ -40,7 +41,7 @@
 				</tr>
 			</tfoot>
 		</table>
-	</div>
+	</div> -->
 	<div id="source-cryst-plates">
 		<h2>Crystallisation plates</h2>
 		<table>
@@ -74,55 +75,66 @@
 </div>
 <div>
 <table id="batch-table">
+	<caption>Match crystallisation plates to library plates</caption>
 	<thead>
-		<caption>Match source and destination plates</caption>
 		<tr>
 			<th class="batch">Batch</th>
 			<th class="crystals">Crystals</th>
 			<th class="instructions">Instructions</th>
+			<th class="lib">Library</th>
 			<th class="lib-plate">Library (source) <br>plate</th>
 			<th class="wells" >Wells<br><br><button class="in-table" id="hide-well">Hide</button></th>
 			<th class="cr-plate">Crystallisation <br> (destination) plate</th>
+			<th class="matches">Matched compounds</th>
 			<th class="drop" >Drops<br><button class="in-table" id="hide-drop">Hide</button></th>
 			<th class="pb-name">PlateBatch Name</th>
 		</tr>
 	</thead>
 	<tbody id="batches-tbody">
 	{% for i, j, k  in libraries%}
-				<tr class="batch-row" id="plate_row_{{ forloop.counter0 }}_0">
+				<tr class="batch-row">
 					<td class="batch"></td>
 					<td class="crystals"></td>
 					<td class="instructions">Select the first destination plate for this library plate</td>
-					<td class="lib-plate">{{ i }}, {{ j }}</td>
+					<td class="lib">{{ i }}</td>
+					<td class="lib-plate">{{ j }}</td>
+					
 					<td class="wells"></td>
 					<td  class="cr-plate">
 						<select class="cr-plate-selection">
 							<option value="null">Select plate</option>
 						</select>
-						<button class="ok-button" id="plate_{{ forloop.counter }}_1_button">OK</button>
+						<button class="ok-button">OK</button><br>
+						<div class="tip"></div>
 					</td>
+					<td class="matches"><span class="missing-matches">{{ k }}</span> matches<br>to make</td>
 					<td class="drop"></td>
-					<td  class="pb-name"></td>
+					<td class="pb-name"></td>
 				</tr>
 	{% endfor %}
 	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="4">Total of compounds used in experiment in all plates</td>
+			<td id="total-compounds"></td>
+		</tr>
+	</tfoot>
 	</table>
 				<form>
-					<label id="divide">Divide crystals into batches:</label>
+					<label id="divide">Create batches:</label>
 					<br>
-					<input type="radio" name="x">
-					<label>1 batch per plate *</label>
+					<input type="radio" name="batch-making-method" id="one-per-match" value="one-per-match">
+						<label for="one-per-match">1 batch for each library plate - crystallisation plate match</label>
 					<br>
-					<input type="radio" name="x">
-						<label id="cpb-parent"> <input id="cpb" type="number" min="1"> crystals per batch</label>
+					<input type="radio" name="batch-making-method" id="by-number-of-crystals" value="by-number-of-crystals">
+						<label for="number-of-crystals"> <input id="number-of-crystals" type="number" min="1"> crystals per batch</label>
 					<br>
-					<input type="radio" name="x">
-					<label>other (fully manual)</label>
+					<input type="radio" name="batch-making-method" id="other" value="other">
+						<label for="other">other ????</label>
 					<br>
-					<button type="submit">Submit</button>
+					<button id="create-batches">Submit</button>
 				</form>
-				<span>* if a plate contains compounds from more than one library,<br>
-					 it will be automatically divided into more batches, one for each library</span>
+				
 				<div>
 					<button>Accept and save</button>
 				</div>

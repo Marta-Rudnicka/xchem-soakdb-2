@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 	
-	//create Plate objects from the "Library plates" table, and add them to the libraryPlates array
+	//create Plate objects from the initial batches table, and add them to the libraryPlates array
 	let i = 0;
-	document.querySelectorAll('.lib-row').forEach(row => {
-		const name = row.querySelector('.lib-name').innerHTML + '-' + row.querySelector('.lib-plate').innerHTML;
-		const numberOfItems = row.querySelector('.compounds-number').innerHTML
+	document.querySelectorAll('.batch-row').forEach(row => {
+		const name = row.querySelector('.lib').innerHTML + ': ' + row.querySelector('.lib-plate').innerHTML;
+		const numberOfItems = row.querySelector('.missing-matches').innerHTML
 		libraryPlates.push(new Plate(i, name, numberOfItems));
 		i++;
 	})
@@ -27,12 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		i++;
 	})
 	
-	//console.log(batches);
-	
-//	console.log(findBatchByKey(2, 8, 0)); 
-//	console.log(libraryPlates);												//DEBUG
-//	console.log(crystallisationPlates);										//DEBUG
-	
 	/*
 	const batchNumbers = document.querySelectorAll('.bno');
 	*/
@@ -42,13 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
 	document.getElementById('total-crystals').innerHTML = totalCrystals();
 	
 	updateCrystalPlateSelections();
-	
-/*	someRow = document.querySelector('.batch-row');							//DEBUG / TESTING
-	addRowForLibPlate(someRow, 0);
-	console.log(batchTableRows); */
-	
+		
 	document.querySelectorAll('.ok-button').forEach(button => {
 		activateButton(button);
+	})
+	
+	document.querySelectorAll('.cr-plate-selection').forEach(select => {
+		activateSelect(select);
 	})
 	
 	/*

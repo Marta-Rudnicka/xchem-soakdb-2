@@ -10,7 +10,7 @@ var batches = [];
 //strings with instructions to be used in the matching table
 const instrFirst = 'Select the first destination plate for this library plate';
 const instrReady = 'Done.';
-const instrMore = ['Select another destination plate. You need ', ' more crystals'];
+const instrMore = 'Select another destination plate to match remaining compounds to crystals.';
 
 /*indiced of meaningful characters in ids of rows in the matching table
  * id pattern: plate-row-plateIndex-plateRow 
@@ -21,31 +21,31 @@ const plateRowFirstDigit = -1;
 //CLASSES
 
 /* source or destination plate; object used to keep track of how many items (compounds or crystals)
- * in one type of plate have been so far matched to items in the other type of plate
- * kept in arrays, one for crystallisation plates, and one for library plates */
+ * in one type of plate have been so far matched to items in the other type of plate.
+ * Kept in two arrays, one for crystallisation plates, and one for library plates */
 class Plate {
 	constructor(index, name, numberOfItems){
 		this.index = index;
 		this.name = name;
 		this.numberOfItems = parseInt(numberOfItems);
-		this.availableItems = this.numberOfItems;
-		this.assignedItems = 0;
+		this.unmatchedItems = this.numberOfItems;	
+		this.matchedItems = 0;
 	}
 	
 	useItems(numberToUse){
-		const returnValue = numberToUse - this.availableItems;
-		this.availableItems = this.availableItems - numberToUse;
-		this.assignedItems = this.assignedItems + numberToUse;
-		if (this.availableItems < 0) {
-			this.availableItems = 0;
-			this.assignedItems = this.numberOfItems;
+		const returnValue = numberToUse - this.unmatchedItems;
+		this.unmatchedItems = this.unmatchedItems - numberToUse;
+		this.matchedItems = this.matchedItems + numberToUse;
+		if (this.unmatchedItems < 0) {
+			this.unmatchedItems = 0;
+			this.matchedItems = this.numberOfItems;
 		}
 			return returnValue;
 	}
 	
 	useAll() {
-		this.availableItems = 0;
-		this.assignedItems = this.numberOfItems;
+		this.unmatchedItems = 0;
+		this.matchedItems = this.numberOfItems;
 	}
 }
 
@@ -98,9 +98,9 @@ function totalCrystals() {
 //create <option> elements based on current state of Plate objects in the crystallisationPlates array
 function createCrystalPlateOptions(selectElement) {
 	crystallisationPlates.forEach(plate => {
-		if (plate.availableItems > 0) {
+		if (plate.unmatchedItems > 0) {
 			var newOption = document.createElement("option");
-			newOption.innerHTML = plate.name + ', crystals available: ' + plate.availableItems;
+			newOption.innerHTML = plate.name + ', crystals available: ' + plate.unmatchedItems;
 			newOption.value = plate.index;
 			selectElement.appendChild(newOption); 
 		}
@@ -159,8 +159,12 @@ function makeRowForNewMatch(currentRow, compoundsLeft) {
 	
 	//create new row in the table
 	newRow = currentRow.cloneNode(true);
-	newRow.querySelector('.instructions').innerHTML = instrMore[0] + compoundsLeft + instrMore[1];
+	console.log('node after cloning: ', newRow)
+	newRow.querySelector('.instructions').innerHTML = instrMore;
+	newRow.querySelector('.missing-matches').innerHTML = compoundsLeft;
+	newRow.querySelector('.tip').innerHTML = ' ';
 	activateButton(newRow.querySelector('button'));
+	activateSelect(newRow.querySelector('select'));
 	
 	//find appropriate place for the new row and add it to the table
 	nextBatch = findBatchByKey(currentBatch.libPlateIndex + 1, 0, 0);
@@ -178,28 +182,33 @@ function makeRowForNewMatch(currentRow, compoundsLeft) {
 
 function activateButton(button) {
 	button.addEventListener('click', () => {
-		//get plate objects related to button's parent row
 		const parentRow = button.parentElement.parentElement;
 		const currentBatch = findBatchByRow(parentRow);
-		console.log(currentBatch.libPlate);
 		const selectedValue = button.parentElement.querySelector('.cr-plate-selection').value;
-			
+		const matchCount = parentRow.querySelector('.matches');
+		
+		//assign selected crystallisation plate to the current Batch object
 		if (selectedValue !== 'null') {
 			currentBatch.crystalPlate = crystallisationPlates[parseInt(selectedValue)];
 		}
 		else {
 			currentBatch.crystalPlate = null;
 		}
+		const unmatchedCrystals = currentBatch.crystalPlate.unmatchedItems;
+		const unmatchedCompounds = currentBatch.libPlate.unmatchedItems;
 		
-		//update plate objects and add new row if needed
-		if (currentBatch.crystallisationPlate !== null) {
-			crystalsLeftInPlate = currentBatch.libPlate.useItems(currentBatch.crystalPlate.availableItems);
-			if (crystalsLeftInPlate < 0 ) {
+		//update Plate objects and table
+		if (currentBatch.crystalPlate !== null) {
+			if (unmatchedCrystals < unmatchedCompounds) {
+				
+				makeRowForNewMatch(parentRow, unmatchedCompounds-unmatchedCrystals);
+				matchCount.innerHTML = unmatchedCrystals;
 				currentBatch.crystalPlate.useAll();
-				makeRowForNewMatch(parentRow, currentBatch.libPlate.availableItems,);
-			}
+				currentBatch.libPlate.useItems(unmatchedCrystals);
+				}
 			else {
-				currentBatch.crystalPlate.useItems(currentBatch.crystalPlate.availableItems - crystalsLeftInPlate);
+				matchCount.innerHTML = unmatchedCompounds;
+				currentBatch.crystalPlate.useItems(unmatchedCompounds);
 			}
 		}
 		
@@ -208,6 +217,40 @@ function activateButton(button) {
 		button.parentElement.innerHTML = currentBatch.crystalPlate.name;
 		parentRow.querySelector('.instructions').innerHTML = instrReady;
 		
+		
 		updateCrystalPlateSelections();
 	})	
+}
+
+function activateSelect(select) {
+	select.addEventListener('change', () => {
+		if (select.value !== 'null') { 
+			const currentBatch = findBatchByRow(select.closest('.batch-row'));
+			const crystalPlate = crystallisationPlates[select.value];
+			const libPlate = currentBatch.libPlate;
+			select.parentElement.querySelector('.tip').innerHTML = explainMatch(libPlate, crystalPlate);
+		}
+		else {
+			select.parentElement.querySelector('.tip').innerHTML = ' ';
+		}
+	})
+}
+
+function explainMatch(libPlate, crystalPlate) {
+	
+	const infoStrings = ['This match will use up all ', ', but there will be ', ' left in ', '. To accept, click OK.'];
+	let output = '';
+	
+	if (libPlate.unmatchedItems > crystalPlate.unmatchedItems) {
+		const compoundsLeft = libPlate.unmatchedItems - crystalPlate.unmatchedItems;
+		output = infoStrings[0] + crystalPlate.name + infoStrings[1] + compoundsLeft + ' compounds' + infoStrings[2] + libPlate.name + infoStrings[3];
+		}
+	else if (libPlate.unmatchedItems < crystalPlate.unmatchedItems) {
+		const crystalsLeft = crystalPlate.unmatchedItems - libPlate.unmatchedItems;
+		output = infoStrings[0] + libPlate.name + infoStrings[1] + crystalsLeft + ' crystals ' + infoStrings[2] + crystalPlate.name + infoStrings[3];
+		}
+	else{
+		output = 'This match will use up both' + libPlate.name + ' and ' + crystalPlate.name + infoStrings[3];
+	}
+	return output;
 }

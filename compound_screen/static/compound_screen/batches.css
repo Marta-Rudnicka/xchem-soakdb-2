@@ -76,3 +76,9 @@ tr.dark:nth-child(even) {
 	/*background: red !important;
 	background: rgb(210, 210, 0, 0.5) !important;
 }*/
+
+.tip {
+font-weight: bold;
+font-size: 0.7em;
+max-width: 30em;
+}
