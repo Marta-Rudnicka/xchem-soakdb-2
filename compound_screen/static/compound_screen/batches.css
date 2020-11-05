@@ -1,3 +1,8 @@
+main { 
+display: grid;
+grid-template: auto / max(500px) auto;
+}
+
 #batchform{
 display: grid;
 grid-template-columns: 10% 40% 50%;
@@ -17,7 +22,46 @@ text-align: left;
 	grid-column: 2/-1;
 }
 
+#source {
 
+}
+
+#menu {
+grid-column: 2/3;
+}
+
+aside {
+	height: auto;
+    grid-column: 2/3;
+    position: fixed;
+    top: 2px;
+    right: 2px;
+    width: 28em;
+}
+
+.batch, .crystals, .wells, .drop, .pb-name {
+display: none;
+}
+
+.cr-plate-selection {
+font-size: 1em;
+}
+
+.instructions {
+max-width: 100px;
+font-weight: bold;
+font-size: 0.9em;
+}
+
+.ok-button {
+padding:3px;
+margin:0;
+font-size: 0.8em;
+}
+
+#source table {
+width: 100%;
+}
 
 .dark{
 	background: rgb(210, 210, 0, 0.1) !important;

@@ -5,11 +5,11 @@
 //arrays of objects
 var libraryPlates= [];
 var crystallisationPlates =[];
-var batchTableRows = [];
+var batches = [];
 
 //strings with instructions to be used in the matching table
 const instrFirst = 'Select the first destination plate for this library plate';
-const instrReady = 'Ready to create batches';
+const instrReady = 'Done.';
 const instrMore = ['Select another destination plate. You need ', ' more crystals'];
 
 /*indiced of meaningful characters in ids of rows in the matching table
@@ -49,15 +49,31 @@ class Plate {
 	}
 }
 
-/* one row in the matching table; used to manipulate data in the rows*/
-class BatchesTableRow {
-	constructor(id, sourcePlateIndex){
-		this.id = id;
-		this.sourcePlateIndex = sourcePlateIndex;
-		this.sourcePlate = libraryPlates[this.sourcePlateIndex];
-		this.batch = null;
-		this.crystals = null;
-		this.crystalPlate = null;
+/* A batch is a collection of protein crystals exposed to library compounds processed together
+ * in the experiment. One batch can contain only compounds from one library plate, and crystals from one 
+ * crystallisaton plate (based on the lab practice).
+ * In this class, an assignment of one library plate to one crystallisation plate is called a match. Each type of plate can
+ * be present in multiple matches, but there can be only one match in a batch. 
+ * Matches are numbered in relation to library plates, and the lib. plate index together
+ * with the match index can uniquely identify a match. E.g. if the first 100 compounds in lib. plate 3 are applied
+ * to crystals from plate A, and the next 120 are applied to crystals from plate B, the first 100 compounds will
+ * belong to libPlate 3, matchIndex 0, and the next 120 will be libPlate 3, matchIndex 1.
+ * 
+ *   One batch can contain the whole of a match, or a match can be divided into smaller batches - depending on
+ * user needs.*/
+class Batch {
+	constructor(libPlateIndex, matchIndex, matchSectionIndex, row){
+		this.libPlateIndex = libPlateIndex; 				//(int) index of the library (source) plate in the libraryPlates array
+		this.matchIndex = matchIndex;						//(int)
+		this.matchSectionIndex = matchSectionIndex;			//(int) when there are multiple batches made from one match
+		this.row = row;										//(DOM object) a table row representing the Batch
+		this.libPlate = libraryPlates[this.libPlateIndex];	//(Plate object)
+		this.crystalPlate = null;							//(Plate object)
+		this.batchNumber = null;							//(int)
+		this.size = null;									//number of crystals (or number of compounds) in the Batch
+		//this.wells = [];									//(array)
+		//this.drops = [];									//(array)
+		
 	}
 }
 
@@ -108,64 +124,89 @@ function updateCrystalPlateSelections() {
 	selectElements.forEach(element => createCrystalPlateOptions(element));	
 }
 
-//create a new row in the matching table for the same library plate 				TODO
-function addRowForLibPlate(row, plateIndex, compoundsLeft) {
+//finds a batch based on arguments forming its primary key
+function findBatchByKey(libPlateIndex, matchIndex, matchSectionIndex){
+	returnValue = null;
+	batches.forEach( batch => {
+	if ( batch.libPlateIndex === libPlateIndex && batch.matchIndex === matchIndex && batch.matchSectionIndex === matchSectionIndex ) {
+		returnValue = batch;
+		}
+	})
 	
-	//generate data used in the new row
-	let oldId = row.id;
-	let newId = oldId.slice(0, -1) + (parseInt(oldId.slice(plateRowFirstDigit)) + 1);
+	if (returnValue === null ){
+		console.log('ERROR: No batch exists for:', libPlateIndex, matchIndex, matchSectionIndex);
+	}
+	return returnValue;
+}
+
+function findBatchByRow(row){
+	returnValue = null;
+	batches.forEach( batch => {
+	if ( batch.row === row ) {
+		returnValue = batch;
+		}
+	})
 	
-	//create new row
-	newRow = row.cloneNode(true);
-	newRow.id = newId;
+	if (returnValue === null ){
+		console.log('ERROR: No batch exists for row:', row);
+	}
+	return returnValue;
+}
+
+//create a new row in the matching table for the same library plate 
+function makeRowForNewMatch(currentRow, compoundsLeft) {
+	const currentBatch = findBatchByRow(currentRow);
+	
+	//create new row in the table
+	newRow = currentRow.cloneNode(true);
 	newRow.querySelector('.instructions').innerHTML = instrMore[0] + compoundsLeft + instrMore[1];
 	activateButton(newRow.querySelector('button'));
 	
-	//find first row of the next plate (to insert a new row before it)
-	let nextPlateIndex = parseInt(oldId.charAt(plateIndexLocation)) + 1;
-	let nextRowId = 'plate_row_' + nextPlateIndex + '_0';
-	nextRow = document.getElementById(nextRowId);
+	//find appropriate place for the new row and add it to the table
+	nextBatch = findBatchByKey(currentBatch.libPlateIndex + 1, 0, 0);
+	if (nextBatch !== null) {
+		document.getElementById('batches-tbody').insertBefore(newRow, nextBatch.row); 
+	}
+	else {
+		document.getElementById('batches-tbody').appendChild(newRow);
+	}
 	
-	//create a new BatchesTableRow object to control the new row
-	let args = "('" + newId + "', " + plateIndex + ");";
-	eval(newId + " = new BatchesTableRow" + args );
-	eval("batchTableRows.push(" + newId +");");
-	
-	document.getElementById('batches-tbody').insertBefore(newRow, nextRow); 
+	//create a Batch object for the new row
+	newBatch = new Batch(currentBatch.libPlateIndex, currentBatch.matchIndex + 1, 0, newRow);
+	batches.push(newBatch);	
 }
 
 function activateButton(button) {
 	button.addEventListener('click', () => {
 		//get plate objects related to button's parent row
 		const parentRow = button.parentElement.parentElement;
-		const thisRowObj = eval(parentRow.id);
+		const currentBatch = findBatchByRow(parentRow);
+		console.log(currentBatch.libPlate);
 		const selectedValue = button.parentElement.querySelector('.cr-plate-selection').value;
 			
 		if (selectedValue !== 'null') {
-			thisRowObj.crystalPlate = crystallisationPlates[parseInt(selectedValue)];
+			currentBatch.crystalPlate = crystallisationPlates[parseInt(selectedValue)];
 		}
 		else {
-			thisRowObj.crystalPlate = null;
+			currentBatch.crystalPlate = null;
 		}
 		
 		//update plate objects and add new row if needed
-		if (thisRowObj.crystallisationPlate !== null) {
-			crystalsLeftInPlate = thisRowObj.sourcePlate.useItems(thisRowObj.crystalPlate.availableItems);
+		if (currentBatch.crystallisationPlate !== null) {
+			crystalsLeftInPlate = currentBatch.libPlate.useItems(currentBatch.crystalPlate.availableItems);
 			if (crystalsLeftInPlate < 0 ) {
-				thisRowObj.crystalPlate.useAll();
-				addRowForLibPlate(parentRow, thisRowObj.sourcePlate.index, thisRowObj.sourcePlate.availableItems,);
+				currentBatch.crystalPlate.useAll();
+				makeRowForNewMatch(parentRow, currentBatch.libPlate.availableItems,);
 			}
 			else {
-				thisRowObj.crystalPlate.useItems(thisRowObj.crystalPlate.availableItems - crystalsLeftInPlate);
-				
+				currentBatch.crystalPlate.useItems(currentBatch.crystalPlate.availableItems - crystalsLeftInPlate);
 			}
 		}
 		
 		parentRow.querySelector('.cr-plate-selection').hidden = true;
 		button.hidden = true;
-		button.parentElement.innerHTML = thisRowObj.crystalPlate.name;
-		parentRow.querySelector('.instructions').innerHTML = "Ready to create batches for this match";
-		
+		button.parentElement.innerHTML = currentBatch.crystalPlate.name;
+		parentRow.querySelector('.instructions').innerHTML = instrReady;
 		
 		updateCrystalPlateSelections();
 	})	

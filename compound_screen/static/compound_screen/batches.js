@@ -1,7 +1,57 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-	const batchNumbers = document.querySelectorAll('.bno');
 	
+	//create Plate objects from the "Library plates" table, and add them to the libraryPlates array
+	let i = 0;
+	document.querySelectorAll('.lib-row').forEach(row => {
+		const name = row.querySelector('.lib-name').innerHTML + '-' + row.querySelector('.lib-plate').innerHTML;
+		const numberOfItems = row.querySelector('.compounds-number').innerHTML
+		libraryPlates.push(new Plate(i, name, numberOfItems));
+		i++;
+	})
+	
+	//create Plate objects from the "Crystallisation plates" table, and add them to the crystallisationPlates array
+	i = 0;
+	document.querySelectorAll('.crystal-row').forEach(row => {
+		const name = row.querySelector('.cr-plate-name').innerHTML
+		const numberOfItems = row.querySelector('.crystals-number').innerHTML
+		crystallisationPlates.push(new Plate(i, name, numberOfItems));
+		i++;
+	})
+	
+	//create Batches objects from the matching table
+	//(after first loading, there is only one row for each library plate)
+	i = 0;
+	document.querySelectorAll('.batch-row').forEach(row => {
+		const newBatch = new Batch(i, 0, 0, row);
+		batches.push(newBatch);
+		i++;
+	})
+	
+	//console.log(batches);
+	
+//	console.log(findBatchByKey(2, 8, 0)); 
+//	console.log(libraryPlates);												//DEBUG
+//	console.log(crystallisationPlates);										//DEBUG
+	
+	/*
+	const batchNumbers = document.querySelectorAll('.bno');
+	*/
+	
+	//fill in totals in the "Library plates" and "Crystallisation plates" tables
+	document.getElementById('total-compounds').innerHTML = totalCompounds();
+	document.getElementById('total-crystals').innerHTML = totalCrystals();
+	
+	updateCrystalPlateSelections();
+	
+/*	someRow = document.querySelector('.batch-row');							//DEBUG / TESTING
+	addRowForLibPlate(someRow, 0);
+	console.log(batchTableRows); */
+	
+	document.querySelectorAll('.ok-button').forEach(button => {
+		activateButton(button);
+	})
+	
+	/*
 	//divide into batches by number of crystals	
 	document.querySelector('form').addEventListener('submit', (event) => {
 			
@@ -55,5 +105,5 @@ document.addEventListener('DOMContentLoaded', () => {
 		eval('column' + keyword + ' = new HideableArray' + constructorArguments);
 		eval('column' + keyword + '.addListeners();');		
 	})
-	
+	*/
 })

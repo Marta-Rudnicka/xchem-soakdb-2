@@ -1,47 +1,113 @@
-{% extends "table_layout.html" %}
+{% extends "soakdb_template.html" %}
   
 {% block head_links %}
-<link rel="stylesheet" href="../../static/compound_screen/table_layout.css">
+<!-- <link rel="stylesheet" href="../../static/compound_screen/table_layout.css"> -->
 <link rel="stylesheet" href="../../static/compound_screen/batches.css">
 <script src="../../static/compound_screen/batches.js"></script>
+<script src="../../static/compound_screen/batches-functions.js"></script>
 <script src="../../static/classes.js"></script>
 {% endblock %}
 
+{% block main %}
+<div id="source">
+	<div id="source-lib-plates">
+		<h2>Library plates</h2>
+			<table>.
+				<thead>
+				<tr>
+					<th>Library</th>
+					<th>Plate</th>
+					<th>Compounds in screen</th>
+					<th>Matched to crystals</th>
+					<th>Not matched</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for i, j, k  in libraries%}
+				<tr class="lib-row">
+					<td class="lib-name">{{ i }}</td>
+					<td class="lib-plate">{{ j }}</td>
+					<td class="compounds-number">{{ k }}</td>
+					<td></td>
+					<td></td>
+				</tr>
+				{% endfor %}
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="2"><strong>Total:</strong></td>
+					<td id="total-compounds"></td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	<div id="source-cryst-plates">
+		<h2>Crystallisation plates</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Plate ID</th>
+					<th>Crystals in screen</th>
+					<th>Matched to compounds</th>
+					<th>Unmatched</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for i, j  in crystal_plates%}
+				<tr class="crystal-row">
+					<td class="cr-plate-name">{{ i }}</td>
+					<td class="crystals-number">{{ j }}</td>
+					<td></td>
+					<td></td>
+				</tr>
+				{% endfor %}
+			</tbody>
+			<tfoot>
+				<tr>
+					<td><strong>Total:</strong></td>
+					<td id="total-crystals"></td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
 
-{% block show_buttons %}
-<button class="small-button" id="show-lib" hidden>Show library plate</button>
-<button class="small-button" id="show-well" hidden>Show well</button>
-<button class="small-button" id="show-cp" hidden>Show crystallisation plate</button>
-<button class="small-button" id="show-drop" hidden>Show drop</button>
-{% endblock %}					
-
-{% block ths %}
-				<th class="lib">Library plate<br><button class="in-table" id="hide-lib">Hide</button></th>
-				<th class="well">Well<br><button class="in-table" id="hide-well">Hide</button></th>
-				<th class="cp">Crystallisation plate<br><button class="in-table" id="hide-cp">Hide</button></th>
-				<th class="drop">Drop<br><button class="in-table" id="hide-drop">Hide</button></th>
-				<th>Batch Number</th>
-				<th>PlateBatch Name</th>
-{% endblock %}
-
-{% block tbody %}
-	{% for i in counter %}
-	<tr>
-		<td>{{i}}</td>
-		<td class="lib">[data]</td>
-		<td class="well">[data]</td>
-		<td class="cp">[data]</td>
-		<td class="drop">[data]</td>
-		<td>
-			<input class="bno" type="number" min="1">
-		<td>[data]</td>
-	</tr>
+</div>
+<div>
+<table id="batch-table">
+	<thead>
+		<caption>Match source and destination plates</caption>
+		<tr>
+			<th class="batch">Batch</th>
+			<th class="crystals">Crystals</th>
+			<th class="instructions">Instructions</th>
+			<th class="lib-plate">Library (source) <br>plate</th>
+			<th class="wells" >Wells<br><br><button class="in-table" id="hide-well">Hide</button></th>
+			<th class="cr-plate">Crystallisation <br> (destination) plate</th>
+			<th class="drop" >Drops<br><button class="in-table" id="hide-drop">Hide</button></th>
+			<th class="pb-name">PlateBatch Name</th>
+		</tr>
+	</thead>
+	<tbody id="batches-tbody">
+	{% for i, j, k  in libraries%}
+				<tr class="batch-row" id="plate_row_{{ forloop.counter0 }}_0">
+					<td class="batch"></td>
+					<td class="crystals"></td>
+					<td class="instructions">Select the first destination plate for this library plate</td>
+					<td class="lib-plate">{{ i }}, {{ j }}</td>
+					<td class="wells"></td>
+					<td  class="cr-plate">
+						<select class="cr-plate-selection">
+							<option value="null">Select plate</option>
+						</select>
+						<button class="ok-button" id="plate_{{ forloop.counter }}_1_button">OK</button>
+					</td>
+					<td class="drop"></td>
+					<td  class="pb-name"></td>
+				</tr>
 	{% endfor %}
-
-{% endblock %}
-
-{% block menu %}
-<form id="batchform">
+	</tbody>
+	</table>
+				<form>
 					<label id="divide">Divide crystals into batches:</label>
 					<br>
 					<input type="radio" name="x">
@@ -67,4 +133,5 @@
 					If data saved is different than data in the spreadshet, asks if <br>
 					you want to save changes.</span>
 				</div>
+			</div>
 {% endblock %}

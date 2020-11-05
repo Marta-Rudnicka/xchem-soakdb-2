@@ -32,6 +32,9 @@ wells_small = generate_well_names(3, 4)
 wells_small_1 = wells_small[0:8]
 wells_small_2 = wells_small[8:-1]
 
+libraries = [['DSI_poised', 'plate_name1', 96 ], ['York3D', 'plate_name2', 84], ['FragLites', 'plate_name3', 127]]
+crystal_plates = [ ['Plate1', 92],['Plate2', 56], ['Plate3', 48], ['Plate4', 86], ['Plate5', 37]]
+
 def source(request):
 	return render(request, "compound_screen/source.html", {
 		"title": "Source compounds table",
@@ -55,9 +58,11 @@ def batches(request):
 	return render(request, "compound_screen/batches.html", {
 	"title": "Batches",
 	"header": "Batches table",
-	"page_info": "Divide crystals into batches",
+	"page_info": "Match library plates to crystallisation plates",
 	"table_caption": "Batches", 
 	"counter": range(1, 61),
+	"libraries": libraries,
+	"crystal_plates" : crystal_plates ,
 	})
 
 def soak(request):
