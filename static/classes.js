@@ -1,7 +1,7 @@
 /* an element that can be shown or hidden, together with controls used to show or hide it */
 class Hideable {
 	constructor(container, target, targetDisplay, hiderElementSelector, showerElementSelector, controlsDisplay, targetHide = null ){
-		this.container = container;								//nearest common parent element of the target and the controls (selector)									
+		this.container = container;								//common parent element of the target and the controls (selector)									
 		this.target = target;									//element to be shown or hidden (selector)
 		this.targetDisplay = targetDisplay;						//CSS display attribute or class of target when shown (string)
 		this.hiderElementSelector = hiderElementSelector; 		//control used to hide target (selector)

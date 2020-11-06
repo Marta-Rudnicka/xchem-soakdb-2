@@ -1,12 +1,16 @@
 main { 
 display: grid;
-grid-template: auto / max(500px) auto;
+grid-template: auto / max(400px) auto;
+grid-gap: 1em;
 }
 
 #batchform{
 display: grid;
 grid-template-columns: 10% 40% 50%;
+}
 
+th {
+position: relative;
 }
 
 #batchform label{
@@ -22,8 +26,9 @@ text-align: left;
 	grid-column: 2/-1;
 }
 
-#source {
-
+table caption {
+font-weight: bold;
+font-size: 1.5em;
 }
 
 #menu {
@@ -39,7 +44,7 @@ aside {
     width: 28em;
 }
 
-.batch, .crystals, .wells, .drop, .pb-name {
+.batch, .crystals, .wells, .drop, .pb-name, .batch-checkbox, .unused{
 display: none;
 }
 

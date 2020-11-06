@@ -24,8 +24,8 @@ const plateRowFirstDigit = -1;
  * in one type of plate have been so far matched to items in the other type of plate.
  * Kept in two arrays, one for crystallisation plates, and one for library plates */
 class Plate {
-	constructor(index, name, numberOfItems){
-		this.index = index;
+	constructor(name, numberOfItems){
+		//this.index = index;
 		this.name = name;
 		this.numberOfItems = parseInt(numberOfItems);
 		this.unmatchedItems = this.numberOfItems;	
@@ -62,7 +62,7 @@ class Plate {
  *   One batch can contain the whole of a match, or a match can be divided into smaller batches - depending on
  * user needs.*/
 class Batch {
-	constructor(libPlateIndex, matchIndex, matchSectionIndex, row){
+	constructor(libPlateIndex, matchIndex, matchSectionIndex, row, size){
 		this.libPlateIndex = libPlateIndex; 				//(int) index of the library (source) plate in the libraryPlates array
 		this.matchIndex = matchIndex;						//(int)
 		this.matchSectionIndex = matchSectionIndex;			//(int) when there are multiple batches made from one match
@@ -70,10 +70,9 @@ class Batch {
 		this.libPlate = libraryPlates[this.libPlateIndex];	//(Plate object)
 		this.crystalPlate = null;							//(Plate object)
 		this.batchNumber = null;							//(int)
-		this.size = null;									//number of crystals (or number of compounds) in the Batch
+		this.size = size;									//number of crystals (or number of compounds) in the Batch
 		//this.wells = [];									//(array)
-		//this.drops = [];									//(array)
-		
+		//this.drops = [];									//(array)	
 	}
 }
 
@@ -101,7 +100,7 @@ function createCrystalPlateOptions(selectElement) {
 		if (plate.unmatchedItems > 0) {
 			var newOption = document.createElement("option");
 			newOption.innerHTML = plate.name + ', crystals available: ' + plate.unmatchedItems;
-			newOption.value = plate.index;
+			newOption.value = crystallisationPlates.indexOf(plate);
 			selectElement.appendChild(newOption); 
 		}
 	})
@@ -134,7 +133,7 @@ function findBatchByKey(libPlateIndex, matchIndex, matchSectionIndex){
 	})
 	
 	if (returnValue === null ){
-		console.log('ERROR: No batch exists for:', libPlateIndex, matchIndex, matchSectionIndex);
+		console.log('No batch exists for:', libPlateIndex, matchIndex, matchSectionIndex);
 	}
 	return returnValue;
 }
@@ -148,26 +147,36 @@ function findBatchByRow(row){
 	})
 	
 	if (returnValue === null ){
-		console.log('ERROR: No batch exists for row:', row);
+		console.log('No batch exists for row:', row);
 	}
 	return returnValue;
 }
 
 //create a new row in the matching table for the same library plate 
-function makeRowForNewMatch(currentRow, compoundsLeft) {
+function createNewRow(currentRow, compoundsLeft) {
 	const currentBatch = findBatchByRow(currentRow);
 	
-	//create new row in the table
+	//create new row and fill it with data
 	newRow = currentRow.cloneNode(true);
-	console.log('node after cloning: ', newRow)
 	newRow.querySelector('.instructions').innerHTML = instrMore;
-	newRow.querySelector('.missing-matches').innerHTML = compoundsLeft;
-	newRow.querySelector('.tip').innerHTML = ' ';
-	activateButton(newRow.querySelector('button'));
-	activateSelect(newRow.querySelector('select'));
+	if (newRow.querySelector('.missing-matches') !== null){
+		newRow.querySelector('.missing-matches').innerHTML = compoundsLeft;
+	}
+	else {
+		newRow.querySelector('.items').innerHTML = compoundsLeft;
+	}
+	if ( newRow.querySelector('button') !== null) {
+		newRow.querySelector('.tip').innerHTML = ' ';
+		activateOkButton(newRow.querySelector('button'));
+		activateSelect(newRow.querySelector('select'));
+	}
 	
 	//find appropriate place for the new row and add it to the table
-	nextBatch = findBatchByKey(currentBatch.libPlateIndex + 1, 0, 0);
+	nextBatch = findBatchByKey(currentBatch.libPlateIndex, currentBatch.matchIndex + 1, 0);
+	if (nextBatch === null) {
+		nextBatch = findBatchByKey(currentBatch.libPlateIndex + 1, 0, 0);
+	} 
+	
 	if (nextBatch !== null) {
 		document.getElementById('batches-tbody').insertBefore(newRow, nextBatch.row); 
 	}
@@ -175,17 +184,21 @@ function makeRowForNewMatch(currentRow, compoundsLeft) {
 		document.getElementById('batches-tbody').appendChild(newRow);
 	}
 	
-	//create a Batch object for the new row
-	newBatch = new Batch(currentBatch.libPlateIndex, currentBatch.matchIndex + 1, 0, newRow);
-	batches.push(newBatch);	
+	return newRow;
 }
 
-function activateButton(button) {
+function createNewBatch(libPlateIndex, matchIndex, matchSectionIndex, row, size) {
+	const newBatch = new Batch(libPlateIndex, matchIndex, matchSectionIndex, row, size);
+	batches.push(newBatch);
+	return newBatch;
+}
+
+function activateOkButton(button) {
 	button.addEventListener('click', () => {
 		const parentRow = button.parentElement.parentElement;
 		const currentBatch = findBatchByRow(parentRow);
 		const selectedValue = button.parentElement.querySelector('.cr-plate-selection').value;
-		const matchCount = parentRow.querySelector('.matches');
+		const items = parentRow.querySelector('.items');
 		
 		//assign selected crystallisation plate to the current Batch object
 		if (selectedValue !== 'null') {
@@ -196,18 +209,20 @@ function activateButton(button) {
 		}
 		const unmatchedCrystals = currentBatch.crystalPlate.unmatchedItems;
 		const unmatchedCompounds = currentBatch.libPlate.unmatchedItems;
+		const compoundsLeft = unmatchedCompounds - unmatchedCrystals;
 		
-		//update Plate objects and table
+		//update object states and table rows
 		if (currentBatch.crystalPlate !== null) {
 			if (unmatchedCrystals < unmatchedCompounds) {
-				
-				makeRowForNewMatch(parentRow, unmatchedCompounds-unmatchedCrystals);
-				matchCount.innerHTML = unmatchedCrystals;
+				const newRow = createNewRow(parentRow, compoundsLeft);
+				createNewBatch(currentBatch.libPlateIndex, currentBatch.matchIndex + 1, 0, newRow, compoundsLeft);
+				items.innerHTML = unmatchedCrystals;
 				currentBatch.crystalPlate.useAll();
+				currentBatch.size = unmatchedCrystals;
 				currentBatch.libPlate.useItems(unmatchedCrystals);
 				}
 			else {
-				matchCount.innerHTML = unmatchedCompounds;
+				items.innerHTML = unmatchedCompounds;
 				currentBatch.crystalPlate.useItems(unmatchedCompounds);
 			}
 		}
@@ -225,7 +240,9 @@ function activateButton(button) {
 function activateSelect(select) {
 	select.addEventListener('change', () => {
 		if (select.value !== 'null') { 
+			
 			const currentBatch = findBatchByRow(select.closest('.batch-row'));
+			
 			const crystalPlate = crystallisationPlates[select.value];
 			const libPlate = currentBatch.libPlate;
 			select.parentElement.querySelector('.tip').innerHTML = explainMatch(libPlate, crystalPlate);
@@ -253,4 +270,77 @@ function explainMatch(libPlate, crystalPlate) {
 		output = 'This match will use up both' + libPlate.name + ' and ' + crystalPlate.name + infoStrings[3];
 	}
 	return output;
+}
+
+function changeColour(colour) {
+	if (colour === 'white'){
+		return 'aliceblue';
+	}
+	else {
+		return 'white';
+	}
+}
+
+function changeTableView() {
+	//show and hide coloumns
+	const show = ['.batch', '.wells', '.drop', '.batch-checkbox', '.pb-name'];
+	const hide = ['.instructions'];
+	show.forEach(className => {
+		showHiddenClass(className);	
+	})
+	
+	hide.forEach(className => {
+		hideClass(className);
+	})	
+	
+	//widen the table
+	document.getElementById('batch-table').style.width = '100%';
+	document.getElementById('wide-cell').colSpan = '6';
+	
+	//colour rows to show where a new match starts
+	let oldLibPlateIndex = 0;
+	let oldMatchIndex = 0;
+	let colour = 'white';
+	
+	document.querySelectorAll('.batch-row').forEach(row => {
+		const newMatchIndex = findBatchByRow(row).matchIndex;
+		const newLibPlateIndex = findBatchByRow(row).libPlateIndex;
+		if ( newMatchIndex !== oldMatchIndex || oldLibPlateIndex !== newLibPlateIndex ){
+				colour = changeColour(colour);
+		}		
+		row.style.background = colour;
+		oldMatchIndex = newMatchIndex;
+		oldLibPlateIndex = newLibPlateIndex;
+	});
+}
+
+function generateBatchNumbers() {
+	let i = 1;
+	document.querySelectorAll('.batch-row').forEach(row => {
+		const batch = findBatchByRow(row);
+		batch.batchNumber = i;
+		batch.size = parseInt(row.querySelector('.items').innerHTML);
+		row.querySelector('.batch').innerHTML = i;
+		i++;
+	})
+	changeTableView();
+}
+
+function createBatchesByNumberOfCrystals(size) {
+	batches.forEach(batch => {
+		divideBatch(batch, size);
+	});
+	generateBatchNumbers();
+	changeTableView();
+}
+
+function divideBatch(batch, newSize) {
+	while (batch.size > newSize){
+		const itemsLeft = batch.size - newSize;
+		const newRow = createNewRow(batch.row, itemsLeft);
+		const newBatch = createNewBatch(batch.libPlateIndex, batch.matchIndex, batch.matchSectionIndex + 1, newRow, itemsLeft);
+		batch.size = newSize;
+		batch.row.querySelector('.items').innerHTML = newSize;
+		divideBatch(newBatch, newSize);
+	}
 }

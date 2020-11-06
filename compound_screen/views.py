@@ -57,8 +57,7 @@ def crystals(request):
 def batches(request):
 	return render(request, "compound_screen/batches.html", {
 	"title": "Batches",
-	"header": "Batches table",
-	"page_info": "Match library plates to crystallisation plates",
+	"header": "Matching compounds to crystals",
 	"table_caption": "Batches", 
 	"counter": range(1, 61),
 	"libraries": libraries,

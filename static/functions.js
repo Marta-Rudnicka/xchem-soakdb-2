@@ -106,13 +106,16 @@ function countChecked(checkboxIdList, displayElementId) {
 }
 
 function showHiddenClass(className){
+	
 	document.querySelectorAll(className).forEach(element => {
 		element.style.visibility = 'visible';
+		element.style.display = 'table-cell';
 	})
 }
 
 function hideClass(className){
 	document.querySelectorAll(className).forEach(element => {
-		element.style.visibility = 'hidden';
+		//element.style.visibility = 'hidden';
+		element.style.display = 'none';
 	})
 }

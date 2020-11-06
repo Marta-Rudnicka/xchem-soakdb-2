@@ -5,72 +5,65 @@
 <link rel="stylesheet" href="../../static/compound_screen/batches.css">
 <script src="../../static/compound_screen/batches.js"></script>
 <script src="../../static/compound_screen/batches-functions.js"></script>
+<script src="../../static/functions.js"></script>
 <script src="../../static/classes.js"></script>
 {% endblock %}
 
 {% block main %}
 <div id="source">
-	<!--
-	<div id="source-lib-plates">
-		<h2>Library plates</h2>
-			<table>.
-				<thead>
-				<tr>
-					<th>Library</th>
-					<th>Plate</th>
-					<th>Compounds in screen</th>
-					<th>Matched to crystals</th>
-					<th>Not matched</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for i, j, k  in libraries%}
-				<tr class="lib-row">
-					<td class="lib-name">{{ i }}</td>
-					<td class="lib-plate">{{ j }}</td>
-					<td class="compounds-number">{{ k }}</td>
-					<td></td>
-					<td></td>
-				</tr>
-				{% endfor %}
-			</tbody>
-			<tfoot>
-				<tr>
-					<td colspan="2"><strong>Total:</strong></td>
-					<td id="total-compounds"></td>
-				</tr>
-			</tfoot>
-		</table>
-	</div> -->
-	<div id="source-cryst-plates">
-		<h2>Crystallisation plates</h2>
 		<table>
 			<thead>
-				<tr>
-					<th>Plate ID</th>
-					<th>Crystals in screen</th>
-					<th>Matched to compounds</th>
-					<th>Unmatched</th>
+			<caption>Library plates</caption>
+			<tr>
+				<th>Library</th>
+				<th>Plate</th>
+				<th>Compounds in screen</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for i, j, k  in libraries%}
+			<tr class="lib-row">
+				<td class="lib-name">{{ i }}</td>
+				<td class="lib-plate">{{ j }}</td>
+				<td class="compounds-number">{{ k }}</td>
 				</tr>
-			</thead>
-			<tbody>
-				{% for i, j  in crystal_plates%}
-				<tr class="crystal-row">
-					<td class="cr-plate-name">{{ i }}</td>
-					<td class="crystals-number">{{ j }}</td>
-					<td></td>
-					<td></td>
-				</tr>
-				{% endfor %}
-			</tbody>
-			<tfoot>
-				<tr>
-					<td><strong>Total:</strong></td>
-					<td id="total-crystals"></td>
-				</tr>
-			</tfoot>
-		</table>
-	</div>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="2"><strong>Total:</strong></td>
+				<td id="total-compounds"></td>
+			</tr>
+		</tfoot>
+	</table>
+<br><br>
+	<table>
+		<thead>
+			<caption>Crystallisation plates</caption>
+			<tr>
+				<th>Plate ID</th>
+				<th>Accepted <br>crystals</th>
+				<th class="unused">Unused</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for i, j  in crystal_plates%}
+			<tr class="crystal-row">
+				<td class="cr-plate-name">{{ i }}</td>
+				<td class="crystals-number">{{ j }}</td>
+				<td class="unused"></td>
+			</tr>
+			{% endfor %}
+		</tbody>
+		<tfoot>
+			<tr>
+				<td><strong>Total:</strong></td>
+				<td id="total-crystals"></td>
+				<td class="unused"></td>
+			</tr>
+		</tfoot>
+	</table>
+</div>
 
 </div>
 <div>
@@ -79,27 +72,27 @@
 	<thead>
 		<tr>
 			<th class="batch">Batch</th>
-			<th class="crystals">Crystals</th>
 			<th class="instructions">Instructions</th>
 			<th class="lib">Library</th>
 			<th class="lib-plate">Library (source) <br>plate</th>
 			<th class="wells" >Wells<br><br><button class="in-table" id="hide-well">Hide</button></th>
 			<th class="cr-plate">Crystallisation <br> (destination) plate</th>
-			<th class="matches">Matched compounds</th>
 			<th class="drop" >Drops<br><button class="in-table" id="hide-drop">Hide</button></th>
+			<th class="items">Matched items</th>
+			
 			<th class="pb-name">PlateBatch Name</th>
+			<th class="batch-checkbox">Select</th>
 		</tr>
 	</thead>
 	<tbody id="batches-tbody">
 	{% for i, j, k  in libraries%}
 				<tr class="batch-row">
-					<td class="batch"></td>
-					<td class="crystals"></td>
+					<td class="batch">TODO</td>
 					<td class="instructions">Select the first destination plate for this library plate</td>
 					<td class="lib">{{ i }}</td>
 					<td class="lib-plate">{{ j }}</td>
 					
-					<td class="wells"></td>
+					<td class="wells">TODO</td>
 					<td  class="cr-plate">
 						<select class="cr-plate-selection">
 							<option value="null">Select plate</option>
@@ -107,15 +100,17 @@
 						<button class="ok-button">OK</button><br>
 						<div class="tip"></div>
 					</td>
-					<td class="matches"><span class="missing-matches">{{ k }}</span> matches<br>to make</td>
-					<td class="drop"></td>
-					<td class="pb-name"></td>
+					<td class="drop">TODO</td>
+					<td class="items"><span class="missing-matches">{{ k }}</span> matches<br>to make</td>
+				
+					<td class="pb-name">TODO</td>
+					<td class="batch-checkbox"><input type="checkbox"></td>
 				</tr>
 	{% endfor %}
 	</tbody>
 	<tfoot>
 		<tr>
-			<td colspan="4">Total of compounds used in experiment in all plates</td>
+			<td id="wide-cell" colspan="4">Total of compounds used in experiment in all plates</td>
 			<td id="total-compounds"></td>
 		</tr>
 	</tfoot>
@@ -129,11 +124,9 @@
 					<input type="radio" name="batch-making-method" id="by-number-of-crystals" value="by-number-of-crystals">
 						<label for="number-of-crystals"> <input id="number-of-crystals" type="number" min="1"> crystals per batch</label>
 					<br>
-					<input type="radio" name="batch-making-method" id="other" value="other">
-						<label for="other">other ????</label>
-					<br>
-					<button id="create-batches">Submit</button>
+						<button id="create-batches">Create batches</button>
 				</form>
+			
 				
 				<div>
 					<button>Accept and save</button>
