@@ -1,12 +1,23 @@
 main { 
 display: grid;
-grid-template: auto / max(400px) auto;
+grid-template-columns: max(400px) auto 100px;
 grid-gap: 1em;
 }
 
 #batchform{
 display: grid;
 grid-template-columns: 10% 40% 50%;
+}
+
+#source {
+color: #003767;
+background: aliceblue;
+font-size: 0.8em;
+height: 100vh;
+}
+
+#source td, th, table, caption {
+border: solid #003767 1px;
 }
 
 th {
@@ -44,9 +55,15 @@ aside {
     width: 28em;
 }
 
-.batch, .crystals, .wells, .drop, .pb-name, .batch-checkbox, .unused{
+.batch, .crystals, .wells, .drop, .pb-name, .batch-checkbox, .unused-crystals, .unused-compounds {
 display: none;
 }
+
+/*
+.view3, .view2 {
+visibility: hidden;
+}*/
+
 
 .cr-plate-selection {
 font-size: 1em;
@@ -58,6 +75,10 @@ font-weight: bold;
 font-size: 0.9em;
 }
 
+#actions{
+grid-column-start: 3;
+}
+
 .ok-button {
 padding:3px;
 margin:0;
@@ -66,6 +87,7 @@ font-size: 0.8em;
 
 #source table {
 width: 100%;
+max-width: 350px;
 }
 
 .dark{
@@ -82,8 +104,9 @@ tr.dark:nth-child(even) {
 	background: rgb(210, 210, 0, 0.5) !important;
 }*/
 
-.tip {
+div.tip {
+background: aliceblue;
 font-weight: bold;
 font-size: 0.7em;
-max-width: 30em;
+max-width: 30em;;
 }
