@@ -32,9 +32,9 @@ wells_small = generate_well_names(3, 4)
 wells_small_1 = wells_small[0:8]
 wells_small_2 = wells_small[8:-1]
 
-libraries = [['DSI_poised', 'plate_name1', 96 ], ['York3D', 'plate_name2', 84], ['FragLites', 'plate_name3', 127]]
+libraries = [['DSI_poised', 'plate_name1', 300 ], ['York3D', 'plate_name2', 200], ['FragLites', 'plate_name3', 127]]
 #libraries = [['DSI_poised', 'plate_name1', 96 ], ['York3D', 'plate_name2', 84]]
-crystal_plates = [ ['Crystallisation_Plate1', 92],['Crystallisation_Plate2', 56], ['Crystallisation_Plate3', 48], ['Crystallisation_Plate4', 86], ['Crystallisation_Plate5', 37]]
+crystal_plates = [ ['Crystallisation_Plate1', 150],['Crystallisation_Plate2', 200], ['Crystallisation_Plate3', 103], ['Crystallisation_Plate4', 86], ['Crystallisation_Plate5', 37]]
 #crystal_plates = [ ['Crystallisation_Plate1', 92],['Crystallisation_Plate2', 56], ['Crystallisation_Plate4', 86]]
 
 def source(request):

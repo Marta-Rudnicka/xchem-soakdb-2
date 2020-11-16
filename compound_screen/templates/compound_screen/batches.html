@@ -5,6 +5,9 @@
 <link rel="stylesheet" href="../../static/compound_screen/batches.css">
 <script src="../../static/compound_screen/batches.js"></script>
 <script src="../../static/compound_screen/batches-functions.js"></script>
+<script src="../../static/compound_screen/batches-classes-consts.js"></script>
+<script src="../../static/compound_screen/batches-helpers.js"></script>
+
 <script src="../../static/functions.js"></script>
 <script src="../../static/classes.js"></script>
 {% endblock %}
@@ -70,6 +73,14 @@
 
 
 <div>
+	<form class="view2">
+		<label id="divide">Specify batch size:</label>
+		<br>
+		<input type="radio" name="batch-making-method" id="one-per-match" value="one-per-match" checked>
+		<label for="one-per-match">1 batch per plate </label>
+		<input type="radio" name="batch-making-method" id="by-number-of-crystals" value="by-number-of-crystals" >
+		<label for="number-of-crystals"><input id="number-of-crystals" type="number" min="1"> crystals per plate</label>
+	</form>
 	<table id="batch-table">
 		<caption>
 			<span class="view1">Match crystallisation plates to library plates</span>
@@ -78,41 +89,41 @@
 		</caption>
 		<thead>
 			<tr>
-				<th class="batch">Batch</th>
-				<th class="instructions">Instructions</th>
-				<th class="lib">Library</th>
 				<th class="lib-plate">Library (source) <br>plate</th>
+
 				<th class="wells" >Wells<br><br><button class="in-table" id="hide-well">Hide</button></th>
 				<th class="cr-plate">Crystallisation <br> (destination) plate</th>
 				<th class="drop" >Drops<br><button class="in-table" id="hide-drop">Hide</button></th>
-				<th class="items">Matched<br> items</th>
-				
+				<th class="batch">Batch</th>
+				<th class="items">Batch size</th>
 				<th class="pb-name">PlateBatch Name</th>
-				<th class="batch-checkbox">Select<br>to edit</th>
+				<th class="checkbox-cell">Select<br>to&nbsp;edit</th>
 			</tr>
 		</thead>
 		<tbody id="batches-tbody">
 		{% for i, j, k  in libraries%}
 			<tr class="batch-row">
-				<td class="batch">TODO</td>
-				<td class="instructions">Select the first destination plate for this library plate</td>
-				<td class="lib">{{ i }}</td>
-				<td class="lib-plate">{{ j }}</td>
-						
-				<td class="wells">TODO</td>
-				<td  class="cr-plate">
-					<select class="cr-plate-selection">
-						<option value="null">Select plate</option>
+				
+				<td class="lib-plate" rowspan="1">
+					<select class="lib-plate-selection">
+						<option value="null">None / reset selection</option>
 					</select>
-					<button class="ok-button">OK</button><br>
-					<div class="tip"><br><br><br></div>
+				</td>
+				
+					
+				<td class="wells">TODO</td>
+				<td class="cr-plate">
+					<select class="cr-plate-selection">
+						<option value="null">None  / reset selection</option>
+					</select>
 				</td>
 				<td class="drop">TODO</td>
-				<td class="items"><span class="missing-matches">{{ k }}</span> matches<br>to make</td>
+				<td class="batch"><span class="small">no batch<br>created yet</span></td>
+				<td class="items"><span class="small">no batch<br>created yet</span></td>	
 				<td class="pb-name">TODO</td>
-				<td class="batch-checkbox"><input class="batch-checkbox" type="checkbox"></td>
+				<td class="checkbox-cell"><span class="small">not ready</span><!--<input class="batch-checkbox" type="checkbox">--></td>
 			</tr>
-		{% endfor %}
+		{% endfor %} 
 		</tbody>
 		<tfoot>
 			<tr>
@@ -121,17 +132,7 @@
 			</tr>
 		</tfoot>
 	</table>	
-	<form class="view2" hidden>
-		<label id="divide">Create batches:</label>
-		<br>
-		<input type="radio" name="batch-making-method" id="one-per-match" value="one-per-match">
-		<label for="one-per-match">1 batch for each library plate - crystallisation plate match</label>
-		<br>
-		<input type="radio" name="batch-making-method" id="by-number-of-crystals" value="by-number-of-crystals">
-		<label for="number-of-crystals"> <input id="number-of-crystals" type="number" min="1"> crystals per batch</label>
-		<br>
-		<button id="create-batches">Create batches</button>
-	</form>
+	
 	<div class="view3" hidden>
 		<button>Accept and save</button>
 		<div class="nextlink">
@@ -143,7 +144,7 @@
 	</div>
 </div>
 </div>
-<div class="view3" id="actions" hidden>
+<div class="view3" id="actions">
 	<button id="merge-selected">Merge selected</button>
 	<button id="delete-selected">Delete selected</button>
 </div>

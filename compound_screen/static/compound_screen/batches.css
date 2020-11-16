@@ -55,8 +55,12 @@ aside {
     width: 28em;
 }
 
-.batch, .crystals, .wells, .drop, .pb-name, .batch-checkbox, .unused-crystals, .unused-compounds {
+.crystals, .wells, .drop, .pb-name, .unused-crystals, .unused-compounds {
 display: none;
+}
+
+.small {
+font-size: 0.7em;
 }
 
 /*
@@ -64,10 +68,6 @@ display: none;
 visibility: hidden;
 }*/
 
-
-.cr-plate-selection {
-font-size: 1em;
-}
 
 .instructions {
 max-width: 100px;
