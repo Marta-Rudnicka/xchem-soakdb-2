@@ -74,11 +74,11 @@ class Plate {
 	//for debugging
 	checkPlateIntegrity() {
 		if (this.size < 0 || this.unmatchedItems < 0 || this.matchedItems < 0 ) {
-			throw new RangeError("Negative value(s) in a Batch object's properties; ", this);
+			throw new RangeError("Negative value(s) in a Plate object's properties; ", this);
 		}
 		
 		if (this.unmatchedItems + this.matchedItems !== this.size) {
-			throw new RangeError('Items in a Batch object do not add up: ', this);
+			throw new RangeError('Items in a Plate object do not add up: ', this);
 		}
 	}
 }
@@ -89,11 +89,11 @@ class Plate {
  * */
  
 class Batch {
-	constructor(size){
+	constructor(size, libPlate = null, crystalPlate = null){
 		this.row = null;									//(DOM object) a table row representing the Batch
 		this.size = size;									//(int)
-		this.libPlate = null								//(Plate object)
-		this.crystalPlate = null;							//(Plate object)
+		this.libPlate = libPlate;								//(Plate object)
+		this.crystalPlate = crystalPlate;							//(Plate object)
 		this.batchNumber = null;							//(int) ID for human use
 		
 		//this.wells = [];									//(array) TODO
@@ -120,7 +120,8 @@ class Batch {
 			newRowNeeded = this.assignCrystalPlate(index);
 		}
 		this.cleanUpRubbishBatches();
-		return newRowNeeded;
+		const batchCount = this.divideIntoSmallerBatches(batchSize);
+		return [newRowNeeded, batchCount];
 	}
 	
 	/*setter for LibPlate; should be called by assignPlate */
@@ -154,6 +155,9 @@ class Batch {
 		let newRowNeeded = null;
 		
 		if (this.crystalPlate !== null){
+			if (batchSize) {
+				mergeMatch(this.libPlate, this.crystalPlate);
+			}
 			this.crystalPlate.unmatchItems(this.size);
 			if (this.libPlate !== null) {
 				this.libPlate.unmatchItems(this.size);
@@ -175,6 +179,7 @@ class Batch {
 			this.resetCrystalPlate();
 			newRowNeeded = false;
 		}
+		this.checkBatchIntegrity();
 		return newRowNeeded;
 	}
 	
@@ -295,6 +300,7 @@ class Batch {
 				const newBatch = createNewBatch(0);
 				newBatch.assignPlate(libraryPlates, libraryPlates.indexOf(this.libPlate));
 				newBatch.setSize(unmatchedCompounds - unmatchedCrystals);
+			//	console.log('newBatch from MATCH: ', newBatch);
 			}
 			else {
 				newRowNeeded = false;
@@ -311,15 +317,46 @@ class Batch {
 	}
 	
 	cleanUpRubbishBatches() {
-		let mergeList = [];	
+		let listToMerge = [];	
 		batches.forEach(batch => {
-			if(batch.libPlate === this.libPlate && batch.crystalPlate === null){
-				mergeList.push(batch);
+			if(batch.libPlate === this.libPlate && !batch.crystalPlate){
+				listToMerge.push(batch);
 			} 
 		});		
-		if(mergeList.length > 1){
-			mergeSelected(mergeList);
+		if(listToMerge.length > 1){
+			mergeList(listToMerge);
 		}
+	}
 	
+	divideIntoSmallerBatches(size) {	
+		if (size && this.libPlate && this.crystalPlate){
+			return this.divideBatch(size);
+		}
+	}
+	
+	divideBatch(newSize) {
+		let batchCount = 1;
+		while (this.size > newSize){
+			this.setSize(this.size - newSize);
+			const newBatch = createNewBatch(newSize, this.libPlate, this.crystalPlate);
+			batchCount = batchCount + this.divideBatch(newSize);
+		}
+		return batchCount;
+	}
+	
+	checkBatchIntegrity() {
+		console.log('integrity: ', this.size, this.libPlate.size);
+		if (this.size < 0 ) {
+			throw new RangeError("Negative size of a Batch object; ", this);
+		}
+		
+		if (this.libPlate && this.size > this.libPlate.size) {
+			
+			throw new RangeError('Batch has more items than its libPlate: ', this);
+		}
+		
+		if (this.crystalPlate && this.size > this.crystalPlate.size) {
+			throw new RangeError('Batch has more items than its crystalPlate: ', this);
+		}
 	}
 }

@@ -23,12 +23,17 @@ function generateBatchNumbers() {
 }
 
 /* NOT USED YET */
+/*
 function createBatchesByNumberOfCrystals(size) {
+	console.log('createBatchesByNumberOfCrystals', size);
 	batches.forEach(batch => {
-		divideBatch(batch, size);
+		if (batch.libPlate && batch.crystalPlate){
+			console.log('found batch suitable tfor division');
+			divideBatch(batch, size);
+		}
 	});
 	generateBatchNumbers();
-}
+}*/
 
 function totalCompounds() {
 	let total = 0;
@@ -118,24 +123,25 @@ function saveOption(row, plateArray, index) {
 }
 
 function updateCheckbox(row) {
-	const batch = findBatchByRow(row)
-	const checkboxCell = row.querySelector('.checkbox-cell');
-
-	if ( newCheckboxNeeded(checkboxCell, batch) ) {
-		let checkbox = document.createElement('input');
-		checkbox.type = 'checkbox';
-		checkbox.className = "batch-checkbox";
-		checkboxCell.appendChild(checkbox);
-		checkboxCell.querySelector('span').remove();
-	}
-	else {
-		checkboxCell.innerHTML = noCheckboxString;
+	if (row){
+		const batch = findBatchByRow(row)
+		const checkboxCell = row.querySelector('.checkbox-cell');
+	
+		if (batch && batch.crystalPlate && batch.libPlate) {
+			checkboxCell.innerHTML = '';
+			checkboxCell.appendChild( makeCheckbox() );
+		}
+		else {
+			checkboxCell.innerHTML = noCheckboxString;
+		}
 	}
 }
 
-function newCheckboxNeeded(td, batch) {
-	const checkboxPresent = td.querySelector('input')
-	return batch && batch.libPlate && batch.crystalPlate && !checkboxPresent;
+function makeCheckbox() {
+	let checkbox = document.createElement('input');
+	checkbox.type = 'checkbox';
+	checkbox.className = "batch-checkbox";
+	return checkbox;
 }
 
 //create <option> elements based on current state of Plate objects in the crystallisationPlates array
@@ -231,7 +237,7 @@ function removeUnneeded() {
 		});
 		
 		if (batchesToMerge.length >= 2) {
-			mergeSelected(batchesToMerge);	
+			mergeList(batchesToMerge);	
 		}
 	});
 }
@@ -266,7 +272,10 @@ function createNewRow(currentRow, placement = 'under') {
 	//create and adjust new row
 	newRow = currentRow.cloneNode(true);
 	
-	batches[batches.length - 1].assignRow(newRow);
+	findExtraBatch(currentBatch).assignRow(newRow);
+//	console.log('createNewRow assigned row: ', newRow)
+//	console.log('to batch: ', batches[batches.length - 1])
+	
 	newRow.querySelectorAll('select').forEach( select => {
 		clearClonedSelection(select);
 		activateSelect(select);
@@ -281,7 +290,8 @@ function createNewRow(currentRow, placement = 'under') {
 		document.getElementById('batches-tbody').appendChild(newRow);
 	}
 	
-	findRelatedLibraryCell(currentRow).rowSpan ++;
+	//findRelatedLibraryCell(currentRow).rowSpan ++;
+	findRelatedMultiRowCell(currentRow, '.lib-plate').rowSpan ++;
 	
 	if(newRow.querySelector('.lib-plate')) {
 		newRow.querySelector('.lib-plate').remove();
@@ -290,14 +300,29 @@ function createNewRow(currentRow, placement = 'under') {
 	return newRow;
 }
 
+function findExtraBatch(currentBatch) {
+	let value = null;
+	batches.forEach(batch => {
+	//	console.log('findExtraBatch inspects batch: ', batch)
+		if (!batch.crystalPlate && !batch.row && batch.libPlate === currentBatch.libPlate) {
+		//	console.log('found extra batch')
+			value = batch;
+		}
+/*		else {
+			console.log('nope')
+		} */
+	});
+	return value;
+}
+
 function clearClonedSelection(select) {
 	select.querySelectorAll('option').forEach(option => {
 		option.className = 'regular';	
 	});
 }
 
-function createNewBatch(size) {
-	const newBatch = new Batch(size);
+function createNewBatch(size, libPlate = null, crystalPlate = null) {
+	const newBatch = new Batch(size, libPlate, crystalPlate);
 	batches.push(newBatch);
 	return newBatch;
 }
@@ -342,26 +367,14 @@ function changeTableView() {
 
 /* NOT USED YET */
 function changeColour(colour){
-	if (colour === 'white'){
+	if (colour === 'floralwhite'){
 		return 'aliceblue';
 	}
 	else {
-		return 'white';
+		return 'floralwhite';
 	}
 }
 
-/*NOT USED YET*/
-function divideBatch(batch, newSize) {
-	while (batch.size > newSize){
-		const itemsLeft = batch.size - newSize;
-		const newRow = createNewRow(batch.row, itemsLeft);
-	//	const newBatch = createNewBatch(batch.libPlateIndex, batch.matchIndex, batch.matchSectionIndex + 1, newRow, itemsLeft);
-		newBatch.assignCrystalPlate(batch.crystalPlate);
-		batch.size = newSize;
-		batch.row.querySelector('.items').innerHTML = newSize;
-		divideBatch(newBatch, newSize);
-	}
-}
 
 function validateMerge(batchList) {
 	let valid = true; 
@@ -392,20 +405,30 @@ function merge2Rows(row1, row2){
 		checkbox.checked = false;
 	}
 	
-	findRelatedLibraryCell(row1).rowSpan --;
+	/*findRelatedMultiRowCell(row1, '.lib-plate').rowSpan --;
+	findRelatedMultiRowCell(row1, '.cr-plate').rowSpan --;
+	* */
+	
+	shrink(findRelatedMultiRowCell(row1, '.lib-plate'));
+	shrink(findRelatedMultiRowCell(row1, '.cr-plate'));
 	row2.remove();
 }
 
-//The table cell with the library plate spans all the rows representing
-//batches that use that library cell; therefore only the first row in the HTML
-//contains this cell.
-function findRelatedLibraryCell(row){
-	let libCell = row.querySelector('.lib-plate');
-	while (libCell === null) {
+function findRelatedMultiRowCell(row, className){
+	let libCell = row.querySelector(className);
+	while (libCell === null && row) {
 		row = row.previousElementSibling;
-		libCell = row.querySelector('.lib-plate');
+		if (row) {
+			libCell = row.querySelector(className);
+		}
 	}
 	return libCell;
+}
+
+function shrink(cell) {
+	if (cell.rowSpan > 1 ){
+		cell.rowSpan --;
+	}
 }
 
 //returns an array of Batch objects represented by selected rows in the table
@@ -432,23 +455,32 @@ function totalMatched(array) {
 //show where a match ends and highlight very small batches in red
 function colourCodeTable() {
 	//colour rows to show where a new match starts; highlight very small batches
-	let oldLibPlateIndex = 0;
-	let oldMatchIndex = 0;
-	let colour = 'white';
+	let oldLibPlate = null;
+	let oldCrystalPlate = null;
+	let colour = 'blue';
 	
 	document.querySelectorAll('.batch-row').forEach(row => {
 		const currentBatch = findBatchByRow(row);
-		const newMatchIndex = currentBatch.matchIndex;
-		const newLibPlateIndex = currentBatch.libPlateIndex;
-		if ( newMatchIndex !== oldMatchIndex || oldLibPlateIndex !== newLibPlateIndex ){
-				colour = changeColour(colour);
+		if (currentBatch && currentBatch.libPlate && currentBatch.crystalPlate) {
+			const newLibPlate = currentBatch.libPlate;
+			const newCrystalPlate = currentBatch.crystalPlate;
+			if ( newLibPlate !== oldLibPlate || newCrystalPlate !== oldCrystalPlate ){
+					colour = changeColour(colour);
+			}
+			
+			row.querySelector('.items').style = '';
+			row.style.background = colour;
+			if (row.querySelector('.lib-plate') ){
+				row.querySelector('.lib-plate').style.background = 'white';
+			}
+			if (currentBatch.size < 6 ) {
+				console.log('row: ', row);
+				console.log('batch size: ', currentBatch.size)
+				row.querySelector('.items').style.background = 'red';
+			}	
+			oldLibPlate = newLibPlate;
+			oldCrystalPlate = newCrystalPlate;
 		}
-		if (currentBatch.size < 6 ) {
-			row.querySelector('.items').style.background = 'red';
-		}	
-		row.style.background = colour;
-		oldMatchIndex = newMatchIndex;
-		oldLibPlateIndex = newLibPlateIndex;
 	});
 }
 
@@ -491,15 +523,71 @@ function cleanUpOrphanRows() {
 		if (libCell !== null && libCell.rowSpan > 1 && findBatchByRow(row) === null) {
 			const nextRow = row.nextElementSibling;
 			cloneCell = libCell.cloneNode(true);
-			cloneCell.rowSpan --;
+			shrink(cloneCell);
+			//cloneCell.rowSpan --;
 			cloneCell.querySelector('select').value = cloneCell.querySelector('.protected').value;
 			nextRow.insertBefore(cloneCell, nextRow.querySelector('.wells'));
 			row.remove();
 		}
 		//an orphan row is somewhere else
 		else if (findBatchByRow(row) === null && libCell === null) {
-			findRelatedLibraryCell(row).rowSpan -- ;
+			//findRelatedMultiRowCell(row, '.lib-plate').rowSpan --;
+			shrink(findRelatedMultiRowCell(row, '.lib-plate'));
 			row.remove();
 		}
 	});
+}
+
+function makeMultipleRows(currentRow) {
+	const currentBatch = findBatchByRow(currentRow);
+	let libCell = currentRow.querySelector('.lib-plate');
+	
+	let blankRow = currentRow.cloneNode(true);
+	blankRow.querySelector('.cr-plate').remove();
+	
+	if ( blankRow.querySelector('.lib-plate') ) {
+		blankRow.querySelector('.lib-plate').remove();
+	}
+	
+	let i = 1;
+	batches.forEach(batch => {
+		if (batch.libPlate === currentBatch.libPlate && batch.crystalPlate === currentBatch.crystalPlate) {
+			if (i > 1 ){
+				//findRelatedLibraryCell(currentRow).rowSpan ++;
+				findRelatedMultiRowCell(currentRow, '.lib-plate').rowSpan ++;
+				
+				currentRow.querySelector('.cr-plate').rowSpan ++;
+				const newRow = blankRow.cloneNode(true);
+				batch.assignRow(newRow);
+				document.querySelector('#batch-table tbody').insertBefore(newRow, currentRow.nextElementSibling);
+				updateCheckbox(newRow);
+				//updateCheckbox(currentRow);
+			}
+			i ++;
+		}
+	});
+}
+
+function mergeMatches() {
+	libraryPlates.forEach(libPlate => {
+		crystallisationPlates.forEach(crystalPlate => {
+			mergeMatch(libPlate, crystalPlate);
+		});
+	generateBatchNumbers();
+	});
+}
+
+function mergeMatch(libPlate, crystalPlate){
+	let matched = [];
+	//let crystalCount = 0;
+	batches.forEach(batch => {
+		if (batch.libPlate === libPlate && batch.crystalPlate === crystalPlate) {
+	//		crystalCount = crystalCount + batch.size;
+			matched.push(batch);
+		}
+	});
+	if (matched.length > 1 ){
+		return mergeList(matched);
+	}
+	//return crystalCount;
 }

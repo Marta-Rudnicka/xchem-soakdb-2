@@ -73,13 +73,13 @@
 
 
 <div>
-	<form class="view2">
+	<form id="batch-size-form">
 		<label id="divide">Specify batch size:</label>
 		<br>
 		<input type="radio" name="batch-making-method" id="one-per-match" value="one-per-match" checked>
 		<label for="one-per-match">1 batch per plate </label>
 		<input type="radio" name="batch-making-method" id="by-number-of-crystals" value="by-number-of-crystals" >
-		<label for="number-of-crystals"><input id="number-of-crystals" type="number" min="1"> crystals per plate</label>
+		<label for="number-of-crystals"><input id="number-of-crystals" type="number" min="16" value="32" step="16"> crystals per plate</label>
 	</form>
 	<table id="batch-table">
 		<caption>

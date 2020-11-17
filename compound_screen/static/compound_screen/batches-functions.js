@@ -22,8 +22,18 @@ function updatePlateSelections() {
 				createPlateOptions(element, crystallisationPlates);
 			}
 		}
-		
 	});
+}
+
+
+function getBatchSize() {
+	if (document.getElementById('one-per-match').checked === true ){
+		batchSize = null;
+	}
+	else if (document.getElementById('by-number-of-crystals').checked === true ){
+		batchSize = parseInt(document.getElementById('number-of-crystals').value); 
+	}
+	return batchSize;
 }
 
 /*
@@ -63,14 +73,21 @@ function activateSelect(select) {
 			plateArray = crystallisationPlates;
 		}
 		
-		const newRowNeeded = currentBatch.assignPlate(plateArray, plateIndex);		
+		const [newRowNeeded, batchCount] = currentBatch.assignPlate(plateArray, plateIndex);
+
 		if (newRowNeeded) {
 			createNewRow(currentRow);
 		}
+		
+		if (batchCount > 1 && currentBatch.crystalPlate) {
+			makeMultipleRows(currentRow);
+		}
+		
 		cleanUpOrphanRows();
 		generateBatchNumbers();
-		updateCheckbox(currentRow);
 		updatePlateSelections();
+		updateCheckbox(currentRow);
+		colourCodeTable();
 	});
 } 
 
@@ -87,8 +104,7 @@ function generateBatchNumbers() {
 	})
 }
 
-//TODO rename to mergeList
-function mergeSelected(selected) {
+function mergeList(selected) {
 	
 	if (validateMerge(selected) === true) {
 		firstBatch = selected[0];
@@ -98,6 +114,7 @@ function mergeSelected(selected) {
 			}
 		});
 	}
+	return firstBatch;
 }
 
 function deleteSelected(selected) {
@@ -109,3 +126,15 @@ function deleteSelected(selected) {
 	document.getElementById('total-items').innerHTML = totalMatched(libraryPlates);	
 	showUnused();
 }
+
+function divideAll() {
+	batches.forEach(batch => {
+		if (batch.crystalPlate && batch.libPlate) {
+			const batchCount = batch.divideBatch(batchSize);
+			if (batchCount > 1) {
+				makeMultipleRows(batch.row);
+			}
+		}
+	});
+}
+
