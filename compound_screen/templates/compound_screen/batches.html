@@ -48,8 +48,9 @@
 		<thead>
 			<tr>
 				<th>Plate ID</th>
-				<th>Accepted <br>crystals</th>
-				<th class="unused-crystals">Unused</th>
+				<th>Usable <br>crystals</th>
+				<th>Alloted for experiment</th>
+				<th>Edit allotment</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -57,7 +58,11 @@
 			<tr class="crystal-row">
 				<td class="cr-plate-name">{{ i }}</td>
 				<td class="crystals-number">{{ j }}</td>
-				<td class="unused-crystals"></td>
+				<td class="alloted">
+					<span class="alloted-number">{{ j }}</span>
+					<input class="alloted-input" type="number" min="1" max="{{ j }}" value="{{ j }}">
+				</td>
+				<td class="edit"><button class="edit-allotment">Edit</button><button class="save-allotment">Save</button></td>
 			</tr>
 			{% endfor %}
 		</tbody>
@@ -90,14 +95,12 @@
 		<thead>
 			<tr>
 				<th class="lib-plate">Library (source) <br>plate</th>
-
-				<th class="wells" >Wells<br><br><button class="in-table" id="hide-well">Hide</button></th>
 				<th class="cr-plate">Crystallisation <br> (destination) plate</th>
 				<th class="drop" >Drops<br><button class="in-table" id="hide-drop">Hide</button></th>
 				<th class="batch">Batch</th>
 				<th class="items">Batch size</th>
 				<th class="pb-name">PlateBatch Name</th>
-				<th class="checkbox-cell">Select<br>to&nbsp;edit</th>
+				<th class="checkbox-cell">Select</th>
 			</tr>
 		</thead>
 		<tbody id="batches-tbody">
@@ -109,9 +112,6 @@
 						<option value="null">None / reset selection</option>
 					</select>
 				</td>
-				
-					
-				<td class="wells">TODO</td>
 				<td class="cr-plate">
 					<select class="cr-plate-selection">
 						<option value="null">None  / reset selection</option>
@@ -121,13 +121,13 @@
 				<td class="batch"><span class="small">no batch<br>created yet</span></td>
 				<td class="items"><span class="small">no batch<br>created yet</span></td>	
 				<td class="pb-name">TODO</td>
-				<td class="checkbox-cell"><span class="small">not ready</span><!--<input class="batch-checkbox" type="checkbox">--></td>
+				<td class="checkbox-cell"><span class="small">not ready</span></td>
 			</tr>
 		{% endfor %} 
 		</tbody>
 		<tfoot>
 			<tr>
-				<td id="wide-cell" colspan="4">Total of compounds used in experiment in all plates</td>
+				<td id="wide-cell" colspan="3">Total items (TODO)</td>
 				<td id="total-items"></td>
 			</tr>
 		</tfoot>
@@ -145,7 +145,9 @@
 </div>
 </div>
 <div class="view3" id="actions">
-	<button id="merge-selected">Merge selected</button>
-	<button id="delete-selected">Delete selected</button>
+	<caption>Actions for<br>selected batches:</caption>
+	<button id="save-selected">Save</button>
+	<button id="merge-selected">Merge</button>
+	<button id="delete-selected">Delete</button>
 </div>
 {% endblock %}

@@ -22,6 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
 	updatePlateSelections();
 	
 	//event listeners
+	
+	document.querySelectorAll('.edit-allotment').forEach( button => {
+		activateAllotmentButton(button);
+	});
+	
 	document.getElementById('batch-size-form').addEventListener('change', ()=> {
 		batchSize = getBatchSize();
 		if (batchSize) {
@@ -50,6 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	
 	document.getElementById('delete-selected').addEventListener('click', () => {
 		deleteSelected(getSelected());
+	});
+	
+	document.getElementById('save-selected').addEventListener('click', () => {
+		saveSelected(getSelected());
 	});
 	
 	document.getElementById('batch-size-form').addEventListener('submit', ()=> {

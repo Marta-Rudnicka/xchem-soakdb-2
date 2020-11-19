@@ -6,12 +6,12 @@ function updatePlateSelections() {
 	//remove old options except 'None' and already selected options
 	document.querySelectorAll('select').forEach(element => {
 		element.querySelectorAll('option').forEach(option => {
-			if (option.className !== 'protected' && option.value !== 'null') {
+			if (option.className !== 'selected' && option.value !== 'null') {
 				option.remove();
 			}
 		});
 		//update already selected option, or create a list of new, up-to-date options
-		if (element.querySelector('.protected')) {
+		if (element.querySelector('.selected')) {
 			manageExistingSelection(element);
 		}
 		else {
@@ -36,23 +36,6 @@ function getBatchSize() {
 	return batchSize;
 }
 
-/*
-function activateOkButton(button) {
-	button.addEventListener('click', () => {
-		const parentRow = button.parentElement.parentElement;
-		
-		createMatch(parentRow);
-		parentRow.querySelector('.instructions').innerHTML = instrReady;
-		updateCrystalPlateSelections();
-		
-		//i.e. when all matches have been made (createMatch() deletes the OK button)
-		if (document.querySelector('.ok-button') === null ) {
-			changeToView(2);
-		}
-	})	
-}
-*/
-
 function activateSelect(select) {
 	select.addEventListener('change', () => {
 		const currentRow = select.closest('.batch-row');
@@ -68,7 +51,6 @@ function activateSelect(select) {
 		if (select.className === 'lib-plate-selection') {
 			plateArray = libraryPlates;
 		}
-		
 		else if (select.className === 'cr-plate-selection'){
 			plateArray = crystallisationPlates;
 		}
@@ -117,14 +99,9 @@ function mergeList(selected) {
 	return firstBatch;
 }
 
+//TODO
 function deleteSelected(selected) {
-	selected.forEach(batch => {
-		batch.row.remove();
-		deleteBatch(batch);
-	});
-
-	document.getElementById('total-items').innerHTML = totalMatched(libraryPlates);	
-	showUnused();
+	console.log('TODO: deleteSelected')
 }
 
 function divideAll() {
@@ -138,3 +115,57 @@ function divideAll() {
 	});
 }
 
+function activateAllotmentButton(button) {
+	button.addEventListener('click', () => {
+		const row = button.closest('.crystal-row');
+		showEditOptions(row);
+		activateSaveAllotmentButton(row);
+	});
+}
+
+function activateSaveAllotmentButton(row) {
+	const button = row.querySelector('.save-allotment')
+	button.addEventListener('click', () => {
+		hideEditOptions(row);
+		if ( !plateMatched(row) ) {
+			findAndResizePlate(row);
+		}
+		else {
+			window.alert('Some of the crystals in this plate already have compounds allocated to them. To edit the plate, first unselect it from any batches it belongs to.');
+		}
+	});
+}
+
+function saveSelected(array) {
+	array.forEach(batch => {
+		
+		shrink(findRelatedMultiRowCell(batch.row, '.lib-plate'));
+		shrink(findRelatedMultiRowCell(batch.row, '.cr-plate'));
+		const firstRowInLib = findRelatedMultiRowCell(batch.row, '.lib-plate').closest('.batch-row');	
+		const firstRowInCr = findRelatedMultiRowCell(batch.row, '.cr-plate').closest('.batch-row');	
+		let libCell = batch.row.querySelector('.lib-plate');
+		let crystalCell = batch.row.querySelector('.cr-plate');
+		
+		if (batch.row !== firstRowInLib) {
+			if (!crystalCell) {
+				crystalCell = addMissingCell('cr-plate', batch.row);
+			}
+			else {
+				divideCell('.cr-plate', batch.row);
+			}
+			const row = document.querySelector('#batch-table tbody').removeChild(batch.row);
+			libCell = addMissingCell('lib-plate', row);
+			document.querySelector('#batch-table tbody').insertBefore(row, firstRowInLib);
+		}
+		else if (batch.row === firstRowInLib) {
+			
+			divideCell('.cr-plate', batch.row);
+			divideCell('.lib-plate', batch.row);
+		}
+
+		libCell.innerHTML = batch.libPlate.name;
+		crystalCell.innerHTML = batch.crystalPlate.name;
+		batch.row.querySelector('.checkbox-cell').innerHTML = '';
+	});
+	
+}

@@ -31,6 +31,7 @@ class Plate {
 		this.size = parseInt(size); 			//int
 		this.unmatchedItems = this.size;		//int
 		this.matchedItems = 0;					//int
+		this.originalSize = this.size;
 	}
 	
 	//associate number of items to corresponding items in the other type of Plate in a Batch
@@ -69,6 +70,17 @@ class Plate {
 		this.unmatchedItems = this.size;
 		this.matchedItems = 0;
 		this.checkPlateIntegrity();
+	}
+	
+	resize(newSize) {
+		if (this.originalSize < newSize ) {
+			throw new RangeError("Trying to resize a crystallisation plate beyond its original size.");
+		}
+		else {
+			this.size = parseInt(newSize);
+			this.unmatchedItems = parseInt(newSize);
+			this.matchedItems = 0;
+		}
 	}
 	
 	//for debugging
@@ -246,6 +258,7 @@ class Batch {
 		});
 	}
 	
+	/*
 	replaceLibInAllBatches(newLib) {
 		let newRowNeeded = false;
 		batches.forEach(batch => {
@@ -277,6 +290,7 @@ class Batch {
 			}
 		}	
 	}
+	*/
 	setSize(size){
 		this.size = size;
 	}
@@ -321,7 +335,10 @@ class Batch {
 		batches.forEach(batch => {
 			if(batch.libPlate === this.libPlate && !batch.crystalPlate){
 				listToMerge.push(batch);
-			} 
+			}
+			else if ( !batch.libPlate && !batch.crystalPlate) {
+				deleteBatch(batches);
+			}
 		});		
 		if(listToMerge.length > 1){
 			mergeList(listToMerge);
@@ -345,18 +362,18 @@ class Batch {
 	}
 	
 	checkBatchIntegrity() {
-		console.log('integrity: ', this.size, this.libPlate.size);
+		//console.log('integrity: ', this.size, this.libPlate.size);
 		if (this.size < 0 ) {
 			throw new RangeError("Negative size of a Batch object; ", this);
 		}
 		
-		if (this.libPlate && this.size > this.libPlate.size) {
+		if (this.libPlate && (this.size > this.libPlate.size) ) {
 			
-			throw new RangeError('Batch has more items than its libPlate: ', this);
+			throw new RangeError('Batch object has more items than its libPlate: ', this);
 		}
 		
-		if (this.crystalPlate && this.size > this.crystalPlate.size) {
-			throw new RangeError('Batch has more items than its crystalPlate: ', this);
+		if (this.crystalPlate && (this.size > this.crystalPlate.size) ) {
+			throw new RangeError('Batch object has more items than its crystalPlate: ', this);
 		}
 	}
 }
