@@ -34,12 +34,14 @@ INSTALLED_APPS = [
 	'experiment_preparation',
 	'compound_screen',
 	'solvent_characterisation',
+	'playground',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +128,11 @@ STATICFILES_DIRS = [
     "/home/arl45673/project/django/soakdb2/static",
   
 ]
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ]
+}

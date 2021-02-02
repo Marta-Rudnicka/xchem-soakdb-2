@@ -1,7 +1,8 @@
 /*lower-level functions managing DOM elements
  * used by batches-function.js and batches-classes-consts.j */
  
-//replacement for information about a batch
+//replacement for information about a batch 
+
 const noBatchString = '<span class="small">no batch<br>created yet</span>';
 const noCheckboxString = '<span class="small">not ready </span>';
 
@@ -362,7 +363,11 @@ function cleanUpOrphanRows() {
 			if (cloneCell.querySelector('.selected')) {
 				cloneCell.querySelector('select').value = cloneCell.querySelector('.selected').value;
 			}
-			nextRow.insertBefore(cloneCell, nextRow.querySelector('.wells'));
+			console.log('insering cloneCell: ');
+			console.log(cloneCell)
+			console.log('before cell: ')
+			console.log(nextRow.querySelector('.cr-plate'))
+			nextRow.insertBefore(cloneCell, nextRow.querySelector('.cr-plate'));
 			row.remove();
 			nextRow.style.background = 'white';
 			activateSelect(nextRow.querySelector('select'));

@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import *
 
 def generate_table_body(html_string):
 	rows = ""
@@ -6,7 +7,6 @@ def generate_table_body(html_string):
 		rows = rows + "<tr><td>" + str(i+1) + "</td>" + html_string + "</tr>\n"
 	
 	return rows
-
 
 # Create your views here.
 def index(request):

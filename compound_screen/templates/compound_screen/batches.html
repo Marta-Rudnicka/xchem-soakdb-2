@@ -6,7 +6,8 @@
 <script src="../../static/compound_screen/batches.js"></script>
 <script src="../../static/compound_screen/batches-functions.js"></script>
 <script src="../../static/compound_screen/batches-classes-consts.js"></script>
-<script src="../../static/compound_screen/batches-helpers.js"></script>
+
+<script src="../../static/compound_screen/batches-helpers.js"></script> 
 
 <script src="../../static/functions.js"></script>
 <script src="../../static/classes.js"></script>
@@ -84,7 +85,7 @@
 		<input type="radio" name="batch-making-method" id="one-per-match" value="one-per-match" checked>
 		<label for="one-per-match">1 batch per plate </label>
 		<input type="radio" name="batch-making-method" id="by-number-of-crystals" value="by-number-of-crystals" >
-		<label for="number-of-crystals"><input id="number-of-crystals" type="number" min="16" value="32" step="16"> crystals per plate</label>
+		<label for="number-of-crystals"><input id="number-of-crystals" type="number" min="16" value="16" step="16"> crystals per plate</label>
 	</form>
 	<table id="batch-table">
 		<caption>
@@ -94,8 +95,11 @@
 		</caption>
 		<thead>
 			<tr>
+				<!--<th class="protocol">Protocol - make it stretch together with library plate</th> -->
 				<th class="lib-plate">Library (source) <br>plate</th>
+				<!-- <th class="lib-plate-r">Remaining compounds</th> -->
 				<th class="cr-plate">Crystallisation <br> (destination) plate</th>
+				<!-- <th class="cr-plate-r">Remaining crystals</th> -->
 				<th class="drop" >Drops<br><button class="in-table" id="hide-drop">Hide</button></th>
 				<th class="batch">Batch</th>
 				<th class="items">Batch size</th>
@@ -106,17 +110,29 @@
 		<tbody id="batches-tbody">
 		{% for i, j, k  in libraries%}
 			<tr class="batch-row">
+			<!--	<td class="protocol">
+					<select class="protocol-selection">
+						<option value="null">None  / reset selection</option>
+						<option value="1">Protocol 1</option>
+						<option value="2">Protocol 2</option>
+						<option value="3">Protocol 3</option>
+						<option value="4">Protocol 4</option>
+						<option value="custom">Custom protocol</option>
+					</select>
 				
+				</td> -->
 				<td class="lib-plate" rowspan="1">
 					<select class="lib-plate-selection">
 						<option value="null">None / reset selection</option>
 					</select>
 				</td>
+			<!--	<td class="lib-plate-r">TODO</td> -->
 				<td class="cr-plate">
 					<select class="cr-plate-selection">
 						<option value="null">None  / reset selection</option>
 					</select>
 				</td>
+			<!--	<td class="cr-plate-r">TODO</td> -->
 				<td class="drop">TODO</td>
 				<td class="batch"><span class="small">no batch<br>created yet</span></td>
 				<td class="items"><span class="small">no batch<br>created yet</span></td>	

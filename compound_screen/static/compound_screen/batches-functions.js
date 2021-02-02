@@ -1,15 +1,18 @@
 /* high-level functions used by batches.js */
 /* requires batches.helpers.js and batches-classes-consts.js */
 
-//update <option>s representing each plate in the <select> elements
+//update <option>s representing each plate in the <select> elements 
+
 function updatePlateSelections() {	
 	//remove old options except 'None' and already selected options
 	document.querySelectorAll('select').forEach(element => {
-		element.querySelectorAll('option').forEach(option => {
-			if (option.className !== 'selected' && option.value !== 'null') {
-				option.remove();
-			}
-		});
+		if (element.className !== 'protocol-selection') {
+			element.querySelectorAll('option').forEach(option => {
+				if (option.className !== 'selected' && option.value !== 'null') {
+					option.remove();
+				}
+			});
+		}
 		//update already selected option, or create a list of new, up-to-date options
 		if (element.querySelector('.selected')) {
 			manageExistingSelection(element);

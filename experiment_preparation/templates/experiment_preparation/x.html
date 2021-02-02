@@ -21,6 +21,8 @@ Mostly hardcoded with made-up data.
 				<label>SELECT PLATES WITHIN EACH LIBRARY:</label>	
 				<br>
 				<div id="libs">
+					
+					{% comment %}
 					{% include "library_with_plates.html" with library="DSIPoised" library_counter=dsi_counter %}
 					{% include "library_with_plates.html" with library="FragLites" library_counter=fraglites_counter %}
 					{% include "library_with_plates.html" with library="PepLites" library_counter=peplites_counter %}
@@ -28,6 +30,7 @@ Mostly hardcoded with made-up data.
 					{% include "library_with_plates.html" with library="Cysteine_Covalent" library_counter=cysteine_counter %}
 					{% include "library_with_plates.html" with library="York3D" library_counter=york_counter %}
 					{% include "library_with_plates.html" with library="Leeds3D" library_counter=leeds_counter %}
+					{% endcomment %}
 				</div>
 				<button id="show-all">Show all plates</button>
 				<button id="hide-all">Hide all plates</button>

@@ -7,7 +7,7 @@
 {% block tbody %}
 	{% for i in counter %}
 	<tr>
-		<td>{{i}}</td>
+		<td>{{ i }}</td>
 		<td class="preset">[data]</td>
 		<td class="code">[data]</td>
 		<td class="smiles">[data]</td>
@@ -18,6 +18,20 @@
 		<td class="p2">[data]</td>
 		<td class="p3">[data]</td>
 		<td class="p4">[data]</td>
+	
 	</tr>
+	<!-- <tr>
+		<td>{{i}}</td>
+		<!--<td class="preset">[data]</td>
+		<td class="code"></td> -->
+	<!--	<td class="smiles">compound.smiles</td>
+		<td class="c2d">
+			<img alt="alttext" src="../static/ethanol.png">
+		</td>
+		<td class="p1">TODO</td>
+		<td class="p2">TODO</td>
+		<td class="p3">TODO</td>
+		<td class="p4">TODO</td>
+	</tr> -->
 	{% endfor %}
 {% endblock %}
