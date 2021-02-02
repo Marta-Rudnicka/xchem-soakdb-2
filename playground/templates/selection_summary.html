@@ -1,0 +1,28 @@
+<table>
+	<tr>
+		<th>Library</th>
+		<th>Plate</th>
+		<th>Number of<br>compounds</th>
+		<th>Origin</th>
+		<th>Compounds</th>
+	</tr>
+	{% for key, value in libraries.items %}
+		<tr>
+			<td>{{ key.library }}</td>
+			<td>{{ key.name }}</td>
+			<td>{{ key.compounds.count }}</td>
+			<td>{{ value }}</td>
+			<td><a href="{% url 'lib' key.library key.name %}">See compounds</a></td>
+			<td>
+				<form action="{% url 'remove_plate' %}" method="post">
+					{% csrf_token %}
+					<input type="hidden" name="proposal" value="{{proposal}}">
+					<input type="hidden" name="plate" value="{{key.id}}">
+					<button type="submit">Remove</button>
+				</form>
+			</td>
+		</tr>
+	{% empty %}
+		<tr><td colspan="5">No compounds selected yet.</td></tr>
+	{% endfor %}
+</table>

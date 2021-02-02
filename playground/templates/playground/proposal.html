@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Choose proposal</title>
+</head>
+<body>
+	<h1>Choose proposal:</h1>
+	<form method="post">
+	{% csrf_token %}
+	{{ form }}
+	<button type="submit">Select</button>
+	</form>
+</body>

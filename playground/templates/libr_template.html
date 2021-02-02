@@ -1,0 +1,118 @@
+{% comment %}
+Template to display the currently available list of compounds in a selected
+library plate.
+{% endcomment %}
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>{{ title }}</title>
+	<link rel="stylesheet" href="../../static/playground/plate_details.css">
+	
+	{% block head_links %}
+	{% endblock %}
+	
+	<script src="../../static/classes.js"></script>
+	<script src="../../static/playground/library.js"></script>
+</head>
+<a href="{% url 'index' %}">Home</a> | <a href="{% url 'picker' %}">Compound selection</a>
+<body lang="en">
+	<h1>Library: {{ library }} </h1>
+	<h2>Plate: {{ plate.name }}
+	
+		{% if plate.current and not library.proposal %}
+			(current plate)
+		{% endif %}	
+
+	</h2>	
+	<main>
+		<div class="sidebar-div">
+			<div>
+				Show more table columns: 
+				
+				<button class="small-button" id="show-well">Show Well</button>
+				<button class="small-button" id="show-code">Show Compound code</button>
+				<button class="small-button" id="show-smiles">Show SMILES</button>
+				<button class="small-button" id="show-c2d">Show 2D</button>
+				<button class="small-button" id="show-concentration">Show Concentration</button>
+				<button class="small-button" id="show-p2">Show Molecular weight</button>
+				<button class="small-button" id="show-p3">Show [Property3]</button>
+				<button class="small-button" id="show-p4">Show [Property4]</button>
+			</div>
+			<div>
+				Export data as:
+				<button class="small-button" id="csv-export">csv file</button>
+				<button class="small-button" id="other-export">some other format</button>
+			</div>
+			{% if not library.proposal %}
+			<div>
+				Plates for {{ library }}:
+				<ul>
+				{% for plate in all_plates_in_lib %}
+					<li><a href="{% url 'lib' library.name plate.name %}">{{plate.name}}</a>
+					{% if plate.current %}
+						 (current plate)
+					{% endif %}	
+					</li>
+				{% empty %}
+				<p>No other plates to show</p>
+				{% endfor %}
+				</ul>
+				(If you wish to use an old plate in your experiment, contact XChem staff)
+			</div>
+			{% endif %}
+		</div>
+		<table class="datatable">
+			<caption>
+				<h2>Compound list ({{ plate.compounds.count }} items)</h2>
+			</caption>
+			<thead>
+				<tr>
+					<th class="row-no">Row no.</th>
+					<th class="well">Well 
+						<br>
+						<button class="in-table" id="hide-well">Hide</button>
+					</th>
+					<th class="code">Code
+						<br>
+						<button class="in-table" id="hide-code">Hide</button>
+					</th>
+					<th class="smiles">SMILES
+						<br>
+						<button class="in-table" id="hide-smiles">Hide</button>
+					</th>
+					<th class="c2d">2D structure
+						<br>
+						<button class="in-table" id="hide-c2d">Hide</button>
+					</th>
+					<th class="concentration">Concentration
+						
+						<br>
+						<button class="in-table" id="hide-concentration">Hide</button>		
+					</th>
+					<th class="p2">Molecular weight
+						
+						<br>
+						<button class="in-table" id="hide-p2">Hide</button>
+					</th>
+					<th class="p3">[Property3]
+					
+						<br>
+						<button class="in-table" id="hide-p3">Hide</button>
+					</th>
+					<th class="p4">[Property4]
+						<br>
+						<button class="in-table" id="hide-p4">Hide</button>
+					</th>
+				</tr>
+			</thead> 
+			<tbody id="datatable-body">
+				{% block tbody %}
+				{% endblock %}
+			</tbody> 
+		</table>		
+	</main>
+</body>

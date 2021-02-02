@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>All data</title>
+	<link rel="stylesheet" href="../../static/playground/all.css">
+</head>
+<body>
+	{% include "nav.html" %}
+	<h1>Proposal {{ proposal}}: complete experimental data</h1>
+	<table id="alltable">
+		<thead>
+			<tr>
+				<td colspan="7">Compounds</td>
+				<td colspan="5">Crystals</td>
+			</tr>
+			<tr class="cols">
+				<th>Row</th>
+				<th>Library</th>
+				<th>Library plate</th>
+				<th>Well</th>
+				<th>Code</th>
+				<th>Smiles</th>
+				<th>Concentration</th>
+				<th>Crystallisation plate</th>
+				<th>Well</th>
+				<th>X</th>
+				<th>Y</th>
+				<th>Score</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for library, lib_plate, well, code, smiles, soncentration in samples %}
+			<tr>
+				<td>{{ forloop.counter }}</td>
+				<td>{{ library }}</td>
+				<td>{{ lib_plate }}</td>
+				<td>{{ well }}</td>
+				<td>{{ code }}</td>
+				<td>{{ smiles }}</td>
+				<td>{{ soncentration }}</td>
+			</tr>
+			{% empty %}
+				<tr><td colspan="7">No data produced yet</td></tr>
+			{% endfor %}
+		</tbody>
+		
+	</table>
+	</form>
+</body>

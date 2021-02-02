@@ -1,0 +1,156 @@
+{% comment %}
+Site for selecting libraries, plates and compounds for a future experiment.
+Mostly hardcoded with made-up data.
+{% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>{{ title }}</title>
+	<link rel="stylesheet" href="../../static/playground/picker.css">
+	<script src="../../static/experiment_preparation/functions.js"></script>
+	<script src="../static/classes.js"></script>
+	<script src="../../static/playground/picker.js"></script>
+</head>
+<body lang="en">
+	{% include "nav.html" %}
+	<h1>Select compounds - proposal: {{proposal}}</h1>
+	<main>
+		<section id="libraries">
+			<h2>XChem in-house fragment libraries</h2>
+			<form method="post" id="libform" action="{% url "add_library" %}">
+				 {% csrf_token %}
+				<label>SELECT A LIBRARY TO USE IN YOUR EXPERIMENT:</label>	
+				<br>
+				<div id="libs">
+					{% for library, plate in libraries.items %}
+						<p>
+						<input type="checkbox" value="{{library.id}}" name="lib_ids">
+						<label for="{{plate.id}}">{{ library.name }} </label>
+						<a href="{% url 'lib' library plate.name %}">See compounds</a></p>
+					{% endfor %}
+					
+				</div>
+				<button type="submit">Add selected to your collection</button>
+			</form>
+		
+		</section>
+		<section id="properties">
+			<h2>Select a preset</h2>
+			<p>Select most desirable properties for your experiment and allow automatic selection</p>
+			<form id="properties-form">
+				{% for i in property_counter %}
+				<div>
+					<input type="checkbox"><label>Property{{i}}</label>
+				</div>
+				{% endfor %}
+			</form>
+			<button>Submit</button>
+		</section>
+		<section id="upload">
+			<h2>Upload your own library data</h2>
+			<div>Info box</div>
+			<form method="post" action="{% url "upload_user_library" %}" id="own_lib" enctype="multipart/form-data">
+				 {% csrf_token %}
+				{{ lib_form.as_p }}
+				<button type="submit">Upload and add to your selection</button>
+			</form>
+			<div>Learn more about the required file formats: <img id="info" src="../static/info.png" alt="info icon"></div>
+			<h2>Upload cherrypicking list</h2>
+			<form method="post" action="{% url "upload_subset" %}" id="own_subset" enctype="multipart/form-data">
+				 {% csrf_token %}
+				{{ subset_form.as_p }}
+				<button type="submit">Upload and add to your selection</button>
+			</form>
+			
+		</section>
+		
+		<section id="stats">
+			<h2>Library stats</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Library</th>
+						<th>Plate</th>
+						<th>Compounds</th>
+						<th>Selected <br>compounds</th>
+						<th>Stat 1</th>
+						<th>Stat 2</th>
+						<th>Stat 3</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td rowspan="3">Library name 1</td>
+						<td>Plate name 1</td>
+						<td>666</td>
+						<td>420</td>
+						<td>69</td>
+						<td>42</td>
+						<td>21</td>
+					</tr>
+					<tr>
+					
+						<td>Plate name 2</td>
+						<td>1337</td>
+						<td>77</td>
+						<td>13</td>
+						<td>4</td>
+						<td>0</td>
+					</tr>
+					<tr>
+					
+						<td>Plate name 3</td>
+						<td>256</td>
+						<td>128</td>
+						<td>64</td>
+						<td>32</td>
+						<td>16</td>
+					</tr>
+					<tr>
+						<td rowspan="2">Library name 2</td>
+						<td>Plate name 1</td>
+						<td>666</td>
+						<td>420</td>
+						<td>69</td>
+						<td>42</td>
+						<td>21</td>
+					</tr>
+					<tr>
+					
+						<td>Plate name 2</td>
+						<td>1337</td>
+						<td>77</td>
+						<td>13</td>
+						<td>4</td>
+						<td>0</td>
+					</tr>
+					<tfoot>
+						<tr>
+							<td>3 libraries</td>
+							<td>5 plates</td>
+							<td>4246</td>
+							<td>1122</td>
+							<td>228</td>
+							<td>124</td>
+							<td>58</td>
+						</tr>
+					
+					</tfoot>
+				</tbody>
+			</table>
+		</section>
+		<section id="summary">
+			<h2>Summary</h2>
+			<div>
+				<img src="../static/experiment_preparation/dsi-ClogP.png">
+				<img src="../static/experiment_preparation/dsi-Fsp3.png">
+				<img src="../static/experiment_preparation/dsi-mol-weight.png">
+				<img src="../static/experiment_preparation/dsi-TPSA.png">
+			</div>
+		</section>
+
+	</main>
+
+</body>
+</html>

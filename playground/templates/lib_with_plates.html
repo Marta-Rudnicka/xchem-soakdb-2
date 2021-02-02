@@ -1,0 +1,24 @@
+
+<div class="library">
+	<label>{{library}}</label>
+	
+	<input id="{{library}}-checkbox" class="show" type="radio" name="x">
+	<label for="{{library}}-checkbox">
+		<img class="icon" src="../static/show.png" alt="Show plate list">
+	</label>
+	<label class="hide-icon" for="hide-{{library}}">
+		<img class="icon" src="../static/hide.png" alt="Hide plate list">
+	</label>
+	<form class="plate-list">
+
+		{% for item in plate_list %}
+			<input type="checkbox"><label>{{ item.name }}</label>
+			<button class="plate-details" id="{{library}}-{{ item.name }}" data-library="{{library}}" data-plate="{{ item.name }}">Compounds</button>
+		{% empty %}
+			<p>Unavailable</p>
+		{% endfor %}
+	</form>
+	
+	<input id="hide-{{library}}" class="hide" type="radio" name="x" hidden> 
+	
+</div>

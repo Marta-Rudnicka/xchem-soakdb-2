@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Sources</title>
+		<link rel="stylesheet" href="../../static/playground/summary.css">
+</head>
+<body lang="en">
+	<h1>Source compounds - proposal {{ proposal }}</h1>
+	<main>
+		<div>
+		<p>TODO: allow user to have several selections</p>
+		<form method="post" action="{% url 'import_compounds' %}">
+			{% csrf_token %}
+		<!--	<input type="hiden" name="proposal" value="{{proposal}}">
+			 -->
+			{{ form }}
+			
+			<code>This will a choice of saved compound selections tied to the current proposal instead of proposals</code>
+			<br>
+			<button type="submit">Upload compound data</button>	
+		</form>
+		</div>
+		<div>
+			{% include "selection_summary.html" %}
+		</div>
+	</main>
+	
+</body>

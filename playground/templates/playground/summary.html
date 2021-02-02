@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>{{proposal}} summary</title>
+		<link rel="stylesheet" href="../../static/playground/summary.css">
+		<script src="../../static/playground/summary.js"></script>
+		
+</head>
+<body lang="en">
+	{% include "nav.html" %}
+	<h1>Proposal {{ proposal }} : preparation summary</h1>
+	<main>
+	<section>
+		<h2>Protein</h2>
+		<div>
+			{% if protein %}
+		<table>
+			<tr><td>Name:</td><td>{{ protein.name }}</td></tr>
+			<tr><td>Space group:</td><td>{{ protein.space_group }}</td></tr>
+			<tr><td>A:</td><td>{{ protein.a }}</td></tr>
+			<tr><td>B:</td><td>{{ protein.b }}</td></tr>
+			<tr><td>C:</td><td>{{ protein.c }}</td></tr>
+			<tr><td>α:</td><td>{{ protein.alpha }}</td></tr>
+			<tr><td>β:</td><td>{{ protein.beta }}</td></tr>
+			<tr><td>γ:</td><td>{{ protein.gamma }}</td></tr>
+			
+		</table>
+		<button id="edit-protein">Edit protein</button>
+		{% else %}
+		<p id="no-protein">Protein data not yet submitted</p>
+		{% endif %}
+		</div>
+		
+		<form id="protein-form" action="{% url 'protein' %}" method="post">
+			<table>
+			{% csrf_token %}
+			{{ protein_form.as_table }}
+			</table>
+			<button type="submit">Submit</button>
+			
+		</form>
+	</section>
+	
+	<section id="exp">
+		<h2>Compounds</h2>
+		{% include "selection_summary.html" with libraries=libraries %}
+
+	</section>
+	</main>
+</body>

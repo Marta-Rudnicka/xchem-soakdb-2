@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Protein</title>
+		<link rel="stylesheet" href="../../static/playground/picker.css">
+</head>
+<body lang="en">
+	{% include "nav.html" %}
+	<h1>Protein - proposal [69420]</h1>
+	<p>Interface mockup</p>
+	<h2>Enter protein data:</h2>
+	<form method="post">
+		
+		<table>
+		{% csrf_token %}
+		{{ form.as_table }}
+		</table>
+		<input type="submit" value="Submit">
+	</form>
+	<p><a href="{% url 'index' %}">Back to dashboard</a></p>
+</body>

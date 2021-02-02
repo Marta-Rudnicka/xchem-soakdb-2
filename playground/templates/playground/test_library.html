@@ -1,0 +1,25 @@
+{% extends "libr_template.html" %}
+{% load static %}
+
+{% block head_links %}
+<link rel="stylesheet" href="../../static/playground/test_library.css">
+{% endblock %}
+
+{% block tbody %}
+	{% for compound in list %}
+	<tr>
+		<td>{{ forloop.counter }}</td>
+		<td class="well">{{ compound.well }}</td>
+		<td class="code"> {{ compound.compound.code }}</td>
+		<td class="smiles">{{ compound.compound.smiles }}</td>
+		<td class="c2d">
+			<img alt="alttext" src="../../static/ethanol.png">
+		</td>
+		<td class="concentration"> {% if compound.concentration %}{{ compound.concentration }}{% endif %}</td>
+		<td class="p2">{{ compound.compound.molecular_weight }}</td>
+		<td class="p3">TODO</td>
+		<td class="p4">TODO</td>
+	
+	</tr>
+	{% endfor %}
+{% endblock %}
